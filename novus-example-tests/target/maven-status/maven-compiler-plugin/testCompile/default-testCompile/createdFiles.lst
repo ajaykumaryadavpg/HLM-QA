@@ -1,0 +1,5 @@
+com/tpg/automation/base/InventoryTestBase.class
+com/tpg/automation/inventory/InventoryLoginTests.class
+com/tpg/automation/example/BasicApiTests.class
+com/tpg/automation/inventory/DashboardApiTests.class
+com/tpg/automation/example/TpgContactUsTests.class

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(jar tf:*)",
+      "Bash(ls /Users/ajaykumar.yadav/HLM-QA/novus-core/target/*.jar)",
+      "Bash(mvn --version)",
+      "Bash(mvn test-compile:*)",
+      "Bash(mvn clean:*)"
+    ]
+  }
+}

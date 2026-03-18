@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Inventory Management – Login Tests" verbose="2" thread-count="1">
+
+    <parameter name="report-name" value="Inventory-Login-Report"/>
+
+    <test name="Inventory Login Tests">
+        <classes>
+            <class name="com.tpg.automation.inventory.InventoryLoginTests"/>
+        </classes>
+    </test>
+
+</suite>

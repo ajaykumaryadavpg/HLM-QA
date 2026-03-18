@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+  <meta charset='utf-8'>
+  <title>TestNG reports</title>
+
+    <link type="text/css" href="testng-reports1.css" rel="stylesheet" id="ultra" />
+    <link type="text/css" href="testng-reports.css" rel="stylesheet" id="retro" disabled="false"/>
+    <script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="testng-reports.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type='text/javascript'>
+      google.load('visualization', '1', {packages:['table']});
+      google.setOnLoadCallback(drawTable);
+      var suiteTableInitFunctions = new Array();
+      var suiteTableData = new Array();
+    </script>
+    <!--
+      <script type="text/javascript" src="jquery-ui/js/jquery-ui-1.8.16.custom.min.js"></script>
+     -->
+  </head>
+
+  <body>    <div class="top-banner-root">
+      <span class="top-banner-title-font">Test results</span>
+      <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
+      <br/>
+      <span class="top-banner-font-1">1 suite, 1 failed test</span>
+    </div> <!-- top-banner-root -->
+    <div class="navigator-root">
+      <div class="navigator-suite-header">
+        <span>All suites</span>
+        <a href="#" title="Collapse/expand all the suites" class="collapse-all-link">
+          <img src="collapseall.gif" class="collapse-all-icon">
+          </img> <!-- collapse-all-icon -->
+        </a> <!-- collapse-all-link -->
+      </div> <!-- navigator-suite-header -->
+      <div class="suite">
+        <div class="rounded-window">
+          <div class="suite-header light-rounded-window-top">
+            <a href="#" panel-name="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests" class="navigator-link">
+              <span class="suite-name border-failed">Inventory Management – Dashboard API Data Layer Tests</span>
+            </a> <!-- navigator-link -->
+          </div> <!-- suite-header light-rounded-window-top -->
+          <div class="navigator-suite-content">
+            <div class="suite-section-title">
+              <span>Info</span>
+            </div> <!-- suite-section-title -->
+            <div class="suite-section-content">
+              <ul>
+                <li>
+                  <a href="#" panel-name="test-xml-Inventory_Management___Dashboard_API_Data_Layer_Tests" class="navigator-link ">
+                    <span>dashboard-api-suite.xml</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="testlist-Inventory_Management___Dashboard_API_Data_Layer_Tests" class="navigator-link ">
+                    <span class="test-stats">1 test</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="group-Inventory_Management___Dashboard_API_Data_Layer_Tests" class="navigator-link ">
+                    <span>3 groups</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="times-Inventory_Management___Dashboard_API_Data_Layer_Tests" class="navigator-link ">
+                    <span>Times</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="reporter-Inventory_Management___Dashboard_API_Data_Layer_Tests" class="navigator-link ">
+                    <span>Reporter output</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="ignored-methods-Inventory_Management___Dashboard_API_Data_Layer_Tests" class="navigator-link ">
+                    <span>Ignored methods</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="chronological-Inventory_Management___Dashboard_API_Data_Layer_Tests" class="navigator-link ">
+                    <span>Chronological view</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+              </ul>
+            </div> <!-- suite-section-content -->
+            <div class="result-section">
+              <div class="suite-section-title">
+                <span>Results</span>
+              </div> <!-- suite-section-title -->
+              <div class="suite-section-content">
+                <ul>
+                  <li>
+                    <span class="method-stats">16 methods, 1 failed,  14 skipped,  1 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests" class="hide-methods failed suite-Inventory_Management___Dashboard_API_Data_Layer_Tests"> (hide)</a> <!-- hide-methods failed suite-Inventory_Management___Dashboard_API_Data_Layer_Tests -->
+                      <a href="#" panel-name="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests" class="show-methods failed suite-Inventory_Management___Dashboard_API_Data_Layer_Tests"> (show)</a> <!-- show-methods failed suite-Inventory_Management___Dashboard_API_Data_Layer_Tests -->
+                    </span>
+                    <div class="method-list-content failed suite-Inventory_Management___Dashboard_API_Data_Layer_Tests">
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests" title="com.tpg.automation.inventory.DashboardApiTests" class="method navigator-link" hash-for-method="testAuditLogsAreFetchedForAlertsPanel">testAuditLogsAreFetchedForAlertsPanel</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-Inventory_Management___Dashboard_API_Data_Layer_Tests -->
+                  </li>
+                  <li>
+                    <span class="method-list-title skipped">Skipped methods</span>
+                    <span class="show-or-hide-methods skipped">
+                      <a href="#" panel-name="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests" class="hide-methods skipped suite-Inventory_Management___Dashboard_API_Data_Layer_Tests"> (hide)</a> <!-- hide-methods skipped suite-Inventory_Management___Dashboard_API_Data_Layer_Tests -->
+                      <a href="#" panel-name="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests" class="show-methods skipped suite-Inventory_Management___Dashboard_API_Data_Layer_Tests"> (show)</a> <!-- show-methods skipped suite-Inventory_Management___Dashboard_API_Data_Layer_Tests -->
+                    </span>
+                    <div class="method-list-content skipped suite-Inventory_Management___Dashboard_API_Data_Layer_Tests">
+                      <span>
+                        <img src="skipped.png" width="3%"/>
+                        <a href="#" panel-name="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests" title="com.tpg.automation.inventory.DashboardApiTests" class="method navigator-link" hash-for-method="testAuditLogsTwentyFourHourTimeWindow">testAuditLogsTwentyFourHourTimeWindow</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="skipped.png" width="3%"/>
+                        <a href="#" panel-name="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests" title="com.tpg.automation.inventory.DashboardApiTests" class="method navigator-link" hash-for-method="testInProgressServiceOrdersAreFetched">testInProgressServiceOrdersAreFetched</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="skipped.png" width="3%"/>
+                        <a href="#" panel-name="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests" title="com.tpg.automation.inventory.DashboardApiTests" class="method navigator-link" hash-for-method="testKpiCardsTransitionFromPlaceholderToLiveValues">testKpiCardsTransitionFromPlaceholderToLiveValues</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="skipped.png" width="3%"/>
+                        <a href="#" panel-name="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests" title="com.tpg.automation.inventory.DashboardApiTests" class="method navigator-link" hash-for-method="testNoDashboardAutoRefreshOrPolling">testNoDashboardAutoRefreshOrPolling</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="skipped.png" width="3%"/>
+                        <a href="#" panel-name="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests" title="com.tpg.automation.inventory.DashboardApiTests" class="method navigator-link" hash-for-method="testOfflineDevicesAreFetchedSeparately">testOfflineDevicesAreFetchedSeparately</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="skipped.png" width="3%"/>
+                        <a href="#" panel-name="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests" title="com.tpg.automation.inventory.DashboardApiTests" class="method navigator-link" hash-for-method="testPendingComplianceRecordsAreFetched">testPendingComplianceRecordsAreFetched</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="skipped.png" width="3%"/>
+                        <a href="#" panel-name="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests" title="com.tpg.automation.inventory.DashboardApiTests" class="method navigator-link" hash-for-method="testPendingFirmwareRecordsAreFetched">testPendingFirmwareRecordsAreFetched</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="skipped.png" width="3%"/>
+                        <a href="#" panel-name="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests" title="com.tpg.automation.inventory.DashboardApiTests" class="method navigator-link" hash-for-method="testQuickActionBadgesAreVisibleWhenCountIsGreaterThanZero">testQuickActionBadgesAreVisibleWhenCountIsGreaterThanZero</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="skipped.png" width="3%"/>
+                        <a href="#" panel-name="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests" title="com.tpg.automation.inventory.DashboardApiTests" class="method navigator-link" hash-for-method="testRefreshButtonIsVisibleWithCircularArrowIcon">testRefreshButtonIsVisibleWithCircularArrowIcon</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="skipped.png" width="3%"/>
+                        <a href="#" panel-name="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests" title="com.tpg.automation.inventory.DashboardApiTests" class="method navigator-link" hash-for-method="testRefreshDashboardButtonTriggersCompleteDataRefetch">testRefreshDashboardButtonTriggersCompleteDataRefetch</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="skipped.png" width="3%"/>
+                        <a href="#" panel-name="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests" title="com.tpg.automation.inventory.DashboardApiTests" class="method navigator-link" hash-for-method="testScheduledServiceOrdersAreFetched">testScheduledServiceOrdersAreFetched</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="skipped.png" width="3%"/>
+                        <a href="#" panel-name="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests" title="com.tpg.automation.inventory.DashboardApiTests" class="method navigator-link" hash-for-method="testSystemStatusHealthPercentagesUpdateFromLiveKpiData">testSystemStatusHealthPercentagesUpdateFromLiveKpiData</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="skipped.png" width="3%"/>
+                        <a href="#" panel-name="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests" title="com.tpg.automation.inventory.DashboardApiTests" class="method navigator-link" hash-for-method="testSystemStatusOperationalAndDegradedLabels">testSystemStatusOperationalAndDegradedLabels</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="skipped.png" width="3%"/>
+                        <a href="#" panel-name="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests" title="com.tpg.automation.inventory.DashboardApiTests" class="method navigator-link" hash-for-method="testSystemStatusPanelDisplaysFourServices">testSystemStatusPanelDisplaysFourServices</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content skipped suite-Inventory_Management___Dashboard_API_Data_Layer_Tests -->
+                  </li>
+                  <li>
+                    <span class="method-list-title passed">Passed methods</span>
+                    <span class="show-or-hide-methods passed">
+                      <a href="#" panel-name="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests" class="hide-methods passed suite-Inventory_Management___Dashboard_API_Data_Layer_Tests"> (hide)</a> <!-- hide-methods passed suite-Inventory_Management___Dashboard_API_Data_Layer_Tests -->
+                      <a href="#" panel-name="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests" class="show-methods passed suite-Inventory_Management___Dashboard_API_Data_Layer_Tests"> (show)</a> <!-- show-methods passed suite-Inventory_Management___Dashboard_API_Data_Layer_Tests -->
+                    </span>
+                    <div class="method-list-content passed suite-Inventory_Management___Dashboard_API_Data_Layer_Tests">
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests" title="com.tpg.automation.inventory.DashboardApiTests" class="method navigator-link" hash-for-method="testAllDeviceRecordsAreFetched">testAllDeviceRecordsAreFetched</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content passed suite-Inventory_Management___Dashboard_API_Data_Layer_Tests -->
+                  </li>
+                </ul>
+              </div> <!-- suite-section-content -->
+            </div> <!-- result-section -->
+          </div> <!-- navigator-suite-content -->
+        </div> <!-- rounded-window -->
+      </div> <!-- suite -->
+    </div> <!-- navigator-root -->
+    <div class="wrapper">
+      <div class="main-panel-root">
+        <div panel-name="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests" class="panel Inventory_Management___Dashboard_API_Data_Layer_Tests">
+          <div class="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests-class-failed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="failed.png"/>
+              <span class="class-name">com.tpg.automation.inventory.DashboardApiTests</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="testAuditLogsAreFetchedForAlertsPanel">
+                  </a> <!-- testAuditLogsAreFetchedForAlertsPanel -->
+                  <span class="method-name">testAuditLogsAreFetchedForAlertsPanel</span>
+                  <div class="stack-trace">java.lang.AssertionError: ocator expected to be visible
+Call log:
+Locator.expect with timeout 30000ms
+waiting for locator(&quot;div.bg-card:has(h3:text-is(&apos;Recent Alerts&apos;)) ul li&quot;)
+	at com.tpg.verification.Verify.verifyAs(Verify.java:156)
+	at com.tpg.actor.Actor.wantsTo(Actor.java:39)
+	at com.tpg.automation.inventory.DashboardApiTests.testAuditLogsAreFetchedForAlertsPanel(DashboardApiTests.java:423)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.run(AbstractTestNGSpringContextTests.java:154)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+... Removed 31 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Inventory_Management___Dashboard_API_Data_Layer_Tests-class-failed -->
+          <div class="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests-class-skipped">
+            <div class="main-panel-header rounded-window-top">
+              <img src="skipped.png"/>
+              <span class="class-name">com.tpg.automation.inventory.DashboardApiTests</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="testAuditLogsTwentyFourHourTimeWindow">
+                  </a> <!-- testAuditLogsTwentyFourHourTimeWindow -->
+                  <span class="method-name">testAuditLogsTwentyFourHourTimeWindow</span>
+                  <div class="stack-trace">com.tpg.exceptions.NovusConfigException: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:179)
+	at com.tpg.services.NovusReportingService.attachResult(NovusReportingService.java:121)
+	at com.tpg.NovusGuiTestBase.afterMethodSetup(NovusGuiTestBase.java:75)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+Caused by: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:185)
+	at java.base/java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:139)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:174)
+	... 37 more
+... Removed 34 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testInProgressServiceOrdersAreFetched">
+                  </a> <!-- testInProgressServiceOrdersAreFetched -->
+                  <span class="method-name">testInProgressServiceOrdersAreFetched</span>
+                  <div class="stack-trace">com.tpg.exceptions.NovusConfigException: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:179)
+	at com.tpg.services.NovusReportingService.attachResult(NovusReportingService.java:121)
+	at com.tpg.NovusGuiTestBase.afterMethodSetup(NovusGuiTestBase.java:75)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+Caused by: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:185)
+	at java.base/java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:139)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:174)
+	... 37 more
+... Removed 34 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testKpiCardsTransitionFromPlaceholderToLiveValues">
+                  </a> <!-- testKpiCardsTransitionFromPlaceholderToLiveValues -->
+                  <span class="method-name">testKpiCardsTransitionFromPlaceholderToLiveValues</span>
+                  <div class="stack-trace">com.tpg.exceptions.NovusConfigException: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:179)
+	at com.tpg.services.NovusReportingService.attachResult(NovusReportingService.java:121)
+	at com.tpg.NovusGuiTestBase.afterMethodSetup(NovusGuiTestBase.java:75)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+Caused by: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:185)
+	at java.base/java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:139)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:174)
+	... 37 more
+... Removed 34 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testNoDashboardAutoRefreshOrPolling">
+                  </a> <!-- testNoDashboardAutoRefreshOrPolling -->
+                  <span class="method-name">testNoDashboardAutoRefreshOrPolling</span>
+                  <div class="stack-trace">com.tpg.exceptions.NovusConfigException: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:179)
+	at com.tpg.services.NovusReportingService.attachResult(NovusReportingService.java:121)
+	at com.tpg.NovusGuiTestBase.afterMethodSetup(NovusGuiTestBase.java:75)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+Caused by: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:185)
+	at java.base/java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:139)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:174)
+	... 37 more
+... Removed 34 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testOfflineDevicesAreFetchedSeparately">
+                  </a> <!-- testOfflineDevicesAreFetchedSeparately -->
+                  <span class="method-name">testOfflineDevicesAreFetchedSeparately</span>
+                  <div class="stack-trace">com.tpg.exceptions.NovusConfigException: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:179)
+	at com.tpg.services.NovusReportingService.attachResult(NovusReportingService.java:121)
+	at com.tpg.NovusGuiTestBase.afterMethodSetup(NovusGuiTestBase.java:75)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+Caused by: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:185)
+	at java.base/java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:139)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:174)
+	... 37 more
+... Removed 34 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testPendingComplianceRecordsAreFetched">
+                  </a> <!-- testPendingComplianceRecordsAreFetched -->
+                  <span class="method-name">testPendingComplianceRecordsAreFetched</span>
+                  <div class="stack-trace">com.tpg.exceptions.NovusConfigException: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:179)
+	at com.tpg.services.NovusReportingService.attachResult(NovusReportingService.java:121)
+	at com.tpg.NovusGuiTestBase.afterMethodSetup(NovusGuiTestBase.java:75)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+Caused by: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:185)
+	at java.base/java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:139)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:174)
+	... 37 more
+... Removed 34 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testPendingFirmwareRecordsAreFetched">
+                  </a> <!-- testPendingFirmwareRecordsAreFetched -->
+                  <span class="method-name">testPendingFirmwareRecordsAreFetched</span>
+                  <div class="stack-trace">com.tpg.exceptions.NovusConfigException: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:179)
+	at com.tpg.services.NovusReportingService.attachResult(NovusReportingService.java:121)
+	at com.tpg.NovusGuiTestBase.afterMethodSetup(NovusGuiTestBase.java:75)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+Caused by: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:185)
+	at java.base/java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:139)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:174)
+	... 37 more
+... Removed 34 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testQuickActionBadgesAreVisibleWhenCountIsGreaterThanZero">
+                  </a> <!-- testQuickActionBadgesAreVisibleWhenCountIsGreaterThanZero -->
+                  <span class="method-name">testQuickActionBadgesAreVisibleWhenCountIsGreaterThanZero</span>
+                  <div class="stack-trace">com.tpg.exceptions.NovusConfigException: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:179)
+	at com.tpg.services.NovusReportingService.attachResult(NovusReportingService.java:121)
+	at com.tpg.NovusGuiTestBase.afterMethodSetup(NovusGuiTestBase.java:75)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+Caused by: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:185)
+	at java.base/java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:139)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:174)
+	... 37 more
+... Removed 34 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testRefreshButtonIsVisibleWithCircularArrowIcon">
+                  </a> <!-- testRefreshButtonIsVisibleWithCircularArrowIcon -->
+                  <span class="method-name">testRefreshButtonIsVisibleWithCircularArrowIcon</span>
+                  <div class="stack-trace">com.tpg.exceptions.NovusConfigException: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:179)
+	at com.tpg.services.NovusReportingService.attachResult(NovusReportingService.java:121)
+	at com.tpg.NovusGuiTestBase.afterMethodSetup(NovusGuiTestBase.java:75)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+Caused by: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:185)
+	at java.base/java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:139)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:174)
+	... 37 more
+... Removed 34 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testRefreshDashboardButtonTriggersCompleteDataRefetch">
+                  </a> <!-- testRefreshDashboardButtonTriggersCompleteDataRefetch -->
+                  <span class="method-name">testRefreshDashboardButtonTriggersCompleteDataRefetch</span>
+                  <div class="stack-trace">com.tpg.exceptions.NovusConfigException: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:179)
+	at com.tpg.services.NovusReportingService.attachResult(NovusReportingService.java:121)
+	at com.tpg.NovusGuiTestBase.afterMethodSetup(NovusGuiTestBase.java:75)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+Caused by: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:185)
+	at java.base/java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:139)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:174)
+	... 37 more
+... Removed 34 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testScheduledServiceOrdersAreFetched">
+                  </a> <!-- testScheduledServiceOrdersAreFetched -->
+                  <span class="method-name">testScheduledServiceOrdersAreFetched</span>
+                  <div class="stack-trace">com.tpg.exceptions.NovusConfigException: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:179)
+	at com.tpg.services.NovusReportingService.attachResult(NovusReportingService.java:121)
+	at com.tpg.NovusGuiTestBase.afterMethodSetup(NovusGuiTestBase.java:75)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+Caused by: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:185)
+	at java.base/java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:139)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:174)
+	... 37 more
+... Removed 34 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testSystemStatusHealthPercentagesUpdateFromLiveKpiData">
+                  </a> <!-- testSystemStatusHealthPercentagesUpdateFromLiveKpiData -->
+                  <span class="method-name">testSystemStatusHealthPercentagesUpdateFromLiveKpiData</span>
+                  <div class="stack-trace">com.tpg.exceptions.NovusConfigException: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:179)
+	at com.tpg.services.NovusReportingService.attachResult(NovusReportingService.java:121)
+	at com.tpg.NovusGuiTestBase.afterMethodSetup(NovusGuiTestBase.java:75)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+Caused by: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:185)
+	at java.base/java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:139)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:174)
+	... 37 more
+... Removed 34 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testSystemStatusOperationalAndDegradedLabels">
+                  </a> <!-- testSystemStatusOperationalAndDegradedLabels -->
+                  <span class="method-name">testSystemStatusOperationalAndDegradedLabels</span>
+                  <div class="stack-trace">com.tpg.exceptions.NovusConfigException: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:179)
+	at com.tpg.services.NovusReportingService.attachResult(NovusReportingService.java:121)
+	at com.tpg.NovusGuiTestBase.afterMethodSetup(NovusGuiTestBase.java:75)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+Caused by: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:185)
+	at java.base/java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:139)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:174)
+	... 37 more
+... Removed 34 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testSystemStatusPanelDisplaysFourServices">
+                  </a> <!-- testSystemStatusPanelDisplaysFourServices -->
+                  <span class="method-name">testSystemStatusPanelDisplaysFourServices</span>
+                  <div class="stack-trace">com.tpg.exceptions.NovusConfigException: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:179)
+	at com.tpg.services.NovusReportingService.attachResult(NovusReportingService.java:121)
+	at com.tpg.NovusGuiTestBase.afterMethodSetup(NovusGuiTestBase.java:75)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+Caused by: java.io.FileNotFoundException: /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/screenshots/DashboardApiTests_testAuditLogsAreFetchedForAlertsPanel1773817365503.jpg (No such file or directory)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:185)
+	at java.base/java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:139)
+	at com.tpg.services.NovusReportingService.base64(NovusReportingService.java:174)
+	... 37 more
+... Removed 34 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Inventory_Management___Dashboard_API_Data_Layer_Tests-class-skipped -->
+          <div class="suite-Inventory_Management___Dashboard_API_Data_Layer_Tests-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.tpg.automation.inventory.DashboardApiTests</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="testAllDeviceRecordsAreFetched">
+                  </a> <!-- testAllDeviceRecordsAreFetched -->
+                  <span class="method-name">testAllDeviceRecordsAreFetched</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Inventory_Management___Dashboard_API_Data_Layer_Tests-class-passed -->
+        </div> <!-- panel Inventory_Management___Dashboard_API_Data_Layer_Tests -->
+        <div panel-name="test-xml-Inventory_Management___Dashboard_API_Data_Layer_Tests" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">/Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/test/resources/dashboard-api-suite.xml</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
+&lt;suite thread-count=&quot;1&quot; name=&quot;Inventory Management – Dashboard API Data Layer Tests&quot; guice-stage=&quot;DEVELOPMENT&quot; verbose=&quot;0&quot;&gt;
+  &lt;parameter name=&quot;report-name&quot; value=&quot;Dashboard-API-Report&quot;/&gt;
+  &lt;test thread-count=&quot;1&quot; name=&quot;Dashboard API Data Layer Tests&quot; verbose=&quot;0&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.tpg.automation.inventory.DashboardApiTests&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Dashboard API Data Layer Tests --&gt;
+&lt;/suite&gt; &lt;!-- Inventory Management – Dashboard API Data Layer Tests --&gt;
+            </pre>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="testlist-Inventory_Management___Dashboard_API_Data_Layer_Tests" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Tests for Inventory Management – Dashboard API Data Layer Tests</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <ul>
+              <li>
+                <span class="test-name">Dashboard API Data Layer Tests (1 class)</span>
+              </li>
+            </ul>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="group-Inventory_Management___Dashboard_API_Data_Layer_Tests" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Groups for Inventory Management – Dashboard API Data Layer Tests</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="test-group">
+              <span class="test-group-name">dashboard-api</span>
+              <br/>
+              <div class="method-in-group">
+                <span class="method-in-group-name">testAllDeviceRecordsAreFetched</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testAuditLogsAreFetchedForAlertsPanel</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testAuditLogsTwentyFourHourTimeWindow</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testInProgressServiceOrdersAreFetched</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testKpiCardsTransitionFromPlaceholderToLiveValues</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testNoDashboardAutoRefreshOrPolling</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testOfflineDevicesAreFetchedSeparately</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testPendingComplianceRecordsAreFetched</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testPendingFirmwareRecordsAreFetched</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testQuickActionBadgesAreVisibleWhenCountIsGreaterThanZero</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testRefreshButtonIsVisibleWithCircularArrowIcon</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testRefreshDashboardButtonTriggersCompleteDataRefetch</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testScheduledServiceOrdersAreFetched</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testSystemStatusHealthPercentagesUpdateFromLiveKpiData</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testSystemStatusOperationalAndDegradedLabels</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testSystemStatusPanelDisplaysFourServices</span>
+                <br/>
+              </div> <!-- method-in-group -->
+            </div> <!-- test-group -->
+            <div class="test-group">
+              <span class="test-group-name">regression</span>
+              <br/>
+              <div class="method-in-group">
+                <span class="method-in-group-name">testAuditLogsTwentyFourHourTimeWindow</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testNoDashboardAutoRefreshOrPolling</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testOfflineDevicesAreFetchedSeparately</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testPendingComplianceRecordsAreFetched</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testRefreshButtonIsVisibleWithCircularArrowIcon</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testScheduledServiceOrdersAreFetched</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testSystemStatusHealthPercentagesUpdateFromLiveKpiData</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testSystemStatusOperationalAndDegradedLabels</span>
+                <br/>
+              </div> <!-- method-in-group -->
+            </div> <!-- test-group -->
+            <div class="test-group">
+              <span class="test-group-name">smoke-tests</span>
+              <br/>
+              <div class="method-in-group">
+                <span class="method-in-group-name">testAllDeviceRecordsAreFetched</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testAuditLogsAreFetchedForAlertsPanel</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testInProgressServiceOrdersAreFetched</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testKpiCardsTransitionFromPlaceholderToLiveValues</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testPendingFirmwareRecordsAreFetched</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testQuickActionBadgesAreVisibleWhenCountIsGreaterThanZero</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testRefreshDashboardButtonTriggersCompleteDataRefetch</span>
+                <br/>
+              </div> <!-- method-in-group -->
+              <div class="method-in-group">
+                <span class="method-in-group-name">testSystemStatusPanelDisplaysFourServices</span>
+                <br/>
+              </div> <!-- method-in-group -->
+            </div> <!-- test-group -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="times-Inventory_Management___Dashboard_API_Data_Layer_Tests" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Times for Inventory Management – Dashboard API Data Layer Tests</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="times-div">
+              <script type="text/javascript">
+suiteTableInitFunctions.push('tableData_Inventory_Management___Dashboard_API_Data_Layer_Tests');
+function tableData_Inventory_Management___Dashboard_API_Data_Layer_Tests() {
+var data = new google.visualization.DataTable();
+data.addColumn('number', 'Number');
+data.addColumn('string', 'Method');
+data.addColumn('string', 'Class');
+data.addColumn('number', 'Time (ms)');
+data.addRows(16);
+data.setCell(0, 0, 0)
+data.setCell(0, 1, 'testAuditLogsAreFetchedForAlertsPanel')
+data.setCell(0, 2, 'com.tpg.automation.inventory.DashboardApiTests')
+data.setCell(0, 3, 20160);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'testAllDeviceRecordsAreFetched')
+data.setCell(1, 2, 'com.tpg.automation.inventory.DashboardApiTests')
+data.setCell(1, 3, 5991);
+data.setCell(2, 0, 2)
+data.setCell(2, 1, 'testPendingComplianceRecordsAreFetched')
+data.setCell(2, 2, 'com.tpg.automation.inventory.DashboardApiTests')
+data.setCell(2, 3, 1);
+data.setCell(3, 0, 3)
+data.setCell(3, 1, 'testQuickActionBadgesAreVisibleWhenCountIsGreaterThanZero')
+data.setCell(3, 2, 'com.tpg.automation.inventory.DashboardApiTests')
+data.setCell(3, 3, 1);
+data.setCell(4, 0, 4)
+data.setCell(4, 1, 'testInProgressServiceOrdersAreFetched')
+data.setCell(4, 2, 'com.tpg.automation.inventory.DashboardApiTests')
+data.setCell(4, 3, 1);
+data.setCell(5, 0, 5)
+data.setCell(5, 1, 'testPendingFirmwareRecordsAreFetched')
+data.setCell(5, 2, 'com.tpg.automation.inventory.DashboardApiTests')
+data.setCell(5, 3, 0);
+data.setCell(6, 0, 6)
+data.setCell(6, 1, 'testSystemStatusOperationalAndDegradedLabels')
+data.setCell(6, 2, 'com.tpg.automation.inventory.DashboardApiTests')
+data.setCell(6, 3, 0);
+data.setCell(7, 0, 7)
+data.setCell(7, 1, 'testScheduledServiceOrdersAreFetched')
+data.setCell(7, 2, 'com.tpg.automation.inventory.DashboardApiTests')
+data.setCell(7, 3, 0);
+data.setCell(8, 0, 8)
+data.setCell(8, 1, 'testKpiCardsTransitionFromPlaceholderToLiveValues')
+data.setCell(8, 2, 'com.tpg.automation.inventory.DashboardApiTests')
+data.setCell(8, 3, 0);
+data.setCell(9, 0, 9)
+data.setCell(9, 1, 'testNoDashboardAutoRefreshOrPolling')
+data.setCell(9, 2, 'com.tpg.automation.inventory.DashboardApiTests')
+data.setCell(9, 3, 0);
+data.setCell(10, 0, 10)
+data.setCell(10, 1, 'testAuditLogsTwentyFourHourTimeWindow')
+data.setCell(10, 2, 'com.tpg.automation.inventory.DashboardApiTests')
+data.setCell(10, 3, 0);
+data.setCell(11, 0, 11)
+data.setCell(11, 1, 'testSystemStatusHealthPercentagesUpdateFromLiveKpiData')
+data.setCell(11, 2, 'com.tpg.automation.inventory.DashboardApiTests')
+data.setCell(11, 3, 0);
+data.setCell(12, 0, 12)
+data.setCell(12, 1, 'testRefreshDashboardButtonTriggersCompleteDataRefetch')
+data.setCell(12, 2, 'com.tpg.automation.inventory.DashboardApiTests')
+data.setCell(12, 3, 0);
+data.setCell(13, 0, 13)
+data.setCell(13, 1, 'testRefreshButtonIsVisibleWithCircularArrowIcon')
+data.setCell(13, 2, 'com.tpg.automation.inventory.DashboardApiTests')
+data.setCell(13, 3, 0);
+data.setCell(14, 0, 14)
+data.setCell(14, 1, 'testSystemStatusPanelDisplaysFourServices')
+data.setCell(14, 2, 'com.tpg.automation.inventory.DashboardApiTests')
+data.setCell(14, 3, 0);
+data.setCell(15, 0, 15)
+data.setCell(15, 1, 'testOfflineDevicesAreFetchedSeparately')
+data.setCell(15, 2, 'com.tpg.automation.inventory.DashboardApiTests')
+data.setCell(15, 3, 0);
+window.suiteTableData['Inventory_Management___Dashboard_API_Data_Layer_Tests']= { tableData: data, tableDiv: 'times-div-Inventory_Management___Dashboard_API_Data_Layer_Tests'}
+return data;
+}
+              </script>
+              <span class="suite-total-time">Total running time: 26 seconds</span>
+              <div id="times-div-Inventory_Management___Dashboard_API_Data_Layer_Tests">
+              </div> <!-- times-div-Inventory_Management___Dashboard_API_Data_Layer_Tests -->
+            </div> <!-- times-div -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="reporter-Inventory_Management___Dashboard_API_Data_Layer_Tests" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Reporter output for Inventory Management – Dashboard API Data Layer Tests</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="ignored-methods-Inventory_Management___Dashboard_API_Data_Layer_Tests" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">14 ignored methods</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="ignored-class-div">
+              <span class="ignored-class-name">com.tpg.automation.inventory.DashboardApiTests</span>
+              <div class="ignored-methods-div">
+                <span class="ignored-method-name">testDashboardLoadsWithZeroData</span>
+                <br/>
+                <span class="ignored-method-name">testAlertsErrorMessageOnApiFailure</span>
+                <br/>
+                <span class="ignored-method-name">testKpiAndAlertsFetchIndependently</span>
+                <br/>
+                <span class="ignored-method-name">testErrorBannersAreClearedWhenRefreshStarts</span>
+                <br/>
+                <span class="ignored-method-name">testKpiCardsShowPlaceholdersDuringRefresh</span>
+                <br/>
+                <span class="ignored-method-name">testErrorBannerDisplaysMeaningfulMessage</span>
+                <br/>
+                <span class="ignored-method-name">testQuickActionBadgesAreHiddenWhenCountIsZero</span>
+                <br/>
+                <span class="ignored-method-name">testErrorBannerAndPlaceholdersWhenAllApisFail</span>
+                <br/>
+                <span class="ignored-method-name">testErrorBannerDisplayedOnSingleApiFailure</span>
+                <br/>
+                <span class="ignored-method-name">testKpiCardsShowLoadingPlaceholderOnPageLoad</span>
+                <br/>
+                <span class="ignored-method-name">testAlertsLoadingIndicatorDisplayedWhileFetching</span>
+                <br/>
+                <span class="ignored-method-name">testParallelApiCallsOnDashboardLoad</span>
+                <br/>
+                <span class="ignored-method-name">testAlertsPanelShowsLoadingStateDuringRefresh</span>
+                <br/>
+                <span class="ignored-method-name">testNoRecentActivityMessageWhenNoAuditLogsExist</span>
+                <br/>
+              </div> <!-- ignored-methods-div -->
+            </div> <!-- ignored-class-div -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="chronological-Inventory_Management___Dashboard_API_Data_Layer_Tests" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Methods in chronological order</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.tpg.automation.inventory.DashboardApiTests</div> <!-- chronological-class-name -->
+              <div class="configuration-suite before">
+                <span class="method-name">springTestContextPrepareTestInstance</span>
+                <span class="method-start">0 ms</span>
+              </div> <!-- configuration-suite before -->
+              <div class="configuration-suite before">
+                <span class="method-name">initReport(Dashboard-API-Report)</span>
+                <span class="method-start">8876 ms</span>
+              </div> <!-- configuration-suite before -->
+              <div class="configuration-class before">
+                <span class="method-name">springTestContextBeforeTestClass</span>
+                <span class="method-start">9403 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="configuration-class before">
+                <span class="method-name">springTestContextPrepareTestInstance</span>
+                <span class="method-start">9408 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="configuration-class before">
+                <span class="method-name">baseBeforeClassSetup</span>
+                <span class="method-start">9413 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="configuration-class before">
+                <span class="method-name">loginToApplication</span>
+                <span class="method-start">9413 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testAllDeviceRecordsAreFetched())</span>
+                <span class="method-start">11402 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">beforeMethodSetup(public void com.tpg.automation.inventory.DashboardApiTests.testAllDeviceRecordsAreFetched())</span>
+                <span class="method-start">12493 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testAllDeviceRecordsAreFetched</span>
+                <span class="method-start">12534 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">afterMethodSetup([TestResult name=testAllDeviceRecordsAreFetched status=SUCCESS method=DashboardApiTests.testAllDevic...)</span>
+                <span class="method-start">18529 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testAllDeviceRecordsAreFetched())</span>
+                <span class="method-start">18531 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testAuditLogsAreFetchedForAlertsPanel())</span>
+                <span class="method-start">18547 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">beforeMethodSetup(public void com.tpg.automation.inventory.DashboardApiTests.testAuditLogsAreFetchedForAlertsPanel())</span>
+                <span class="method-start">18548 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">testAuditLogsAreFetchedForAlertsPanel</span>
+                <span class="method-start">18550 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">afterMethodSetup([TestResult name=testAuditLogsAreFetchedForAlertsPanel status=FAILURE method=DashboardApiTests.testA...)</span>
+                <span class="method-start">38722 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testAuditLogsAreFetchedForAlertsPanel())</span>
+                <span class="method-start">38751 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testAuditLogsTwentyFourHourTimeWindow())</span>
+                <span class="method-start">38755 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">beforeMethodSetup(public void com.tpg.automation.inventory.DashboardApiTests.testAuditLogsTwentyFourHourTimeWindow())</span>
+                <span class="method-start">38757 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">afterMethodSetup([TestResult name=testAuditLogsTwentyFourHourTimeWindow status=SKIP method=DashboardApiTests.testAudi...)</span>
+                <span class="method-start">38773 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testAuditLogsTwentyFourHourTimeWindow())</span>
+                <span class="method-start">38774 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testInProgressServiceOrdersAreFetched())</span>
+                <span class="method-start">38780 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">beforeMethodSetup(public void com.tpg.automation.inventory.DashboardApiTests.testInProgressServiceOrdersAreFetched())</span>
+                <span class="method-start">38782 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">afterMethodSetup([TestResult name=testInProgressServiceOrdersAreFetched status=SKIP method=DashboardApiTests.testInPr...)</span>
+                <span class="method-start">38786 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testInProgressServiceOrdersAreFetched())</span>
+                <span class="method-start">38787 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testKpiCardsTransitionFromPlaceholderToLi...)</span>
+                <span class="method-start">38789 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">beforeMethodSetup(public void com.tpg.automation.inventory.DashboardApiTests.testKpiCardsTransitionFromPlaceholderToLi...)</span>
+                <span class="method-start">38790 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">afterMethodSetup([TestResult name=testKpiCardsTransitionFromPlaceholderToLiveValues status=SKIP method=DashboardApiTe...)</span>
+                <span class="method-start">38792 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testKpiCardsTransitionFromPlaceholderToLi...)</span>
+                <span class="method-start">38792 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testNoDashboardAutoRefreshOrPolling())</span>
+                <span class="method-start">38794 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">beforeMethodSetup(public void com.tpg.automation.inventory.DashboardApiTests.testNoDashboardAutoRefreshOrPolling())</span>
+                <span class="method-start">38795 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">afterMethodSetup([TestResult name=testNoDashboardAutoRefreshOrPolling status=SKIP method=DashboardApiTests.testNoDash...)</span>
+                <span class="method-start">38796 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testNoDashboardAutoRefreshOrPolling())</span>
+                <span class="method-start">38797 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testOfflineDevicesAreFetchedSeparately())</span>
+                <span class="method-start">38798 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">beforeMethodSetup(public void com.tpg.automation.inventory.DashboardApiTests.testOfflineDevicesAreFetchedSeparately())</span>
+                <span class="method-start">38799 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">afterMethodSetup([TestResult name=testOfflineDevicesAreFetchedSeparately status=SKIP method=DashboardApiTests.testOff...)</span>
+                <span class="method-start">38801 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testOfflineDevicesAreFetchedSeparately())</span>
+                <span class="method-start">38802 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testPendingComplianceRecordsAreFetched())</span>
+                <span class="method-start">38804 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">beforeMethodSetup(public void com.tpg.automation.inventory.DashboardApiTests.testPendingComplianceRecordsAreFetched())</span>
+                <span class="method-start">38813 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">afterMethodSetup([TestResult name=testPendingComplianceRecordsAreFetched status=SKIP method=DashboardApiTests.testPen...)</span>
+                <span class="method-start">38822 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testPendingComplianceRecordsAreFetched())</span>
+                <span class="method-start">38823 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testPendingFirmwareRecordsAreFetched())</span>
+                <span class="method-start">38825 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">beforeMethodSetup(public void com.tpg.automation.inventory.DashboardApiTests.testPendingFirmwareRecordsAreFetched())</span>
+                <span class="method-start">38825 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">afterMethodSetup([TestResult name=testPendingFirmwareRecordsAreFetched status=SKIP method=DashboardApiTests.testPendi...)</span>
+                <span class="method-start">38828 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testPendingFirmwareRecordsAreFetched())</span>
+                <span class="method-start">38830 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testQuickActionBadgesAreVisibleWhenCountI...)</span>
+                <span class="method-start">38834 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">beforeMethodSetup(public void com.tpg.automation.inventory.DashboardApiTests.testQuickActionBadgesAreVisibleWhenCountI...)</span>
+                <span class="method-start">38837 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">afterMethodSetup([TestResult name=testQuickActionBadgesAreVisibleWhenCountIsGreaterThanZero status=SKIP method=Dashbo...)</span>
+                <span class="method-start">38850 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testQuickActionBadgesAreVisibleWhenCountI...)</span>
+                <span class="method-start">38852 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testRefreshButtonIsVisibleWithCircularArr...)</span>
+                <span class="method-start">38857 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">beforeMethodSetup(public void com.tpg.automation.inventory.DashboardApiTests.testRefreshButtonIsVisibleWithCircularArr...)</span>
+                <span class="method-start">38858 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">afterMethodSetup([TestResult name=testRefreshButtonIsVisibleWithCircularArrowIcon status=SKIP method=DashboardApiTest...)</span>
+                <span class="method-start">38861 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testRefreshButtonIsVisibleWithCircularArr...)</span>
+                <span class="method-start">38862 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testRefreshDashboardButtonTriggersComplet...)</span>
+                <span class="method-start">38864 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">beforeMethodSetup(public void com.tpg.automation.inventory.DashboardApiTests.testRefreshDashboardButtonTriggersComplet...)</span>
+                <span class="method-start">38866 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">afterMethodSetup([TestResult name=testRefreshDashboardButtonTriggersCompleteDataRefetch status=SKIP method=DashboardA...)</span>
+                <span class="method-start">38870 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testRefreshDashboardButtonTriggersComplet...)</span>
+                <span class="method-start">38871 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testScheduledServiceOrdersAreFetched())</span>
+                <span class="method-start">38873 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">beforeMethodSetup(public void com.tpg.automation.inventory.DashboardApiTests.testScheduledServiceOrdersAreFetched())</span>
+                <span class="method-start">38875 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">afterMethodSetup([TestResult name=testScheduledServiceOrdersAreFetched status=SKIP method=DashboardApiTests.testSched...)</span>
+                <span class="method-start">38879 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testScheduledServiceOrdersAreFetched())</span>
+                <span class="method-start">38880 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testSystemStatusHealthPercentagesUpdateFr...)</span>
+                <span class="method-start">38883 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">beforeMethodSetup(public void com.tpg.automation.inventory.DashboardApiTests.testSystemStatusHealthPercentagesUpdateFr...)</span>
+                <span class="method-start">38884 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">afterMethodSetup([TestResult name=testSystemStatusHealthPercentagesUpdateFromLiveKpiData status=SKIP method=Dashboard...)</span>
+                <span class="method-start">38888 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testSystemStatusHealthPercentagesUpdateFr...)</span>
+                <span class="method-start">38889 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testSystemStatusOperationalAndDegradedLab...)</span>
+                <span class="method-start">38892 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">beforeMethodSetup(public void com.tpg.automation.inventory.DashboardApiTests.testSystemStatusOperationalAndDegradedLab...)</span>
+                <span class="method-start">38894 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">afterMethodSetup([TestResult name=testSystemStatusOperationalAndDegradedLabels status=SKIP method=DashboardApiTests.t...)</span>
+                <span class="method-start">38898 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testSystemStatusOperationalAndDegradedLab...)</span>
+                <span class="method-start">38898 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testSystemStatusPanelDisplaysFourServices...)</span>
+                <span class="method-start">38901 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">beforeMethodSetup(public void com.tpg.automation.inventory.DashboardApiTests.testSystemStatusPanelDisplaysFourServices...)</span>
+                <span class="method-start">38902 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.tpg.automation.inventory.DashboardApiTests.testSystemStatusPanelDisplaysFourServices...)</span>
+                <span class="method-start">38904 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method after">
+                <span class="method-name">afterMethodSetup([TestResult name=testSystemStatusPanelDisplaysFourServices status=SKIP method=DashboardApiTests.test...)</span>
+                <span class="method-start">38904 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-class after">
+                <span class="method-name">saveReport(org.testng.TestRunner@41be8db9)</span>
+                <span class="method-start">38907 ms</span>
+              </div> <!-- configuration-class after -->
+              <div class="configuration-class after">
+                <span class="method-name">springTestContextAfterTestClass</span>
+                <span class="method-start">39736 ms</span>
+              </div> <!-- configuration-class after -->
+              <div class="configuration-suite after">
+                <span class="method-name">tearDown</span>
+                <span class="method-start">39915 ms</span>
+              </div> <!-- configuration-suite after -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+      </div> <!-- main-panel-root -->
+    </div> <!-- wrapper -->
+  </body>
+<script type="text/javascript" src="testng-reports2.js"></script>
+</html>

@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
+    },
+    "jira": {
+      "command": "/Users/user_firstname.user_lastname/.mcp-servers/node_modules/.bin/mcp-atlassian",
+      "args": [],
+      "env": {
+        "ATLASSIAN_BASE_URL": "https://3pillarglobal.atlassian.net/",
+        "ATLASSIAN_EMAIL": "Enter email address here",
+        "ATLASSIAN_API_TOKEN": "Enter API token here"
+      }
+    }
+  }
+}
