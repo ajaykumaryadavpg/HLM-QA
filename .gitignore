@@ -1,3 +1,22 @@
+# macOS
 .DS_Store
+
+# IDE
 /.vscode
+/.idea
+*.iml
+
+# JSON configs (local/sensitive)
 *.json
+
+# Maven build output
+**/target/
+
+# Test screenshots — timestamped per run
+novus-example-tests/src/test/resources/screenshots/
+
+# Playwright MCP session artifacts
+.playwright-mcp/
+
+# Claude Code local config
+.claude/settings.json

@@ -129,7 +129,7 @@ public class Verify<T> implements Verifiable {
 
     private String truncate(String msg) {
         if (msg == null || msg.length() <= 1) return msg == null ? "" : msg;
-        return msg.substring(1, Math.min(msg.length(), 150));
+        return msg.substring(0, Math.min(msg.length(), 150));
     }
 
     @Override public void verifyAs(Actor actor) {

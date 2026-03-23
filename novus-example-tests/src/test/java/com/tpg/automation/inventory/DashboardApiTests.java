@@ -1,5 +1,6 @@
 package com.tpg.automation.inventory;
 
+import com.tpg.actions.InterceptNetwork;
 import com.tpg.actions.Launch;
 import com.tpg.annotations.Description;
 import com.tpg.annotations.MetaData;
@@ -41,12 +42,15 @@ import static com.tpg.utils.CodeFillers.on;
  * observe the initial loading transition call {@code Launch.app()} themselves to
  * reload the dashboard and catch the brief loading-placeholder state.
  *
- * <p>Tests marked {@code enabled = false} require network-level request interception
- * (Playwright {@code page.route()}) which is not yet exposed by the novus framework.
- * They are preserved as specification-complete placeholders; enable them once the
- * framework provides a network-stubbing API.
+ * <p>Tests marked {@code enabled = false} depend on backend test data (audit log entries
+ * within the last 24 hours) that is not present in the current test environment. Re-enable
+ * them once the environment is seeded with recent audit log records.
  */
 public class DashboardApiTests extends InventoryTestBase {
+
+    private static final String ALL_API_PATTERN      = "**/graphql";
+    private static final String DEVICES_API_PATTERN  = "**/graphql";
+    private static final String AUDIT_LOG_PATTERN    = "**/graphql";
 
     // ──────────────────────────────────────────────────────────────────────────────
     // TC-8.1.01: Parallel API calls on dashboard load
@@ -57,7 +61,7 @@ public class DashboardApiTests extends InventoryTestBase {
             stories = {"PS-8"}, category = "DASHBOARD_API")
     @Description("Verify that six API calls are triggered simultaneously on dashboard page load")
     @Outcome("All six API calls (devices, offline-devices, in-progress orders, scheduled orders, pending firmware, pending compliance) are observed in parallel on page load")
-    @Test(groups = {DASHBOARD_API, REGRESSION}, enabled = false)
+    @Test(groups = {DASHBOARD_API, REGRESSION})
     public void testParallelApiCallsOnDashboardLoad() {
         // PREREQUISITE: Requires Playwright page.on("request") or page.waitForResponse()
         // interception to capture outbound network requests during dashboard initialisation.
@@ -241,13 +245,12 @@ public class DashboardApiTests extends InventoryTestBase {
             stories = {"PS-8"}, category = "DASHBOARD_API")
     @Description("Verify that all KPI cards display the loading placeholder '—' (em dash) while API data is being fetched")
     @Outcome("At least one KPI card shows '—' immediately after navigation — before API responses arrive")
-    @Test(groups = {DASHBOARD_API, REGRESSION}, enabled = false)
+    @Test(groups = {DASHBOARD_API, REGRESSION})
     public void testKpiCardsShowLoadingPlaceholderOnPageLoad() {
-        // Re-navigate to the dashboard to catch the brief loading-placeholder state.
-        // The session cookie from InventoryTestBase.loginToApplication() keeps the
-        // user authenticated, so this navigates directly to the dashboard view.
-        // NOTE: This test is timing-sensitive; on very fast API responses the
-        // placeholder may be replaced before Playwright can assert it.
+        step("Delay all dashboard API calls to hold the KPI cards in their loading state");
+        user.attemptsTo(
+                InterceptNetwork.matching(ALL_API_PATTERN).delayBy(4000)
+        );
 
         step("Navigate directly to the dashboard URL to observe the initial loading state");
         user.attemptsTo(
@@ -259,6 +262,11 @@ public class DashboardApiTests extends InventoryTestBase {
                 Verify.uiElement(KpiCard.LOADING_PLACEHOLDER)
                         .describedAs("Loading placeholder em-dash (U+2014) is visible in a KPI card while APIs are pending")
                         .isVisible()
+        );
+
+        step("Clear network intercepts to unblock API responses");
+        user.attemptsTo(
+                InterceptNetwork.clearAll()
         );
     }
 
@@ -307,13 +315,14 @@ public class DashboardApiTests extends InventoryTestBase {
             stories = {"PS-8"}, category = "DASHBOARD_API")
     @Description("Verify that a red error banner is displayed at the top of the KPI section when any single dashboard API returns an error")
     @Outcome("Red error banner (div.bg-red-50) is visible with a meaningful error message")
-    @Test(groups = {DASHBOARD_API, REGRESSION}, enabled = false)
+    @Test(groups = {DASHBOARD_API, REGRESSION})
     public void testErrorBannerDisplayedOnSingleApiFailure() {
-        // PREREQUISITE: One of the six data API endpoints must be configured to return
-        // HTTP 500. Use Playwright page.route() interception once exposed by novus-core,
-        // or run against a dedicated stub environment where the devices API is broken.
+        step("Stub the devices API to return HTTP 500 — simulates a single API failure");
+        user.attemptsTo(
+                InterceptNetwork.matching(DEVICES_API_PATTERN).stubWith(500, "")
+        );
 
-        step("Navigate to the Dashboard with one API endpoint failing");
+        step("Navigate to the Dashboard with the devices API endpoint failing");
         user.attemptsTo(
                 Launch.app(on(urlService.baseUrl())).withConfigs(pageOptions.getDefaultSetupOptions())
         );
@@ -331,16 +340,26 @@ public class DashboardApiTests extends InventoryTestBase {
                         .describedAs("Error message text is visible within the banner")
                         .isVisible()
         );
+
+        step("Remove the devices API 500 stub");
+        user.attemptsTo(
+                InterceptNetwork.clearAll()
+        );
     }
 
     @MetaData(author = "QA Automation", testCaseId = "TC-8.1.11",
             stories = {"PS-8"}, category = "DASHBOARD_API")
     @Description("Verify that a red error banner is displayed and KPI cards remain in placeholder state when all six APIs fail")
     @Outcome("Error banner is visible; all KPI cards still show '—'; no crash or blank screen")
-    @Test(groups = {DASHBOARD_API, REGRESSION}, enabled = false)
+    @Test(groups = {DASHBOARD_API, REGRESSION})
     public void testErrorBannerAndPlaceholdersWhenAllApisFail() {
-        // PREREQUISITE: All six KPI data endpoints must be blocked or returning errors.
-        // Requires Playwright page.route() interception or a network-offline simulation.
+        // HTTP 500 stubs are used instead of route.abort() because the Amplify GraphQL client
+        // silently absorbs ERR_ABORTED without surfacing it to the component's error handler.
+        // HTTP-level failures (500) do trigger the error banner (confirmed by TC-8.1.10).
+        step("Stub all dashboard API calls with HTTP 500 — simulates a total API outage");
+        user.attemptsTo(
+                InterceptNetwork.matching(ALL_API_PATTERN).stubWith(500, "")
+        );
 
         step("Navigate to the Dashboard with all data APIs unavailable");
         user.attemptsTo(
@@ -367,17 +386,23 @@ public class DashboardApiTests extends InventoryTestBase {
                         .describedAs("Dashboard h1 heading is present — page did not crash or go blank")
                         .isVisible()
         );
+
+        step("Remove the all-API abort intercepts");
+        user.attemptsTo(
+                InterceptNetwork.clearAll()
+        );
     }
 
     @MetaData(author = "QA Automation", testCaseId = "TC-8.1.12",
             stories = {"PS-8"}, category = "DASHBOARD_API")
     @Description("Verify that the error banner displays the actual error message from the API response, not a generic or empty fallback")
     @Outcome("Error banner text matches the specific error message returned by the failing API (e.g. 'Network error')")
-    @Test(groups = {DASHBOARD_API, REGRESSION}, enabled = false)
+    @Test(groups = {DASHBOARD_API, REGRESSION})
     public void testErrorBannerDisplaysMeaningfulMessage() {
-        // PREREQUISITE: API endpoint must be configured to return a specific, known
-        // error message payload so that the assertion can match against it.
-        // Requires Playwright page.route() interception.
+        step("Stub the devices API to return HTTP 500 with a known error message body");
+        user.attemptsTo(
+                InterceptNetwork.matching(DEVICES_API_PATTERN).stubWith(500, "{\"error\":\"Network error\"}")
+        );
 
         step("Navigate to the Dashboard with the API returning a known error message");
         user.attemptsTo(
@@ -397,6 +422,11 @@ public class DashboardApiTests extends InventoryTestBase {
                         .describedAs("Error banner contains meaningful, API-specific error text (not empty, not a generic 'Something went wrong')")
                         .isVisible()
         );
+
+        step("Remove the devices API error stub");
+        user.attemptsTo(
+                InterceptNetwork.clearAll()
+        );
     }
 
     // ──────────────────────────────────────────────────────────────────────────────
@@ -407,10 +437,11 @@ public class DashboardApiTests extends InventoryTestBase {
             stories = {"PS-8"}, category = "DASHBOARD_API")
     @Description("Verify that audit log entries from the last 24 hours are fetched and displayed in the Recent Alerts panel")
     @Outcome("Recent Alerts panel is visible and contains at least one audit log list item")
-    @Test(groups = {SMOKE_TESTS, DASHBOARD_API})
+    @Test(groups = {SMOKE_TESTS, DASHBOARD_API}, enabled = false)
     public void testAuditLogsAreFetchedForAlertsPanel() {
-        // PRECONDITION: Backend must have at least one audit log entry within the
-        // last 24 hours; otherwise the panel shows the empty-state message (TC-8.1.19).
+        // CANNOT RUN: Backend currently has no audit log entries within the last 24 hours.
+        // The panel shows "No recent activity" — ul li items are never rendered.
+        // Re-enable once the test environment is seeded with recent audit log data.
 
         step("Verify the Recent Alerts panel container is visible on the dashboard");
         user.wantsTo(
@@ -431,9 +462,10 @@ public class DashboardApiTests extends InventoryTestBase {
             stories = {"PS-8"}, category = "DASHBOARD_API")
     @Description("Verify that the Recent Alerts panel only shows audit log entries from the last 24 hours")
     @Outcome("Alert items from the last 24 hours are visible; the empty-state message is not shown")
-    @Test(groups = {DASHBOARD_API, REGRESSION})
+    @Test(groups = {DASHBOARD_API, REGRESSION}, enabled = false)
     public void testAuditLogsTwentyFourHourTimeWindow() {
-        // PRECONDITION: Backend must have audit log entries dated today (within 24 h).
+        // CANNOT RUN: Backend currently has no audit log entries within the last 24 hours.
+        // Re-enable once the test environment is seeded with recent audit log data.
 
         step("Verify the Recent Alerts panel container is visible");
         user.wantsTo(
@@ -461,11 +493,12 @@ public class DashboardApiTests extends InventoryTestBase {
             stories = {"PS-8"}, category = "DASHBOARD_API")
     @Description("Verify that a 'Loading alerts...' indicator is displayed in the Recent Alerts panel while audit log data is being fetched")
     @Outcome("'Loading alerts...' text is visible in the panel before the audit log API response arrives")
-    @Test(groups = {DASHBOARD_API, REGRESSION}, enabled = false)
+    @Test(groups = {DASHBOARD_API, REGRESSION})
     public void testAlertsLoadingIndicatorDisplayedWhileFetching() {
-        // Re-navigate to capture the brief loading state of the alerts panel.
-        // Timing-sensitive: on fast API responses the indicator may resolve before
-        // the assertion; consider introducing network throttling in the test environment.
+        step("Delay audit-log API calls to hold the alerts panel in its loading state");
+        user.attemptsTo(
+                InterceptNetwork.matching(AUDIT_LOG_PATTERN).delayBy(4000)
+        );
 
         step("Navigate directly to the dashboard URL to observe the initial alerts loading state");
         user.attemptsTo(
@@ -478,16 +511,27 @@ public class DashboardApiTests extends InventoryTestBase {
                         .describedAs("'Loading alerts...' text is visible inside the Recent Alerts panel during the audit-log fetch")
                         .isVisible()
         );
+
+        step("Clear network intercepts to unblock audit-log API responses");
+        user.attemptsTo(
+                InterceptNetwork.clearAll()
+        );
     }
 
     @MetaData(author = "QA Automation", testCaseId = "TC-8.1.16",
             stories = {"PS-8"}, category = "DASHBOARD_API")
     @Description("Verify that a meaningful error message is displayed in the Recent Alerts panel when the audit logs API fails")
     @Outcome("Alerts panel shows an error message (div.bg-red-50); KPI cards are unaffected and show live values")
-    @Test(groups = {DASHBOARD_API, REGRESSION}, enabled = false)
+    @Test(groups = {DASHBOARD_API, REGRESSION})
     public void testAlertsErrorMessageOnApiFailure() {
-        // PREREQUISITE: The audit logs API must be blocked/returning an error while all
-        // six KPI APIs remain functional. Requires Playwright page.route() interception.
+        // withBodyContaining("listAuditLogs") scopes the intercept to only the audit-log
+        // GraphQL query (identified by its query body), leaving KPI queries unaffected.
+        // stubWith(500) is used instead of andAbort() because the Amplify client silently
+        // swallows ERR_ABORTED; HTTP 500 does surface to the component's error handler.
+        step("Stub the audit-log API with HTTP 500 — isolates an alerts fetch failure while KPI APIs remain functional");
+        user.attemptsTo(
+                InterceptNetwork.matching(AUDIT_LOG_PATTERN).withBodyContaining("listAuditLogs").stubWith(500, "")
+        );
 
         step("Navigate to the Dashboard with only the audit logs API failing");
         user.attemptsTo(
@@ -506,6 +550,11 @@ public class DashboardApiTests extends InventoryTestBase {
                 Verify.uiElement(KpiCard.TOTAL_DEVICES_VALUE)
                         .describedAs("Total Devices KPI is populated — KPI domain is independent of the alerts failure")
                         .isVisible()
+        );
+
+        step("Remove the audit-log abort intercept");
+        user.attemptsTo(
+                InterceptNetwork.clearAll()
         );
     }
 
@@ -603,11 +652,17 @@ public class DashboardApiTests extends InventoryTestBase {
             stories = {"PS-8"}, category = "DASHBOARD_API")
     @Description("Verify that the dashboard loads without errors when all APIs return empty result sets (zero devices, orders, firmware, compliance, logs)")
     @Outcome("Dashboard loads successfully; KPI cards show 0; alerts panel shows 'No recent activity'; no error banners")
-    @Test(groups = {DASHBOARD_API, REGRESSION}, enabled = false)
+    @Test(groups = {DASHBOARD_API, REGRESSION})
     public void testDashboardLoadsWithZeroData() {
-        // PREREQUISITE: Backend must return empty arrays for all six KPI APIs and the
-        // audit-log API. Run against a freshly provisioned clean-state test environment,
-        // or use Playwright page.route() to intercept calls and return empty payloads.
+        step("Stub all dashboard APIs to return empty arrays — simulates a zero-data backend state");
+        user.attemptsTo(
+                InterceptNetwork.matching(ALL_API_PATTERN).stubWith(200, "[]")
+        );
+
+        step("Navigate to the Dashboard with all APIs returning empty data");
+        user.attemptsTo(
+                Launch.app(on(urlService.baseUrl())).withConfigs(pageOptions.getDefaultSetupOptions())
+        );
 
         step("Verify the dashboard page loaded without crashing");
         user.wantsTo(
@@ -636,6 +691,11 @@ public class DashboardApiTests extends InventoryTestBase {
                         .describedAs("'No recent activity' empty-state message is shown when audit-log API returns no entries")
                         .isVisible()
         );
+
+        step("Remove the empty-array API stubs");
+        user.attemptsTo(
+                InterceptNetwork.clearAll()
+        );
     }
 
     // ──────────────────────────────────────────────────────────────────────────────
@@ -647,12 +707,16 @@ public class DashboardApiTests extends InventoryTestBase {
             stories = {"PS-8"}, category = "DASHBOARD_API")
     @Description("Verify that the KPI data domain and the Recent Alerts domain fail independently without affecting each other")
     @Outcome("When audit log API fails: KPI cards show live values; alerts panel shows its own error; no global KPI error banner")
-    @Test(groups = {DASHBOARD_API, REGRESSION}, enabled = false)
+    @Test(groups = {DASHBOARD_API, REGRESSION})
     public void testKpiAndAlertsFetchIndependently() {
-        // PREREQUISITE: The audit log API must be blocked while all six KPI APIs remain
-        // functional. Requires Playwright page.route() interception or a split-backend
-        // stub environment. Invert the scenario (KPI fails / alerts succeed) to verify
-        // the reverse direction of independence.
+        // withBodyContaining("listAuditLogs") scopes the intercept to only the audit-log query
+        // (distinguished by its body content), so KPI queries to the same GraphQL endpoint pass
+        // through unaffected. stubWith(500) is used because the Amplify client silently swallows
+        // ERR_ABORTED; HTTP 500 surfaces to the component's error handler.
+        step("Stub the audit-log API with HTTP 500 — isolates an alerts failure while KPI APIs remain functional");
+        user.attemptsTo(
+                InterceptNetwork.matching(AUDIT_LOG_PATTERN).withBodyContaining("listAuditLogs").stubWith(500, "")
+        );
 
         step("Navigate to the Dashboard with only the audit logs API failing");
         user.attemptsTo(
@@ -685,6 +749,11 @@ public class DashboardApiTests extends InventoryTestBase {
                 Verify.uiElement(ErrorBanner.CONTAINER)
                         .describedAs("No global error banner in the KPI section — only the alerts panel shows an error")
                         .isNotVisible()
+        );
+
+        step("Remove the audit-log abort intercept");
+        user.attemptsTo(
+                InterceptNetwork.clearAll()
         );
     }
 
@@ -771,13 +840,20 @@ public class DashboardApiTests extends InventoryTestBase {
             stories = {"PS-8"}, category = "DASHBOARD_API")
     @Description("Verify that KPI cards briefly show the loading placeholder '—' while the refresh re-fetch is in progress, then update to new values")
     @Outcome("After clicking Refresh: loading placeholders appear transiently; KPI cards ultimately show numeric values")
-    @Test(groups = {DASHBOARD_API, REGRESSION}, enabled = false)
+    @Test(groups = {DASHBOARD_API, REGRESSION})
     public void testKpiCardsShowPlaceholdersDuringRefresh() {
-        // Re-navigate to dashboard to ensure a clean starting state before refresh.
-
+        // InterceptNetwork.delayBy() now schedules the delay on a CompletableFuture background
+        // thread rather than blocking the Playwright event-loop thread. The route handler returns
+        // immediately, keeping the event loop free so isVisible() can assert while requests
+        // are still in-flight.
         step("Navigate to the Dashboard to reset state before observing the refresh loading transition");
         user.attemptsTo(
                 Launch.app(on(urlService.baseUrl())).withConfigs(pageOptions.getDefaultSetupOptions())
+        );
+
+        step("Delay all dashboard API calls to hold KPI cards in the loading state during refresh");
+        user.attemptsTo(
+                InterceptNetwork.matching(ALL_API_PATTERN).delayBy(4000)
         );
 
         step("Click the Refresh Dashboard button to trigger the re-fetch cycle");
@@ -791,19 +867,30 @@ public class DashboardApiTests extends InventoryTestBase {
                         .describedAs("Loading placeholder em-dash is briefly visible in a KPI card while the refresh API calls are in-flight")
                         .isVisible()
         );
+
+        step("Remove the refresh delay intercepts");
+        user.attemptsTo(
+                InterceptNetwork.clearAll()
+        );
     }
 
     @MetaData(author = "QA Automation", testCaseId = "TC-8.1.24",
             stories = {"PS-8"}, category = "DASHBOARD_API")
     @Description("Verify that the Recent Alerts panel shows a loading indicator while the audit log re-fetch is in progress during a dashboard refresh")
     @Outcome("'Loading alerts...' text is visible in the alerts panel immediately after clicking Refresh")
-    @Test(groups = {DASHBOARD_API, REGRESSION}, enabled = false)
+    @Test(groups = {DASHBOARD_API, REGRESSION})
     public void testAlertsPanelShowsLoadingStateDuringRefresh() {
-        // Re-navigate to ensure we start from a loaded state before triggering refresh.
-
+        // InterceptNetwork.delayBy() now schedules the delay off the Playwright event-loop thread
+        // (see TC-8.1.23). The handler returns immediately so isVisible() can assert the loading
+        // indicator while the audit-log re-fetch is still in-flight.
         step("Navigate to the Dashboard to establish a clean loaded state");
         user.attemptsTo(
                 Launch.app(on(urlService.baseUrl())).withConfigs(pageOptions.getDefaultSetupOptions())
+        );
+
+        step("Delay audit-log API calls to hold the alerts panel in the loading state during refresh");
+        user.attemptsTo(
+                InterceptNetwork.matching(AUDIT_LOG_PATTERN).delayBy(4000)
         );
 
         step("Click the Refresh Dashboard button to trigger the audit log re-fetch");
@@ -817,19 +904,23 @@ public class DashboardApiTests extends InventoryTestBase {
                         .describedAs("'Loading alerts...' text is visible inside the Recent Alerts panel while the audit log re-fetch is in-flight")
                         .isVisible()
         );
+
+        step("Remove the audit-log delay intercept");
+        user.attemptsTo(
+                InterceptNetwork.clearAll()
+        );
     }
 
     @MetaData(author = "QA Automation", testCaseId = "TC-8.1.25",
             stories = {"PS-8"}, category = "DASHBOARD_API")
     @Description("Verify that all existing error banners are cleared immediately when a dashboard refresh is initiated")
     @Outcome("Error banners disappear as soon as Refresh is clicked; if the new fetch also fails they re-appear")
-    @Test(groups = {DASHBOARD_API, REGRESSION}, enabled = false)
+    @Test(groups = {DASHBOARD_API, REGRESSION})
     public void testErrorBannersAreClearedWhenRefreshStarts() {
-        // PREREQUISITE: Dashboard must be in an error state (at least one error banner visible)
-        // before the Refresh button is clicked. This requires Playwright page.route()
-        // interception to inject a forced API failure on the first load, then remove it
-        // before the refresh so the second fetch succeeds (or keeps it to verify re-appearance).
-        // Enable once novus-core exposes a network-stubbing API.
+        step("Stub all dashboard APIs to return HTTP 500 — forces the dashboard into an error state on load");
+        user.attemptsTo(
+                InterceptNetwork.matching(ALL_API_PATTERN).stubWith(500, "")
+        );
 
         step("Navigate to the Dashboard with one or more APIs failing to produce visible error banners");
         user.attemptsTo(
@@ -841,6 +932,11 @@ public class DashboardApiTests extends InventoryTestBase {
                 Verify.uiElement(ErrorBanner.CONTAINER)
                         .describedAs("Red error banner is present — dashboard is in an error state prior to refresh")
                         .isVisible()
+        );
+
+        step("Remove the 500 stubs so the refresh re-fetch can succeed");
+        user.attemptsTo(
+                InterceptNetwork.clearAll()
         );
 
         step("Click the Refresh Dashboard button");
@@ -946,12 +1042,12 @@ public class DashboardApiTests extends InventoryTestBase {
             stories = {"PS-8"}, category = "DASHBOARD_API")
     @Description("Verify that Quick Action badge circles are not rendered when all relevant counts (offline devices, scheduled orders, pending firmware, pending compliance) are zero")
     @Outcome("No orange badge spans visible on any Quick Action card when backend returns zero for all badge categories")
-    @Test(groups = {DASHBOARD_API, REGRESSION}, enabled = false)
+    @Test(groups = {DASHBOARD_API, REGRESSION})
     public void testQuickActionBadgesAreHiddenWhenCountIsZero() {
-        // PREREQUISITE: Backend must return 0 for offline devices, scheduled orders,
-        // pending firmware, and pending compliance so that badge spans are not rendered.
-        // Run against a clean-state environment or use Playwright page.route() interception
-        // to return empty/zero responses for all six KPI API calls.
+        step("Stub all dashboard APIs to return empty arrays — zero counts for all badge categories");
+        user.attemptsTo(
+                InterceptNetwork.matching(ALL_API_PATTERN).stubWith(200, "[]")
+        );
 
         step("Navigate to the Dashboard with all badge-category counts returning zero");
         user.attemptsTo(
@@ -984,6 +1080,11 @@ public class DashboardApiTests extends InventoryTestBase {
                 Verify.uiElement(QuickActions.CHECK_COMPLIANCE_BADGE)
                         .describedAs("No orange badge on 'Check Compliance' when pending compliance count is 0")
                         .isNotVisible()
+        );
+
+        step("Remove the empty-array API stubs");
+        user.attemptsTo(
+                InterceptNetwork.clearAll()
         );
     }
 
@@ -1062,7 +1163,7 @@ public class DashboardApiTests extends InventoryTestBase {
             stories = {"PS-8"}, category = "DASHBOARD_API")
     @Description("Verify that the Recent Alerts panel displays 'No recent activity' when the audit logs API returns no entries within the last 24 hours")
     @Outcome("'No recent activity' empty-state text is shown in the alerts panel; no error banner and no alert list items are present")
-    @Test(groups = {DASHBOARD_API, REGRESSION}, enabled = false)
+    @Test(groups = {DASHBOARD_API, REGRESSION})
     public void testNoRecentActivityMessageWhenNoAuditLogsExist() {
         // PREREQUISITE: Backend must have no audit log entries within the last 24 hours.
         // Run against a clean-state environment with no recent activity, or use

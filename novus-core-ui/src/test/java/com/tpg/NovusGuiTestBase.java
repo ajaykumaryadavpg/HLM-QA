@@ -59,6 +59,7 @@ public class NovusGuiTestBase extends AbstractTestNGSpringContextTests {
 
     @AfterMethod(alwaysRun = true)
     public void afterMethodSetup(ITestResult result) {
+        browser.unrouteAll();
         if (result.getStatus() == ITestResult.FAILURE) {
             var ssPath = Paths.get("src/test/resources", "screenshots", result.getMethod().getConstructorOrMethod().getDeclaringClass().getSimpleName() + "_" + result.getMethod().getMethodName() + System.currentTimeMillis() + ".jpg");
             try {

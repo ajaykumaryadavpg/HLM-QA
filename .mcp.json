@@ -4,6 +4,13 @@
       "command": "npx",
       "args": ["@playwright/mcp@latest"]
     },
+    "playwright-test": {
+      "command": "npx",
+      "args": [
+        "playwright",
+        "run-test-mcp-server"
+      ]
+    },
     "jira": {
       "command": "/Users/user_firstname.user_lastname/.mcp-servers/node_modules/.bin/mcp-atlassian",
       "args": [],

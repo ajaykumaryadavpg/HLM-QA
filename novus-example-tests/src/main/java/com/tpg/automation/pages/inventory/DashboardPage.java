@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 public class DashboardPage {
 
     /** Main page banner heading – "Dashboard" (h1) */
-    public static final String DASHBOARD_HEADER  = LocateBy.css("h1");
+    public static final String DASHBOARD_HEADER  = LocateBy.withExactCssText("h1", "Dashboard");
 
     /** Welcome heading inside main area – "Welcome back, …" */
     public static final String WELCOME_MESSAGE   = LocateBy.withCssText("h2", "Welcome back");
@@ -126,7 +126,7 @@ public class DashboardPage {
 
         /** Loading text shown while audit-log data is being fetched */
         public static final String LOADING_INDICATOR =
-                LocateBy.withCssText("div.bg-card:has(h3:text-is('Recent Alerts'))", "Loading alerts...");
+                LocateBy.withCssText("div.bg-card:has(h3:text-is('Recent Alerts'))", "Loading alerts");
 
         /** Error element shown when the audit-log API call fails */
         public static final String ERROR_MESSAGE =

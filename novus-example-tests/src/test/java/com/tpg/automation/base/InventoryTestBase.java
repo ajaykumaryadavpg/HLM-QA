@@ -58,7 +58,12 @@ public abstract class InventoryTestBase extends NovusGuiTestBase {
      */
     @BeforeClass(alwaysRun = true, dependsOnMethods = "baseBeforeClassSetup")
     public void loginToApplication() {
-        log.step("Clear cached session state before login");
+        log.step("Navigate to app to establish correct storage origin before clearing session");
+        user.attemptsTo(
+                Launch.app(on(urlService.baseUrl())).withConfigs(pageOptions.getDefaultSetupOptions())
+        );
+
+        log.step("Clear cached session state (correct origin now established)");
         browser.context().clearCookies();
         browser.evaluate("() => { try { localStorage.clear(); sessionStorage.clear(); } catch (e) {} }");
 
