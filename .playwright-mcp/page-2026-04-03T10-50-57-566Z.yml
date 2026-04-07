@@ -1,0 +1,142 @@
+- generic [ref=e2]:
+  - generic [ref=e5]:
+    - complementary "Main navigation" [ref=e6]:
+      - generic [ref=e7]:
+        - img "Sungrow" [ref=e532]
+        - button "Collapse sidebar" [ref=e10] [cursor=pointer]:
+          - img [ref=e11]
+      - navigation [ref=e13]:
+        - link "Dashboard" [ref=e14] [cursor=pointer]:
+          - /url: /
+          - img [ref=e15]
+          - generic [ref=e20]: Dashboard
+        - link "Inventory" [ref=e21] [cursor=pointer]:
+          - /url: /inventory
+          - img [ref=e22]
+          - generic [ref=e26]: Inventory
+        - link "Services" [ref=e27] [cursor=pointer]:
+          - /url: /account-service
+          - img [ref=e28]
+          - generic [ref=e30]: Services
+        - link "Deployment" [ref=e31] [cursor=pointer]:
+          - /url: /deployment
+          - img [ref=e32]
+          - generic [ref=e35]: Deployment
+        - link "Compliance" [ref=e36] [cursor=pointer]:
+          - /url: /compliance
+          - img [ref=e37]
+          - generic [ref=e39]: Compliance
+        - link "Analytics" [ref=e40] [cursor=pointer]:
+          - /url: /analytics
+          - img [ref=e41]
+          - generic [ref=e43]: Analytics
+      - generic [ref=e45]:
+        - generic [ref=e46]: A
+        - generic [ref=e47]:
+          - generic [ref=e48]: Admin
+          - generic [ref=e49]: ajaykumar.yadav@3pillarglobal.com
+        - button "Sign out" [ref=e533] [cursor=pointer]:
+          - img [ref=e51]
+    - generic [ref=e54]:
+      - banner [ref=e55]:
+        - heading "Dashboard" [level=1] [ref=e59]
+        - generic [ref=e60]:
+          - button "Notifications" [ref=e61] [cursor=pointer]:
+            - img [ref=e62]
+          - button [ref=e65] [cursor=pointer]:
+            - img [ref=e66]
+      - main [ref=e68]:
+        - generic [ref=e69]:
+          - generic [ref=e70]:
+            - paragraph [ref=e71]: Secure firmware distribution with complete audit trail
+            - button "Upload Firmware" [ref=e72] [cursor=pointer]:
+              - img [ref=e73]
+              - text: Upload Firmware
+          - generic [ref=e76]:
+            - generic [ref=e78]:
+              - img [ref=e80]
+              - generic [ref=e83]: "4"
+              - generic [ref=e84]: Approved Versions
+            - generic [ref=e86]:
+              - img [ref=e88]
+              - generic [ref=e91]: "5"
+              - generic [ref=e92]: Pending Review
+            - generic [ref=e94]:
+              - img [ref=e96]
+              - generic [ref=e99]: "0"
+              - generic [ref=e100]: Total Downloads
+            - generic [ref=e102]:
+              - img [ref=e104]
+              - generic [ref=e106]: "3"
+              - generic [ref=e107]: Recent Activities
+          - generic [ref=e108]:
+            - tablist "Deployment sections" [ref=e109]:
+              - tab "Firmware Versions" [ref=e110] [cursor=pointer]
+              - tab "Audit Log" [selected] [ref=e111] [cursor=pointer]
+            - generic [ref=e112]:
+              - generic [ref=e113]: Search audit log by action, resource type, or ID
+              - img [ref=e114]
+              - textbox "Search audit log by action, resource type, or ID" [ref=e534]:
+                - /placeholder: Search action, resource, ID…
+          - generic [ref=e535]:
+            - generic [ref=e536]:
+              - generic [ref=e537]: Showing 3 of 3 activities
+              - button "Export Full Log" [ref=e538] [cursor=pointer]:
+                - img [ref=e539]
+                - text: Export Full Log
+            - generic [ref=e542]:
+              - generic [ref=e543]:
+                - generic [ref=e544]:
+                  - generic [ref=e545]:
+                    - generic [ref=e546]:
+                      - generic [ref=e547]:
+                        - generic [ref=e548]: ~
+                        - text: Modified
+                      - generic [ref=e549]: Firmware
+                      - generic [ref=e550]: ·
+                      - generic [ref=e551]: FW#d1a3bcd6-01c1-4bef-b49d-2865dd867195
+                    - generic [ref=e552]: 2026-04-02T14:05:29.328Z
+                  - button "Hide changes" [expanded] [active] [ref=e582] [cursor=pointer]:
+                    - img [ref=e583]
+                    - text: Hide changes
+                - generic [ref=e586]:
+                  - generic [ref=e587]:
+                    - generic [ref=e588]: "status:"
+                    - generic [ref=e589]: "\"Pending\""
+                    - generic [ref=e590]: →
+                    - generic [ref=e591]: "\"Approved\""
+                  - generic [ref=e592]:
+                    - generic [ref=e593]: "approvedBy:"
+                    - generic [ref=e594]: →
+                    - generic [ref=e595]: "\"USER#ajaykumar.yadav@3pillarglobal.com\""
+                  - generic [ref=e596]:
+                    - generic [ref=e597]: "approvedDate:"
+                    - generic [ref=e598]: →
+                    - generic [ref=e599]: "\"2026-04-02T14:05:28.370Z\""
+              - generic [ref=e557]:
+                - generic [ref=e558]:
+                  - generic [ref=e559]:
+                    - generic [ref=e560]:
+                      - generic [ref=e561]: +
+                      - text: Created
+                    - generic [ref=e562]: Firmware
+                    - generic [ref=e563]: ·
+                    - generic [ref=e564]: FW#2ea9ac12-7cce-4f56-aec6-c4302e2cf6fe
+                  - generic [ref=e565]: 2026-04-02T12:27:44.788Z
+                - button "Show changes" [ref=e566] [cursor=pointer]:
+                  - img [ref=e567]
+                  - text: Show changes
+              - generic [ref=e570]:
+                - generic [ref=e571]:
+                  - generic [ref=e572]:
+                    - generic [ref=e573]:
+                      - generic [ref=e574]: +
+                      - text: Created
+                    - generic [ref=e575]: User
+                    - generic [ref=e576]: ·
+                    - generic [ref=e577]: USER#514b95e0-b081-7014-0cc4-1dfe2ac7bf0e
+                  - generic [ref=e578]: 2026-04-01T04:04:55.172Z
+                - button "Show changes" [ref=e579] [cursor=pointer]:
+                  - img [ref=e580]
+                  - text: Show changes
+  - region "Notifications alt+T"

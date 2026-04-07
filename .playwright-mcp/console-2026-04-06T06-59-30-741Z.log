@@ -1,0 +1,37 @@
+[     523ms] [WARNING] Amplify has not been configured. Please call Amplify.configure() before using this service. @ https://main.dddsig2mih3hw.amplifyapp.com/assets/index-D0jrZ7Z6.js:41
+[    2100ms] [ERROR] Failed to load resource: the server responded with a status of 400 () @ https://cognito-idp.us-east-2.amazonaws.com/:0
+[    2713ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://us.sungrowpower.com/img/logo_25_pc.png?v=2023020801:0
+[   89981ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   90002ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   90003ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   90003ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   90003ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   90003ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   90003ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   90028ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   90028ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   90299ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   90325ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   90326ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   90326ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   90326ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   90326ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   90326ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   90367ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   90368ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   90797ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   90799ms] [ERROR] fetchKpis failed: Error: A network error has occurred.
+    at tm (https://main.dddsig2mih3hw.amplifyapp.com/assets/index-D0jrZ7Z6.js:355:16028)
+    at async Promise.all (index 0)
+    at async https://main.dddsig2mih3hw.amplifyapp.com/assets/index-D0jrZ7Z6.js:399:50254 @ https://main.dddsig2mih3hw.amplifyapp.com/assets/index-D0jrZ7Z6.js:398
+[   90859ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   90860ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   90860ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   90860ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   90860ms] [ERROR] fetchAlerts failed: Error: A network error has occurred.
+    at FD (https://main.dddsig2mih3hw.amplifyapp.com/assets/index-D0jrZ7Z6.js:355:16943)
+    at async https://main.dddsig2mih3hw.amplifyapp.com/assets/index-D0jrZ7Z6.js:399:50959 @ https://main.dddsig2mih3hw.amplifyapp.com/assets/index-D0jrZ7Z6.js:398
+[   90861ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   90861ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   90879ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   90880ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0

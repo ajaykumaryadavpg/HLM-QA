@@ -1,0 +1,2 @@
+[     258ms] [WARNING] Amplify has not been configured. Please call Amplify.configure() before using this service. @ https://main.dddsig2mih3hw.amplifyapp.com/assets/index-BvpK9A09.js:41
+[  415805ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://main.dddsig2mih3wu.amplifyapp.com/assets/index-BvpK9A09.js:0

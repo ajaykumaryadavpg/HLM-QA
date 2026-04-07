@@ -1,0 +1,3 @@
+[     613ms] [WARNING] Amplify has not been configured. Please call Amplify.configure() before using this service. @ https://main.dddsig2mih3hw.amplifyapp.com/assets/index-BvpK9A09.js:41
+[    1036ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://main.dddsig2mih3hw.amplifyapp.com/vite.svg:0
+[    2378ms] [ERROR] Failed to load resource: the server responded with a status of 400 () @ https://cognito-idp.us-east-2.amazonaws.com/:0

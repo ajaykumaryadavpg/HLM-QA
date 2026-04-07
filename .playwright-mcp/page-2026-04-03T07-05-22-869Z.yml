@@ -1,0 +1,42 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - generic:
+          - img "Sungrow"
+        - paragraph [ref=e7]: Hardware Lifecycle Management
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - heading "Sign in to your account" [level=2] [ref=e10]
+          - paragraph [ref=e11]: Enter your credentials to continue
+        - generic [ref=e12]:
+          - generic [ref=e13]:
+            - generic [ref=e14]: Email address
+            - textbox "Email address" [ref=e15]:
+              - /placeholder: you@example.com
+          - generic [ref=e16]:
+            - generic [ref=e17]: Password
+            - generic [ref=e18]:
+              - textbox "Password" [ref=e19]:
+                - /placeholder: ............
+              - button [ref=e20] [cursor=pointer]:
+                - img [ref=e21]
+          - button "Sign in" [ref=e24] [cursor=pointer]
+      - paragraph [ref=e25]: Contact your administrator for account access.
+    - generic [ref=e26]:
+      - generic [ref=e27]:
+        - img [ref=e29]
+        - generic [ref=e35]: IMS
+        - generic [ref=e36]: Hardware Lifecycle Management
+        - paragraph [ref=e37]: Unified platform for solar inverter monitoring, firmware compliance, and fleet management.
+      - generic [ref=e38]:
+        - generic [ref=e39]:
+          - generic [ref=e40]: 10K+
+          - generic [ref=e41]: INVERTERS
+        - generic [ref=e42]:
+          - generic [ref=e43]: 99.9%
+          - generic [ref=e44]: UPTIME
+        - generic [ref=e45]:
+          - generic [ref=e46]: 100%
+          - generic [ref=e47]: MONITORED
+  - region "Notifications alt+T"

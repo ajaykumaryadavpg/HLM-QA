@@ -1,0 +1,72 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="All Tests" verbose="2" thread-count="1">
+
+    <parameter name="report-name" value="All-Tests-Report"/>
+
+    <test name="Login Tests">
+        <classes>
+            <class name="com.tpg.automation.inventory.InventoryLoginTests"/>
+        </classes>
+    </test>
+
+    <test name="Dashboard API Tests">
+        <classes>
+            <class name="com.tpg.automation.inventory.DashboardApiTests"/>
+        </classes>
+    </test>
+
+    <test name="Dashboard KPI Tests">
+        <classes>
+            <class name="com.tpg.automation.inventory.DashboardKpiTests"/>
+        </classes>
+    </test>
+
+    <test name="Dashboard Alerts Tests">
+        <classes>
+            <class name="com.tpg.automation.inventory.DashboardAlertsTests"/>
+        </classes>
+    </test>
+
+    <test name="Dashboard System Status Tests">
+        <classes>
+            <class name="com.tpg.automation.inventory.DashboardSystemStatusTests"/>
+        </classes>
+    </test>
+
+    <test name="Dashboard Alerts and System Status Integration Tests">
+        <classes>
+            <class name="com.tpg.automation.inventory.DashboardAlertsSystemStatusIntegrationTests"/>
+        </classes>
+    </test>
+
+    <test name="Dashboard Quick Actions Tests">
+        <classes>
+            <class name="com.tpg.automation.inventory.DashboardQuickActionsTests"/>
+        </classes>
+    </test>
+
+    <test name="Dashboard E2E Integration Tests">
+        <classes>
+            <class name="com.tpg.automation.inventory.DashboardE2EIntegrationTests"/>
+        </classes>
+    </test>
+
+    <test name="Geo Location Tests">
+        <classes>
+            <class name="com.tpg.automation.inventory.GeoLocationTests"/>
+        </classes>
+    </test>
+
+    <test name="Firmware Status Tests">
+        <classes>
+            <class name="com.tpg.automation.inventory.FirmwareStatusTests"/>
+        </classes>
+    </test>
+
+    <test name="Upload Firmware Tests">
+        <classes>
+            <class name="com.tpg.automation.inventory.UploadFirmwareTests"/>
+        </classes>
+    </test>
+
+</suite>

@@ -1,0 +1,9 @@
+[     380ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[     382ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[     382ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[     382ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[     424ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[     424ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[     479ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[     637ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://main.dddsig2mih3hw.amplifyapp.com/login/:0
+[     651ms] [WARNING] Amplify has not been configured. Please call Amplify.configure() before using this service. @ https://main.dddsig2mih3hw.amplifyapp.com/assets/index-BvpK9A09.js:41

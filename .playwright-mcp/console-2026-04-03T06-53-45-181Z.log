@@ -1,0 +1,2 @@
+[     609ms] [WARNING] Amplify has not been configured. Please call Amplify.configure() before using this service. @ https://main.dddsig2mih3hw.amplifyapp.com/assets/index-D5lKOSsc.js:41
+[   25071ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ https://main.dddsig2mih3hw.amplifyapp.com/assets/index-D5lKOSsc.js:398

@@ -1,0 +1,26 @@
+[     669ms] [WARNING] Amplify has not been configured. Please call Amplify.configure() before using this service. @ https://main.dddsig2mih3hw.amplifyapp.com/assets/index-BvpK9A09.js:41
+[    1537ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://main.dddsig2mih3hw.amplifyapp.com/vite.svg:0
+[   45124ms] [ERROR] Failed to load resource: the server responded with a status of 400 (Bad Request) @ https://cognito-idp.us-east-2.amazonaws.com/:0
+[ 1310525ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[ 1310600ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[ 1310646ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[ 1310646ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[ 1310646ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[ 1310718ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[ 1310718ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[ 1310806ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[ 1310914ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[ 1310915ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[ 1310915ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[ 1310915ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[ 1310971ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[ 1310971ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[ 1311274ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[ 1311357ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[ 1311357ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[ 1311431ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[ 1311432ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[ 1311432ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[ 1311471ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[ 1696124ms] [WARNING] Amplify has not been configured. Please call Amplify.configure() before using this service. @ https://main.dddsig2mih3hw.amplifyapp.com/assets/index-BvpK9A09.js:41
+[ 1711346ms] [WARNING] Amplify has not been configured. Please call Amplify.configure() before using this service. @ https://main.dddsig2mih3hw.amplifyapp.com/assets/index-BvpK9A09.js:41

@@ -1,0 +1,506 @@
+- generic:
+  - generic:
+    - generic:
+      - complementary:
+        - generic:
+          - img [ref=e716]
+          - button:
+            - img
+        - navigation:
+          - link:
+            - /url: /
+            - img
+            - generic: Dashboard
+          - link:
+            - /url: /inventory
+            - img
+            - generic: Inventory
+          - link:
+            - /url: /account-service
+            - img
+            - generic: Services
+          - link:
+            - /url: /deployment
+            - img
+            - generic: Deployment
+          - link:
+            - /url: /compliance
+            - img
+            - generic: Compliance
+          - link:
+            - /url: /analytics
+            - img
+            - generic: Analytics
+        - generic:
+          - generic:
+            - generic: A
+            - generic [ref=e96]:
+              - generic [ref=e97]: Admin
+              - generic [ref=e98]: ajaykumar.yadav@3pillarglobal.com
+            - button [ref=e717] [cursor=pointer]:
+              - img [ref=e100]
+      - generic:
+        - banner:
+          - generic:
+            - generic:
+              - heading [level=1]: Deployment and Orchestration
+          - generic:
+            - button:
+              - img
+            - button:
+              - img
+        - main:
+          - generic:
+            - generic:
+              - paragraph: Secure firmware distribution with complete audit trail
+              - button:
+                - img
+                - text: Upload Firmware
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - img
+                  - generic: "4"
+                  - generic: Approved Versions
+              - generic:
+                - generic:
+                  - generic:
+                    - img
+                  - generic: "5"
+                  - generic: Pending Review
+              - generic:
+                - generic:
+                  - generic:
+                    - img
+                  - generic: "0"
+                  - generic: Total Downloads
+              - generic:
+                - generic:
+                  - generic:
+                    - img
+                  - generic: "0"
+                  - generic: Recent Activities
+            - generic:
+              - tablist:
+                - tab [selected]: Firmware Versions
+                - tab: Audit Log
+              - generic:
+                - generic: Search firmware by name, version, or device model
+                - img
+                - textbox:
+                  - /placeholder: Search name, version, model…
+            - tabpanel:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading [level=3]: Dell SRV-9000 Firmware
+                      - generic:
+                        - generic: v5.2.0-beta
+                        - generic: •
+                        - generic: SRV-9000
+                    - generic: Rejected
+                  - generic:
+                    - generic:
+                      - generic: "Release Date:"
+                      - generic: 02/14/2026
+                    - generic:
+                      - generic: "File Size:"
+                      - generic: 12.0 MB
+                    - generic:
+                      - generic: "Downloads:"
+                      - generic: "0"
+                  - generic:
+                    - generic:
+                      - generic: Release Notes
+                      - paragraph: Beta build — rejected due to failed QA tests.
+                    - generic:
+                      - generic:
+                        - img
+                        - generic: "Uploaded by:"
+                        - generic: u002
+                      - generic:
+                        - generic: "Manufacturer:"
+                        - generic: Dell
+                      - generic:
+                        - img
+                        - generic: "File:"
+                        - generic: srv9000-v5.2.0-beta.bin
+                      - generic:
+                        - img
+                        - generic: "Algorithm:"
+                        - generic: SHA-256
+                  - generic:
+                    - button [expanded]:
+                      - img
+                      - text: Hide Details
+                      - img
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading [level=3]: Solar Fan
+                      - generic:
+                        - generic: v3.2.9
+                        - generic: •
+                        - generic: CP-11
+                    - generic:
+                      - generic: ⏳
+                      - text: Pending
+                  - generic:
+                    - generic:
+                      - generic: "Release Date:"
+                      - generic: 04/01/2026
+                    - generic:
+                      - generic: "File Size:"
+                      - generic: 166.2 KB
+                    - generic:
+                      - generic: "Downloads:"
+                      - generic: "0"
+                  - generic:
+                    - button: Approve
+                    - button:
+                      - img
+                      - text: Details
+                      - img
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading [level=3]: QA-TEST Firmware v9.9
+                      - generic:
+                        - generic: 9.9.0
+                        - generic: •
+                        - generic: XR-5000
+                    - generic:
+                      - generic: ⏳
+                      - text: Pending
+                  - generic:
+                    - generic:
+                      - generic: "Release Date:"
+                      - generic: 03/27/2026
+                    - generic:
+                      - generic: "File Size:"
+                      - generic: 1000 KB
+                    - generic:
+                      - generic: "Downloads:"
+                      - generic: "0"
+                  - generic:
+                    - button: Approve
+                    - button:
+                      - img
+                      - text: Details
+                      - img
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading [level=3]: Solar Panel
+                      - generic:
+                        - generic: v1.2.4
+                        - generic: •
+                        - generic: MV-30
+                    - generic:
+                      - generic: ⏳
+                      - text: Pending
+                  - generic:
+                    - generic:
+                      - generic: "Release Date:"
+                      - generic: 03/25/2026
+                    - generic:
+                      - generic: "File Size:"
+                      - generic: 149.2 MB
+                    - generic:
+                      - generic: "Downloads:"
+                      - generic: "0"
+                  - generic:
+                    - button: Approve
+                    - button:
+                      - img
+                      - text: Details
+                      - img
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading [level=3]: WAP-400 Access Point Firmware
+                      - generic:
+                        - generic: v3.4.8
+                        - generic: •
+                        - generic: WAP-400
+                    - generic:
+                      - generic: ⏳
+                      - text: Pending
+                  - generic:
+                    - generic:
+                      - generic: "Release Date:"
+                      - generic: 01/28/2026
+                    - generic:
+                      - generic: "File Size:"
+                      - generic: 5.0 MB
+                    - generic:
+                      - generic: "Downloads:"
+                      - generic: "0"
+                  - generic:
+                    - button: Approve
+                    - button:
+                      - img
+                      - text: Details
+                      - img
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading [level=3]: NetCorp XR-5000 Firmware
+                      - generic:
+                        - generic: v2.4.1
+                        - generic: •
+                        - generic: XR-5000
+                    - generic:
+                      - generic: ✕
+                      - text: Deprecated
+                  - generic:
+                    - generic:
+                      - generic: "Release Date:"
+                      - generic: 12/26/2025
+                    - generic:
+                      - generic: "File Size:"
+                      - generic: 5.0 MB
+                    - generic:
+                      - generic: "Downloads:"
+                      - generic: "0"
+                  - generic:
+                    - button:
+                      - img
+                      - text: Details
+                      - img
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading [level=3]: Cisco S-8200 Firmware
+                      - generic:
+                        - generic: v3.1.2
+                        - generic: •
+                        - generic: S-8200
+                    - generic:
+                      - generic: ✕
+                      - text: Deprecated
+                  - generic:
+                    - generic:
+                      - generic: "Release Date:"
+                      - generic: 01/10/2026
+                    - generic:
+                      - generic: "File Size:"
+                      - generic: 7.0 MB
+                    - generic:
+                      - generic: "Downloads:"
+                      - generic: "0"
+                  - generic:
+                    - button:
+                      - img
+                      - text: Details
+                      - img
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading [level=3]: Palo Alto FW-7500 Firmware
+                      - generic:
+                        - generic: v2.3.9
+                        - generic: •
+                        - generic: FW-7500
+                    - generic:
+                      - generic: ✕
+                      - text: Deprecated
+                  - generic:
+                    - generic:
+                      - generic: "Release Date:"
+                      - generic: 02/19/2026
+                    - generic:
+                      - generic: "File Size:"
+                      - generic: 9.0 MB
+                    - generic:
+                      - generic: "Downloads:"
+                      - generic: "0"
+                  - generic:
+                    - button:
+                      - img
+                      - text: Details
+                      - img
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading [level=3]: Aruba WAP-300 Firmware
+                      - generic:
+                        - generic: v1.8.0
+                        - generic: •
+                        - generic: WAP-300
+                    - generic:
+                      - generic: ⏳
+                      - text: Pending
+                  - generic:
+                    - generic:
+                      - generic: "Release Date:"
+                      - generic: 02/24/2025
+                    - generic:
+                      - generic: "File Size:"
+                      - generic: 3.0 MB
+                    - generic:
+                      - generic: "Downloads:"
+                      - generic: "0"
+                  - generic:
+                    - button: Approve
+                    - button:
+                      - img
+                      - text: Details
+                      - img
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading [level=3]: Solar Inverter
+                      - generic:
+                        - generic: v2.5.3
+                        - generic: •
+                        - generic: LN-11
+                    - generic:
+                      - generic: ✓
+                      - text: Approved
+                  - generic:
+                    - generic:
+                      - generic: "Release Date:"
+                      - generic: 04/16/2026
+                    - generic:
+                      - generic: "File Size:"
+                      - generic: 1.9 MB
+                    - generic:
+                      - generic: "Downloads:"
+                      - generic: "0"
+                  - generic:
+                    - button:
+                      - img
+                      - text: Download
+                    - button: Deprecate
+                    - button:
+                      - img
+                      - text: Details
+                      - img
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading [level=3]: XR-5000 Security Patch
+                      - generic:
+                        - generic: v3.4.1
+                        - generic: •
+                        - generic: XR-5000
+                    - generic:
+                      - generic: ✓
+                      - text: Approved
+                  - generic:
+                    - generic:
+                      - generic: "Release Date:"
+                      - generic: 02/25/2026
+                    - generic:
+                      - generic: "File Size:"
+                      - generic: 5.0 MB
+                    - generic:
+                      - generic: "Downloads:"
+                      - generic: "0"
+                  - generic:
+                    - button:
+                      - img
+                      - text: Download
+                    - button: Deprecate
+                    - button:
+                      - img
+                      - text: Details
+                      - img
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading [level=3]: Test FWn X-2.0.0.2
+                      - generic:
+                        - generic: 2.0.0.2
+                        - generic: •
+                        - generic: X device
+                    - generic:
+                      - generic: ✓
+                      - text: Approved
+                  - generic:
+                    - generic:
+                      - generic: "Release Date:"
+                      - generic: 03/25/2026
+                    - generic:
+                      - generic: "File Size:"
+                      - generic: 60 bytes
+                    - generic:
+                      - generic: "Downloads:"
+                      - generic: "0"
+                  - generic:
+                    - button:
+                      - img
+                      - text: Download
+                    - button: Deprecate
+                    - button:
+                      - img
+                      - text: Details
+                      - img
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading [level=3]: XRS-5002 Security Patch
+                      - generic:
+                        - generic: v3.4.7
+                        - generic: •
+                        - generic: XR-5000
+                    - generic:
+                      - generic: ✓
+                      - text: Approved
+                  - generic:
+                    - generic:
+                      - generic: "Release Date:"
+                      - generic: 03/21/2026
+                    - generic:
+                      - generic: "File Size:"
+                      - generic: 245.0 MB
+                    - generic:
+                      - generic: "Downloads:"
+                      - generic: "0"
+                  - generic:
+                    - button:
+                      - img
+                      - text: Download
+                    - button: Deprecate
+                    - button:
+                      - img
+                      - text: Details
+                      - img
+    - region "Notifications alt+T"
+  - dialog "Upload Firmware" [ref=e719]:
+    - generic [ref=e720]:
+      - heading "Upload Firmware" [level=2] [ref=e721]
+      - paragraph [ref=e722]: Upload a firmware binary file with metadata.
+    - generic [ref=e723]:
+      - generic [ref=e724]:
+        - generic [ref=e725]: Name
+        - textbox "Name" [active] [ref=e726]
+      - generic [ref=e727]:
+        - generic [ref=e728]: Version
+        - textbox "Version" [ref=e729]
+      - generic [ref=e730]:
+        - generic [ref=e731]: Device Model
+        - textbox "Device Model" [ref=e732]
+      - generic [ref=e733]:
+        - generic [ref=e734]: Manufacturer (optional)
+        - textbox "Manufacturer (optional)" [ref=e735]
+      - generic [ref=e736]:
+        - generic [ref=e737]: Release Date
+        - button "MM/DD/YYYY" [ref=e738] [cursor=pointer]:
+          - img [ref=e739]
+          - generic [ref=e741]: MM/DD/YYYY
+      - generic [ref=e742]:
+        - generic [ref=e743]: Firmware File
+        - button "Firmware File" [ref=e744] [cursor=pointer]
+      - generic [ref=e745]:
+        - generic [ref=e746]: Release Notes (optional)
+        - textbox "Release Notes (optional)" [ref=e747]
+      - generic [ref=e748]:
+        - button "Cancel" [ref=e749] [cursor=pointer]
+        - button "Submit" [disabled] [ref=e750]
+    - button "Close" [ref=e751] [cursor=pointer]:
+      - img
+      - generic [ref=e752]: Close

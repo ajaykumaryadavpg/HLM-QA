@@ -1,0 +1,176 @@
+- generic:
+  - generic:
+    - generic:
+      - complementary:
+        - generic:
+          - img [ref=e254]
+          - button:
+            - img
+        - navigation:
+          - link:
+            - /url: /
+            - img
+            - generic: Dashboard
+          - link:
+            - /url: /inventory
+            - img
+            - generic: Inventory
+          - link:
+            - /url: /account-service
+            - img
+            - generic: Services
+          - link:
+            - /url: /deployment
+            - img
+            - generic: Deployment
+          - link:
+            - /url: /compliance
+            - img
+            - generic: Compliance
+          - link:
+            - /url: /analytics
+            - img
+            - generic: Analytics
+        - generic:
+          - generic:
+            - generic: A
+            - generic [ref=e96]:
+              - generic [ref=e97]: Admin
+              - generic [ref=e98]: ajaykumar.yadav@3pillarglobal.com
+            - button [ref=e255] [cursor=pointer]:
+              - img [ref=e100]
+      - generic:
+        - banner:
+          - generic:
+            - generic:
+              - heading [level=1]: Dashboard
+          - generic:
+            - button:
+              - img
+            - button:
+              - img
+        - main:
+          - generic:
+            - generic:
+              - paragraph: Welcome back, ajaykumar.yadav@3pillarglobal.com — here's your hardware lifecycle overview
+              - button:
+                - img
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - img
+                  - generic: "13"
+                  - generic: Total Devices
+              - generic:
+                - generic:
+                  - generic:
+                    - img
+                  - generic: "0"
+                  - generic: Active Deployments
+              - generic:
+                - generic:
+                  - generic:
+                    - img
+                  - generic: "7"
+                  - generic: Pending Approvals
+              - generic:
+                - generic:
+                  - generic:
+                    - img
+                  - generic: 55%
+                  - generic: Health Score
+            - generic:
+              - heading [level=3]: Quick Actions
+              - generic:
+                - link:
+                  - /url: /inventory
+                  - generic: "3"
+                  - generic:
+                    - generic:
+                      - img
+                    - generic: View Inventory
+                    - generic: Manage device assets
+                - link:
+                  - /url: /account-service
+                  - generic: "5"
+                  - generic:
+                    - generic:
+                      - img
+                    - generic: Schedule Service
+                    - generic: Plan technician visits
+                - link:
+                  - /url: /deployment
+                  - generic: "4"
+                  - generic:
+                    - generic:
+                      - img
+                    - generic: Deploy Firmware
+                    - generic: Upload & distribute
+                - link:
+                  - /url: /compliance
+                  - generic: "3"
+                  - generic:
+                    - generic:
+                      - img
+                    - generic: Check Compliance
+                    - generic: Review certifications
+            - generic:
+              - generic:
+                - generic:
+                  - heading [level=3]: Recent Alerts
+                  - link:
+                    - /url: /analytics
+                    - text: View all
+                - generic:
+                  - generic:
+                    - img
+                    - generic: Modified
+                    - generic:
+                      - text: Firmware
+                      - generic: · Solar Inverter
+                    - generic: 16h ago
+                  - generic:
+                    - img
+                    - generic: Created
+                    - generic:
+                      - text: Firmware
+                      - generic: · Solar Fan
+                    - generic: 18h ago
+                  - generic:
+                    - img
+                    - generic: Created
+                    - generic:
+                      - text: User
+                      - generic: · princerko9600@gmail.com
+                    - generic: Apr 1, 09:34 AM
+              - generic:
+                - heading [level=3]: System Status
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic: Deployment Service
+                      - generic: Degraded
+                  - generic:
+                    - generic:
+                      - generic: Compliance Engine
+                      - generic: Degraded
+                  - generic:
+                    - generic:
+                      - generic: Asset Database
+                      - generic: Degraded
+                  - generic:
+                    - generic:
+                      - generic: Analytics Platform
+                      - generic: Operational
+    - region "Notifications alt+T"
+  - dialog "Notifications" [ref=e257]:
+    - generic [ref=e259]:
+      - img [ref=e260]
+      - heading "Notifications" [level=2] [ref=e263]
+    - generic [ref=e265]:
+      - img [ref=e266]
+      - generic [ref=e269]: No notifications yet.
+    - button "Close" [active] [ref=e270] [cursor=pointer]:
+      - img [ref=e271]
+      - generic [ref=e274]: Close

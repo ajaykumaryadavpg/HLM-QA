@@ -1,0 +1,436 @@
+- generic [ref=e2]:
+  - generic [ref=e54]:
+    - complementary "Main navigation" [ref=e55]:
+      - generic [ref=e56]:
+        - img "Sungrow" [ref=e58]
+        - button "Collapse sidebar" [ref=e59] [cursor=pointer]:
+          - img [ref=e60]
+      - navigation [ref=e62]:
+        - link "Dashboard" [ref=e63] [cursor=pointer]:
+          - /url: /
+          - img [ref=e64]
+          - generic [ref=e69]: Dashboard
+        - link "Inventory" [ref=e70] [cursor=pointer]:
+          - /url: /inventory
+          - img [ref=e71]
+          - generic [ref=e75]: Inventory
+        - link "Services" [ref=e76] [cursor=pointer]:
+          - /url: /account-service
+          - img [ref=e77]
+          - generic [ref=e79]: Services
+        - link "Deployment" [active] [ref=e80] [cursor=pointer]:
+          - /url: /deployment
+          - img [ref=e81]
+          - generic [ref=e84]: Deployment
+        - link "Compliance" [ref=e85] [cursor=pointer]:
+          - /url: /compliance
+          - img [ref=e86]
+          - generic [ref=e88]: Compliance
+        - link "Analytics" [ref=e89] [cursor=pointer]:
+          - /url: /analytics
+          - img [ref=e90]
+          - generic [ref=e92]: Analytics
+      - generic [ref=e94]:
+        - generic [ref=e95]: A
+        - generic [ref=e96]:
+          - generic [ref=e97]: Admin
+          - generic [ref=e98]: ajaykumar.yadav@3pillarglobal.com
+        - button "Sign out" [ref=e99] [cursor=pointer]:
+          - img [ref=e100]
+    - generic [ref=e103]:
+      - banner [ref=e104]:
+        - heading "Deployment and Orchestration" [level=1] [ref=e254]
+        - generic [ref=e109]:
+          - button "Notifications" [ref=e110] [cursor=pointer]:
+            - img [ref=e111]
+          - button [ref=e114] [cursor=pointer]:
+            - img [ref=e115]
+      - main [ref=e117]:
+        - generic [ref=e255]:
+          - generic [ref=e256]:
+            - paragraph [ref=e257]: Secure firmware distribution with complete audit trail
+            - button "Upload Firmware" [ref=e258] [cursor=pointer]:
+              - img [ref=e259]
+              - text: Upload Firmware
+          - generic [ref=e262]:
+            - generic [ref=e264]:
+              - img [ref=e266]
+              - generic [ref=e269]: "4"
+              - generic [ref=e270]: Approved Versions
+            - generic [ref=e272]:
+              - img [ref=e274]
+              - generic [ref=e277]: "5"
+              - generic [ref=e278]: Pending Review
+            - generic [ref=e280]:
+              - img [ref=e282]
+              - generic [ref=e285]: "0"
+              - generic [ref=e286]: Total Downloads
+            - generic [ref=e288]:
+              - img [ref=e290]
+              - generic [ref=e292]: "0"
+              - generic [ref=e293]: Recent Activities
+          - generic [ref=e294]:
+            - tablist "Deployment sections" [ref=e295]:
+              - tab "Firmware Versions" [selected] [ref=e296] [cursor=pointer]
+              - tab "Audit Log" [ref=e297] [cursor=pointer]
+            - generic [ref=e298]:
+              - generic [ref=e299]: Search firmware by name, version, or device model
+              - img [ref=e300]
+              - textbox "Search firmware by name, version, or device model" [ref=e303]:
+                - /placeholder: Search name, version, model…
+          - tabpanel "Firmware Versions" [ref=e304]:
+            - generic [ref=e305]:
+              - generic [ref=e306]:
+                - generic [ref=e307]:
+                  - generic [ref=e308]:
+                    - heading "Dell SRV-9000 Firmware" [level=3] [ref=e309]
+                    - generic [ref=e310]:
+                      - generic [ref=e311]: v5.2.0-beta
+                      - generic [ref=e312]: •
+                      - generic [ref=e313]: SRV-9000
+                  - generic [ref=e314]: Rejected
+                - generic [ref=e315]:
+                  - generic [ref=e316]:
+                    - generic [ref=e317]: "Release Date:"
+                    - generic [ref=e318]: 02/14/2026
+                  - generic [ref=e319]:
+                    - generic [ref=e320]: "File Size:"
+                    - generic [ref=e321]: 12.0 MB
+                  - generic [ref=e322]:
+                    - generic [ref=e323]: "Downloads:"
+                    - generic [ref=e324]: "0"
+                - button "Details" [ref=e326] [cursor=pointer]:
+                  - img [ref=e327]
+                  - text: Details
+                  - img [ref=e330]
+              - generic [ref=e332]:
+                - generic [ref=e333]:
+                  - generic [ref=e334]:
+                    - heading "Solar Fan" [level=3] [ref=e335]
+                    - generic [ref=e336]:
+                      - generic [ref=e337]: v3.2.9
+                      - generic [ref=e338]: •
+                      - generic [ref=e339]: CP-11
+                  - generic [ref=e340]:
+                    - generic [ref=e341]: ⏳
+                    - text: Pending
+                - generic [ref=e342]:
+                  - generic [ref=e343]:
+                    - generic [ref=e344]: "Release Date:"
+                    - generic [ref=e345]: 04/01/2026
+                  - generic [ref=e346]:
+                    - generic [ref=e347]: "File Size:"
+                    - generic [ref=e348]: 166.2 KB
+                  - generic [ref=e349]:
+                    - generic [ref=e350]: "Downloads:"
+                    - generic [ref=e351]: "0"
+                - generic [ref=e352]:
+                  - button "Approve" [ref=e353] [cursor=pointer]
+                  - button "Details" [ref=e354] [cursor=pointer]:
+                    - img [ref=e355]
+                    - text: Details
+                    - img [ref=e358]
+              - generic [ref=e360]:
+                - generic [ref=e361]:
+                  - generic [ref=e362]:
+                    - heading "QA-TEST Firmware v9.9" [level=3] [ref=e363]
+                    - generic [ref=e364]:
+                      - generic [ref=e365]: 9.9.0
+                      - generic [ref=e366]: •
+                      - generic [ref=e367]: XR-5000
+                  - generic [ref=e368]:
+                    - generic [ref=e369]: ⏳
+                    - text: Pending
+                - generic [ref=e370]:
+                  - generic [ref=e371]:
+                    - generic [ref=e372]: "Release Date:"
+                    - generic [ref=e373]: 03/27/2026
+                  - generic [ref=e374]:
+                    - generic [ref=e375]: "File Size:"
+                    - generic [ref=e376]: 1000 KB
+                  - generic [ref=e377]:
+                    - generic [ref=e378]: "Downloads:"
+                    - generic [ref=e379]: "0"
+                - generic [ref=e380]:
+                  - button "Approve" [ref=e381] [cursor=pointer]
+                  - button "Details" [ref=e382] [cursor=pointer]:
+                    - img [ref=e383]
+                    - text: Details
+                    - img [ref=e386]
+              - generic [ref=e388]:
+                - generic [ref=e389]:
+                  - generic [ref=e390]:
+                    - heading "Solar Panel" [level=3] [ref=e391]
+                    - generic [ref=e392]:
+                      - generic [ref=e393]: v1.2.4
+                      - generic [ref=e394]: •
+                      - generic [ref=e395]: MV-30
+                  - generic [ref=e396]:
+                    - generic [ref=e397]: ⏳
+                    - text: Pending
+                - generic [ref=e398]:
+                  - generic [ref=e399]:
+                    - generic [ref=e400]: "Release Date:"
+                    - generic [ref=e401]: 03/25/2026
+                  - generic [ref=e402]:
+                    - generic [ref=e403]: "File Size:"
+                    - generic [ref=e404]: 149.2 MB
+                  - generic [ref=e405]:
+                    - generic [ref=e406]: "Downloads:"
+                    - generic [ref=e407]: "0"
+                - generic [ref=e408]:
+                  - button "Approve" [ref=e409] [cursor=pointer]
+                  - button "Details" [ref=e410] [cursor=pointer]:
+                    - img [ref=e411]
+                    - text: Details
+                    - img [ref=e414]
+              - generic [ref=e416]:
+                - generic [ref=e417]:
+                  - generic [ref=e418]:
+                    - heading "WAP-400 Access Point Firmware" [level=3] [ref=e419]
+                    - generic [ref=e420]:
+                      - generic [ref=e421]: v3.4.8
+                      - generic [ref=e422]: •
+                      - generic [ref=e423]: WAP-400
+                  - generic [ref=e424]:
+                    - generic [ref=e425]: ⏳
+                    - text: Pending
+                - generic [ref=e426]:
+                  - generic [ref=e427]:
+                    - generic [ref=e428]: "Release Date:"
+                    - generic [ref=e429]: 01/28/2026
+                  - generic [ref=e430]:
+                    - generic [ref=e431]: "File Size:"
+                    - generic [ref=e432]: 5.0 MB
+                  - generic [ref=e433]:
+                    - generic [ref=e434]: "Downloads:"
+                    - generic [ref=e435]: "0"
+                - generic [ref=e436]:
+                  - button "Approve" [ref=e437] [cursor=pointer]
+                  - button "Details" [ref=e438] [cursor=pointer]:
+                    - img [ref=e439]
+                    - text: Details
+                    - img [ref=e442]
+              - generic [ref=e444]:
+                - generic [ref=e445]:
+                  - generic [ref=e446]:
+                    - heading "NetCorp XR-5000 Firmware" [level=3] [ref=e447]
+                    - generic [ref=e448]:
+                      - generic [ref=e449]: v2.4.1
+                      - generic [ref=e450]: •
+                      - generic [ref=e451]: XR-5000
+                  - generic [ref=e452]:
+                    - generic [ref=e453]: ✕
+                    - text: Deprecated
+                - generic [ref=e454]:
+                  - generic [ref=e455]:
+                    - generic [ref=e456]: "Release Date:"
+                    - generic [ref=e457]: 12/26/2025
+                  - generic [ref=e458]:
+                    - generic [ref=e459]: "File Size:"
+                    - generic [ref=e460]: 5.0 MB
+                  - generic [ref=e461]:
+                    - generic [ref=e462]: "Downloads:"
+                    - generic [ref=e463]: "0"
+                - button "Details" [ref=e465] [cursor=pointer]:
+                  - img [ref=e466]
+                  - text: Details
+                  - img [ref=e469]
+              - generic [ref=e471]:
+                - generic [ref=e472]:
+                  - generic [ref=e473]:
+                    - heading "Cisco S-8200 Firmware" [level=3] [ref=e474]
+                    - generic [ref=e475]:
+                      - generic [ref=e476]: v3.1.2
+                      - generic [ref=e477]: •
+                      - generic [ref=e478]: S-8200
+                  - generic [ref=e479]:
+                    - generic [ref=e480]: ✕
+                    - text: Deprecated
+                - generic [ref=e481]:
+                  - generic [ref=e482]:
+                    - generic [ref=e483]: "Release Date:"
+                    - generic [ref=e484]: 01/10/2026
+                  - generic [ref=e485]:
+                    - generic [ref=e486]: "File Size:"
+                    - generic [ref=e487]: 7.0 MB
+                  - generic [ref=e488]:
+                    - generic [ref=e489]: "Downloads:"
+                    - generic [ref=e490]: "0"
+                - button "Details" [ref=e492] [cursor=pointer]:
+                  - img [ref=e493]
+                  - text: Details
+                  - img [ref=e496]
+              - generic [ref=e498]:
+                - generic [ref=e499]:
+                  - generic [ref=e500]:
+                    - heading "Palo Alto FW-7500 Firmware" [level=3] [ref=e501]
+                    - generic [ref=e502]:
+                      - generic [ref=e503]: v2.3.9
+                      - generic [ref=e504]: •
+                      - generic [ref=e505]: FW-7500
+                  - generic [ref=e506]:
+                    - generic [ref=e507]: ✕
+                    - text: Deprecated
+                - generic [ref=e508]:
+                  - generic [ref=e509]:
+                    - generic [ref=e510]: "Release Date:"
+                    - generic [ref=e511]: 02/19/2026
+                  - generic [ref=e512]:
+                    - generic [ref=e513]: "File Size:"
+                    - generic [ref=e514]: 9.0 MB
+                  - generic [ref=e515]:
+                    - generic [ref=e516]: "Downloads:"
+                    - generic [ref=e517]: "0"
+                - button "Details" [ref=e519] [cursor=pointer]:
+                  - img [ref=e520]
+                  - text: Details
+                  - img [ref=e523]
+              - generic [ref=e525]:
+                - generic [ref=e526]:
+                  - generic [ref=e527]:
+                    - heading "Aruba WAP-300 Firmware" [level=3] [ref=e528]
+                    - generic [ref=e529]:
+                      - generic [ref=e530]: v1.8.0
+                      - generic [ref=e531]: •
+                      - generic [ref=e532]: WAP-300
+                  - generic [ref=e533]:
+                    - generic [ref=e534]: ⏳
+                    - text: Pending
+                - generic [ref=e535]:
+                  - generic [ref=e536]:
+                    - generic [ref=e537]: "Release Date:"
+                    - generic [ref=e538]: 02/24/2025
+                  - generic [ref=e539]:
+                    - generic [ref=e540]: "File Size:"
+                    - generic [ref=e541]: 3.0 MB
+                  - generic [ref=e542]:
+                    - generic [ref=e543]: "Downloads:"
+                    - generic [ref=e544]: "0"
+                - generic [ref=e545]:
+                  - button "Approve" [ref=e546] [cursor=pointer]
+                  - button "Details" [ref=e547] [cursor=pointer]:
+                    - img [ref=e548]
+                    - text: Details
+                    - img [ref=e551]
+              - generic [ref=e553]:
+                - generic [ref=e554]:
+                  - generic [ref=e555]:
+                    - heading "Solar Inverter" [level=3] [ref=e556]
+                    - generic [ref=e557]:
+                      - generic [ref=e558]: v2.5.3
+                      - generic [ref=e559]: •
+                      - generic [ref=e560]: LN-11
+                  - generic [ref=e561]:
+                    - generic [ref=e562]: ✓
+                    - text: Approved
+                - generic [ref=e563]:
+                  - generic [ref=e564]:
+                    - generic [ref=e565]: "Release Date:"
+                    - generic [ref=e566]: 04/16/2026
+                  - generic [ref=e567]:
+                    - generic [ref=e568]: "File Size:"
+                    - generic [ref=e569]: 1.9 MB
+                  - generic [ref=e570]:
+                    - generic [ref=e571]: "Downloads:"
+                    - generic [ref=e572]: "0"
+                - generic [ref=e573]:
+                  - button "Download" [ref=e574] [cursor=pointer]:
+                    - img [ref=e575]
+                    - text: Download
+                  - button "Deprecate" [ref=e578] [cursor=pointer]
+                  - button "Details" [ref=e579] [cursor=pointer]:
+                    - img [ref=e580]
+                    - text: Details
+                    - img [ref=e583]
+              - generic [ref=e585]:
+                - generic [ref=e586]:
+                  - generic [ref=e587]:
+                    - heading "XR-5000 Security Patch" [level=3] [ref=e588]
+                    - generic [ref=e589]:
+                      - generic [ref=e590]: v3.4.1
+                      - generic [ref=e591]: •
+                      - generic [ref=e592]: XR-5000
+                  - generic [ref=e593]:
+                    - generic [ref=e594]: ✓
+                    - text: Approved
+                - generic [ref=e595]:
+                  - generic [ref=e596]:
+                    - generic [ref=e597]: "Release Date:"
+                    - generic [ref=e598]: 02/25/2026
+                  - generic [ref=e599]:
+                    - generic [ref=e600]: "File Size:"
+                    - generic [ref=e601]: 5.0 MB
+                  - generic [ref=e602]:
+                    - generic [ref=e603]: "Downloads:"
+                    - generic [ref=e604]: "0"
+                - generic [ref=e605]:
+                  - button "Download" [ref=e606] [cursor=pointer]:
+                    - img [ref=e607]
+                    - text: Download
+                  - button "Deprecate" [ref=e610] [cursor=pointer]
+                  - button "Details" [ref=e611] [cursor=pointer]:
+                    - img [ref=e612]
+                    - text: Details
+                    - img [ref=e615]
+              - generic [ref=e617]:
+                - generic [ref=e618]:
+                  - generic [ref=e619]:
+                    - heading "Test FWn X-2.0.0.2" [level=3] [ref=e620]
+                    - generic [ref=e621]:
+                      - generic [ref=e622]: 2.0.0.2
+                      - generic [ref=e623]: •
+                      - generic [ref=e624]: X device
+                  - generic [ref=e625]:
+                    - generic [ref=e626]: ✓
+                    - text: Approved
+                - generic [ref=e627]:
+                  - generic [ref=e628]:
+                    - generic [ref=e629]: "Release Date:"
+                    - generic [ref=e630]: 03/25/2026
+                  - generic [ref=e631]:
+                    - generic [ref=e632]: "File Size:"
+                    - generic [ref=e633]: 60 bytes
+                  - generic [ref=e634]:
+                    - generic [ref=e635]: "Downloads:"
+                    - generic [ref=e636]: "0"
+                - generic [ref=e637]:
+                  - button "Download" [ref=e638] [cursor=pointer]:
+                    - img [ref=e639]
+                    - text: Download
+                  - button "Deprecate" [ref=e642] [cursor=pointer]
+                  - button "Details" [ref=e643] [cursor=pointer]:
+                    - img [ref=e644]
+                    - text: Details
+                    - img [ref=e647]
+              - generic [ref=e649]:
+                - generic [ref=e650]:
+                  - generic [ref=e651]:
+                    - heading "XRS-5002 Security Patch" [level=3] [ref=e652]
+                    - generic [ref=e653]:
+                      - generic [ref=e654]: v3.4.7
+                      - generic [ref=e655]: •
+                      - generic [ref=e656]: XR-5000
+                  - generic [ref=e657]:
+                    - generic [ref=e658]: ✓
+                    - text: Approved
+                - generic [ref=e659]:
+                  - generic [ref=e660]:
+                    - generic [ref=e661]: "Release Date:"
+                    - generic [ref=e662]: 03/21/2026
+                  - generic [ref=e663]:
+                    - generic [ref=e664]: "File Size:"
+                    - generic [ref=e665]: 245.0 MB
+                  - generic [ref=e666]:
+                    - generic [ref=e667]: "Downloads:"
+                    - generic [ref=e668]: "0"
+                - generic [ref=e669]:
+                  - button "Download" [ref=e670] [cursor=pointer]:
+                    - img [ref=e671]
+                    - text: Download
+                  - button "Deprecate" [ref=e674] [cursor=pointer]
+                  - button "Details" [ref=e675] [cursor=pointer]:
+                    - img [ref=e676]
+                    - text: Details
+                    - img [ref=e679]
+  - region "Notifications alt+T"

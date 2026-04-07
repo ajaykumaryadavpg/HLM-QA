@@ -4,13 +4,17 @@
 /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/main/java/com/tpg/automation/macros/AuthenticateAs.java
 /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/main/java/com/tpg/automation/macros/Navigate.java
 /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/main/java/com/tpg/automation/pages/home/HomePage.java
+/Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/main/java/com/tpg/automation/impls/inventory/DeploymentPageImpl.java
 /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/main/java/com/tpg/automation/testdata/InventoryTestData.java
 /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/main/java/com/tpg/automation/pages/contact/ContactPage.java
 /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/main/java/com/tpg/automation/impls/inventory/DashboardPageImpl.java
 /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/main/java/com/tpg/automation/impls/home/HomePageImpl.java
+/Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/main/java/com/tpg/automation/pages/inventory/GeoLocationPage.java
 /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/main/java/com/tpg/automation/services/UrlService.java
 /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/main/java/com/tpg/automation/impls/inventory/LoginPageImpl.java
+/Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/main/java/com/tpg/automation/impls/inventory/GeoLocationPageImpl.java
 /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/main/java/com/tpg/automation/pages/inventory/LoginPage.java
 /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/main/java/com/tpg/automation/listeners/NovusTestListener.java
 /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/main/java/com/tpg/automation/pages/inventory/DashboardPage.java
+/Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/main/java/com/tpg/automation/pages/inventory/DeploymentPage.java
 /Users/ajaykumar.yadav/HLM-QA/novus-example-tests/src/main/java/com/tpg/automation/impls/inventory/InventoryPageImpl.java

@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Inventory Management – Dashboard Quick Actions with Live Counts Tests" verbose="2" thread-count="1">
+
+    <parameter name="report-name" value="Dashboard-QuickActions-Report"/>
+
+    <test name="Dashboard Quick Actions Tests">
+        <classes>
+            <class name="com.tpg.automation.inventory.DashboardQuickActionsTests"/>
+        </classes>
+    </test>
+
+</suite>

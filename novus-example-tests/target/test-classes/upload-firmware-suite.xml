@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<!--
+  TestNG suite for Upload Firmware modal form validation tests (Story PS-34 / AC-7).
+
+  Run this suite with:
+    mvn test -pl novus-example-tests -DsuiteXmlFile=upload-firmware-suite.xml
+
+  Groups:
+    smoke-tests      — TC-34.7.07-001 (button visible), TC-34.7.07-002 (modal opens),
+                       TC-34.7.07-003 (disabled when empty), TC-34.7.07-007 (cancel closes)
+    regression       — TC-34.7.07-004 through 006 (incremental field validation),
+                       TC-34.7.08-002 (gap-check baseline — Firmware Family field absent)
+    upload-firmware  — all tests in this suite
+
+  TC-34.7.08-001 (post-PS-34 Firmware Family dropdown) is marked enabled=false and will not
+  run until the PS-34 front-end ships the familyId field to the Upload Firmware form.
+
+  Pre-conditions:
+    - application-inventory.properties must point to a running app instance
+    - Chromium binary path must be set in application-local.properties
+    - The /deployment page must be accessible with the admin credentials
+-->
+<suite name="Deployment – Upload Firmware Form Validation Tests (PS-34 / AC-7)" verbose="2" thread-count="1">
+
+    <parameter name="report-name" value="Upload-Firmware-Report"/>
+
+    <test name="Upload Firmware Modal Validation Tests">
+        <classes>
+            <class name="com.tpg.automation.inventory.UploadFirmwareTests"/>
+        </classes>
+    </test>
+
+</suite>

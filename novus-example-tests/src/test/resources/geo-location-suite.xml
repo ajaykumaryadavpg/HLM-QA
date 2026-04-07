@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<!--
+  TestNG suite for Geo Location tab tests (Story PS-20: Replace Static Map in Inventory Module).
+
+  Run this suite with:
+    mvn test -pl novus-example-tests -DsuiteXmlFile=geo-location-suite.xml
+
+  Groups:
+    smoke-tests   — TC-GEO-01, TC-GEO-02, TC-GEO-07, TC-GEO-08, TC-GEO-10, TC-GEO-11 (fast critical path)
+    regression    — TC-GEO-03 through TC-GEO-16 (full coverage)
+    geo-location  — all tests in this suite
+
+  Pre-conditions:
+    - application-inventory.properties must point to a running app instance
+    - Chromium browser executable must be available at the path in application-local.properties
+-->
+<suite name="Inventory Management – Geo Location Map Tests" verbose="2" thread-count="1">
+
+    <parameter name="report-name" value="Geo-Location-Report"/>
+
+    <test name="Geo Location Map Tests">
+        <classes>
+            <class name="com.tpg.automation.inventory.GeoLocationTests"/>
+        </classes>
+    </test>
+
+</suite>

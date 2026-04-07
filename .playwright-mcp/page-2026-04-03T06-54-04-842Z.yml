@@ -1,0 +1,145 @@
+- generic [ref=e2]:
+  - generic [ref=e54]:
+    - complementary "Main navigation" [ref=e55]:
+      - generic [ref=e56]:
+        - img "Sungrow" [ref=e58]
+        - button "Collapse sidebar" [ref=e59] [cursor=pointer]:
+          - img [ref=e60]
+      - navigation [ref=e62]:
+        - link "Dashboard" [ref=e63] [cursor=pointer]:
+          - /url: /
+          - img [ref=e64]
+          - generic [ref=e69]: Dashboard
+        - link "Inventory" [ref=e70] [cursor=pointer]:
+          - /url: /inventory
+          - img [ref=e71]
+          - generic [ref=e75]: Inventory
+        - link "Services" [ref=e76] [cursor=pointer]:
+          - /url: /account-service
+          - img [ref=e77]
+          - generic [ref=e79]: Services
+        - link "Deployment" [ref=e80] [cursor=pointer]:
+          - /url: /deployment
+          - img [ref=e81]
+          - generic [ref=e84]: Deployment
+        - link "Compliance" [ref=e85] [cursor=pointer]:
+          - /url: /compliance
+          - img [ref=e86]
+          - generic [ref=e88]: Compliance
+        - link "Analytics" [ref=e89] [cursor=pointer]:
+          - /url: /analytics
+          - img [ref=e90]
+          - generic [ref=e92]: Analytics
+      - generic [ref=e94]:
+        - generic [ref=e95]: A
+        - generic [ref=e96]:
+          - generic [ref=e97]: Admin
+          - generic [ref=e98]: ajaykumar.yadav@3pillarglobal.com
+        - button "Sign out" [ref=e99] [cursor=pointer]:
+          - img [ref=e100]
+    - generic [ref=e103]:
+      - banner [ref=e104]:
+        - heading "Dashboard" [level=1] [ref=e108]
+        - generic [ref=e109]:
+          - button "Notifications" [ref=e110] [cursor=pointer]:
+            - img [ref=e111]
+          - button [ref=e114] [cursor=pointer]:
+            - img [ref=e115]
+      - main [ref=e117]:
+        - generic [ref=e118]:
+          - generic [ref=e119]:
+            - paragraph [ref=e120]: Welcome back, ajaykumar.yadav@3pillarglobal.com — here's your hardware lifecycle overview
+            - button "Refresh dashboard" [ref=e121] [cursor=pointer]:
+              - img [ref=e122]
+          - generic [ref=e127]:
+            - generic [ref=e129]:
+              - img [ref=e131]
+              - generic [ref=e135]: "13"
+              - generic [ref=e136]: Total Devices
+            - generic [ref=e138]:
+              - img [ref=e140]
+              - generic [ref=e143]: "0"
+              - generic [ref=e144]: Active Deployments
+            - generic [ref=e146]:
+              - img [ref=e148]
+              - generic [ref=e150]: "7"
+              - generic [ref=e151]: Pending Approvals
+            - generic [ref=e153]:
+              - img [ref=e155]
+              - generic [ref=e158]: 55%
+              - generic [ref=e159]: Health Score
+          - generic [ref=e160]:
+            - heading "Quick Actions" [level=3] [ref=e161]
+            - generic [ref=e162]:
+              - link "3 View Inventory Manage device assets" [ref=e163] [cursor=pointer]:
+                - /url: /inventory
+                - generic [ref=e164]: "3"
+                - generic [ref=e165]:
+                  - img [ref=e167]
+                  - generic [ref=e171]: View Inventory
+                  - generic [ref=e172]: Manage device assets
+              - link "5 Schedule Service Plan technician visits" [ref=e173] [cursor=pointer]:
+                - /url: /account-service
+                - generic [ref=e174]: "5"
+                - generic [ref=e175]:
+                  - img [ref=e177]
+                  - generic [ref=e179]: Schedule Service
+                  - generic [ref=e180]: Plan technician visits
+              - link "4 Deploy Firmware Upload & distribute" [ref=e181] [cursor=pointer]:
+                - /url: /deployment
+                - generic [ref=e182]: "4"
+                - generic [ref=e183]:
+                  - img [ref=e185]
+                  - generic [ref=e188]: Deploy Firmware
+                  - generic [ref=e189]: Upload & distribute
+              - link "3 Check Compliance Review certifications" [ref=e190] [cursor=pointer]:
+                - /url: /compliance
+                - generic [ref=e191]: "3"
+                - generic [ref=e192]:
+                  - img [ref=e194]
+                  - generic [ref=e196]: Check Compliance
+                  - generic [ref=e197]: Review certifications
+          - generic [ref=e198]:
+            - generic [ref=e199]:
+              - generic [ref=e200]:
+                - heading "Recent Alerts" [level=3] [ref=e201]
+                - link "View all" [ref=e202] [cursor=pointer]:
+                  - /url: /analytics
+              - generic [ref=e203]:
+                - generic [ref=e204]:
+                  - img [ref=e205]
+                  - generic [ref=e207]: Modified
+                  - generic [ref=e208]:
+                    - text: Firmware
+                    - generic [ref=e209]: · Solar Inverter
+                  - generic [ref=e210]: 16h ago
+                - generic [ref=e211]:
+                  - img [ref=e212]
+                  - generic [ref=e215]: Created
+                  - generic [ref=e216]:
+                    - text: Firmware
+                    - generic [ref=e217]: · Solar Fan
+                  - generic [ref=e218]: 18h ago
+                - generic [ref=e219]:
+                  - img [ref=e220]
+                  - generic [ref=e223]: Created
+                  - generic [ref=e224]:
+                    - text: User
+                    - generic [ref=e225]: · princerko9600@gmail.com
+                  - generic [ref=e226]: Apr 1, 09:34 AM
+            - generic [ref=e227]:
+              - heading "System Status" [level=3] [ref=e228]
+              - generic [ref=e229]:
+                - generic [ref=e231]:
+                  - generic [ref=e232]: Deployment Service
+                  - generic [ref=e233]: Degraded
+                - generic [ref=e237]:
+                  - generic [ref=e238]: Compliance Engine
+                  - generic [ref=e239]: Degraded
+                - generic [ref=e243]:
+                  - generic [ref=e244]: Asset Database
+                  - generic [ref=e245]: Degraded
+                - generic [ref=e249]:
+                  - generic [ref=e250]: Analytics Platform
+                  - generic [ref=e251]: Operational
+  - region "Notifications alt+T"

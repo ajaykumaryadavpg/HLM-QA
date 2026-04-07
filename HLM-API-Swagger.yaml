@@ -1,0 +1,2329 @@
+openapi: 3.0.3
+info:
+  title: HLM Platform API
+  version: 1.0.0
+  description: |-
+    Complete API specification for the HLM (Hardware Lifecycle Management) Platform.
+
+    ## Architecture
+    All application data calls are **GraphQL POST** requests to the single AWS AppSync endpoint.
+    Map tiles are standard REST GET requests via AWS Location Service.
+
+    ## Authentication
+    All GraphQL requests require a raw Cognito **IdToken** in the `Authorization` header (no `Bearer` prefix). Obtain the token by calling the Cognito `InitiateAuth` endpoint first.
+
+    - **User Pool:** `us-east-2_Q36YWNsEC`
+    - **Client ID:** `3aseu1rf3q3tae7u4dgplllii8`
+
+    ## Live Test Results (2026-03-27)
+    All 20 queries and 7 mutations were executed against the live AppSync endpoint and passed. New bugs discovered are marked ⚠️ in the relevant operation descriptions.
+
+    ## Important Notes
+    - `items` in `PaginatedResponse` is an `AWSJSON` scalar — it cannot be sub-selected in GraphQL; parse it as JSON on the client
+    - `totalCount` — not `total`
+    - `operationName` in the POST body **must exactly match** the named operation in the `query` string
+  contact:
+    name: HLM QA Team
+    email: ajaykumar.yadav@3pillarglobal.com
+servers:
+- url: https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql
+  description: AWS AppSync GraphQL Endpoint
+- url: https://maps.geo.us-east-2.amazonaws.com
+  description: AWS Location Service (Map Tiles)
+- url: https://cognito-idp.us-east-2.amazonaws.com
+  description: AWS Cognito IDP (Auth)
+tags:
+- name: Auth
+  description: Cognito authentication — obtain IdToken
+- name: Device Queries
+  description: listDevices · getDevice · getDevicesByCustomer · getDevicesByLocation
+- name: Firmware Queries
+  description: listFirmware · getFirmware · getFirmwareByModel · getFirmwareWithRelations
+- name: ServiceOrder Queries
+  description: listServiceOrdersByStatus · listServiceOrdersByDate · getServiceOrder · getServiceOrdersByTechnician
+- name: Compliance Queries
+  description: listComplianceByStatus · getCompliance · getComplianceByCertification
+- name: AuditLog Queries
+  description: listAuditLogs · getAuditLogsByUser
+- name: User Queries
+  description: getUserByEmail · listUsersByRole · getCustomerWithRelations
+- name: Device Mutations
+  description: createDevice · updateDeviceCoords
+- name: Firmware Mutations
+  description: createFirmware · approveFirmware
+- name: ServiceOrder Mutations
+  description: createServiceOrder
+- name: Compliance Mutations
+  description: createCompliance
+- name: Status Mutations
+  description: updateEntityStatus (cross-entity)
+- name: Map Tiles (REST)
+  description: AWS Location Service — GET endpoints used by MapLibre on the Geo Location tab
+components:
+  securitySchemes:
+    CognitoIdToken:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: |-
+        Raw Cognito **IdToken** — no `Bearer` prefix.
+
+        Obtain by calling `POST /auth/login` (Cognito InitiateAuth).
+        Token expires in 1 hour.
+  responses:
+    Unauthorized:
+      description: 401 — Missing or expired Authorization token
+      content:
+        application/json:
+          example:
+            errors:
+            - message: UnauthorizedException
+    BadRequest:
+      description: 400 — GraphQL validation error or missing required argument
+      content:
+        application/json:
+          example:
+            errors:
+            - message: Validation error of type MissingFieldArgument
+  schemas:
+    GraphQLRequest:
+      type: object
+      required:
+      - operationName
+      - query
+      - variables
+      properties:
+        operationName:
+          type: string
+          description: Must exactly match the named operation in `query`
+        query:
+          type: string
+          description: Full GraphQL query or mutation document
+        variables:
+          type: object
+          description: Variable values — see each operation's example
+    GraphQLResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          nullable: true
+        errors:
+          type: array
+          items:
+            type: object
+          description: Present only when the operation failed
+    PaginatedResponse:
+      type: object
+      description: ⚠️ `items` is an AWSJSON scalar — parse it as a JSON array on the client side
+      properties:
+        items:
+          type: string
+          description: Serialised JSON array of domain objects (AWSJSON scalar)
+        nextToken:
+          type: string
+          nullable: true
+          description: Cursor for next page, null if no more pages
+        totalCount:
+          type: integer
+    DeviceType:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        deviceName:
+          type: string
+        serialNumber:
+          type: string
+        model:
+          type: string
+        status:
+          type: string
+          enum:
+          - Online
+          - Offline
+          - Maintenance
+        location:
+          type: string
+        lat:
+          type: number
+        lng:
+          type: number
+        customerId:
+          type: string
+        firmwareVersion:
+          type: string
+    FirmwareType:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        version:
+          type: string
+        deviceModel:
+          type: string
+        status:
+          type: string
+          enum:
+          - Pending
+          - Approved
+          - Rejected
+          - Deprecated
+        releaseDate:
+          type: string
+          format: date
+        fileSize:
+          type: integer
+          description: File size in bytes (Int, not Float)
+        checksum:
+          type: string
+    ServiceOrderType:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          description: ⚠️ Selecting this field in createServiceOrder response causes an enum serialization error
+        technicianId:
+          type: string
+        technicianName:
+          type: string
+        serviceType:
+          type: string
+        location:
+          type: string
+        scheduledDate:
+          type: string
+          format: date
+        scheduledTime:
+          type: string
+        priority:
+          type: string
+          enum:
+          - Low
+          - Medium
+          - High
+          - Critical
+        customerId:
+          type: string
+        createdBy:
+          type: string
+    ComplianceType:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        firmwareId:
+          type: string
+        firmwareVersion:
+          type: string
+        deviceModel:
+          type: string
+        status:
+          type: string
+          enum:
+          - Approved
+          - Pending
+          - Deprecated
+        certifications:
+          type: array
+          items:
+            type: string
+          description: ⚠️ Introspection incorrectly shows String! — must pass [String]! array
+        vulnerabilities:
+          type: integer
+    AuditLogType:
+      type: object
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        userEmail:
+          type: string
+        action:
+          type: string
+        auditStatus:
+          type: string
+        resourceType:
+          type: string
+        resourceId:
+          type: string
+    UserType:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        role:
+          type: string
+          enum:
+          - Admin
+          - Manager
+          - Technician
+        firstName:
+          type: string
+        lastName:
+          type: string
+    GeocodedDeviceType:
+      type: object
+      description: ⚠️ API catalogue incorrectly listed an 'id' field — this type has NO id field
+      properties:
+        address:
+          type: string
+        lat:
+          type: number
+        lng:
+          type: number
+        city:
+          type: string
+        country:
+          type: string
+        formattedAddress:
+          type: string
+          nullable: true
+        cachedAt:
+          type: string
+        expiresAt:
+          type: string
+paths:
+  /auth/login:
+    post:
+      operationId: cognitoLogin
+      summary: Login — Get Cognito IdToken
+      description: |-
+        Authenticates with AWS Cognito and returns an `IdToken`.
+
+        **Endpoint:** `https://cognito-idp.us-east-2.amazonaws.com/` (not the GraphQL server)
+
+        Copy the `AuthenticationResult.IdToken` value and use it as the raw `Authorization` header value on every GraphQL request — **no `Bearer` prefix**.
+
+        Client ID: `3aseu1rf3q3tae7u4dgplllii8` · Pool ID: `us-east-2_Q36YWNsEC`
+      tags:
+      - Auth
+      servers:
+      - url: https://cognito-idp.us-east-2.amazonaws.com
+        description: AWS Cognito IDP
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - AuthFlow
+              - ClientId
+              - AuthParameters
+              properties:
+                AuthFlow:
+                  type: string
+                  example: USER_PASSWORD_AUTH
+                ClientId:
+                  type: string
+                  example: 3aseu1rf3q3tae7u4dgplllii8
+                AuthParameters:
+                  type: object
+                  properties:
+                    USERNAME:
+                      type: string
+                      example: ajaykumar.yadav@3pillarglobal.com
+                    PASSWORD:
+                      type: string
+                      example: Secure@12345
+            example:
+              AuthFlow: USER_PASSWORD_AUTH
+              ClientId: 3aseu1rf3q3tae7u4dgplllii8
+              AuthParameters:
+                USERNAME: ajaykumar.yadav@3pillarglobal.com
+                PASSWORD: Secure@12345
+      parameters:
+      - in: header
+        name: Content-Type
+        required: true
+        schema:
+          type: string
+          example: application/x-amz-json-1.1
+      - in: header
+        name: X-Amz-Target
+        required: true
+        schema:
+          type: string
+          example: AWSCognitoIdentityProviderService.InitiateAuth
+      responses:
+        '200':
+          description: Authentication successful — copy IdToken into Authorization header
+          content:
+            application/json:
+              example:
+                AuthenticationResult:
+                  IdToken: <JWT — use this as Authorization header value>
+                  AccessToken: <JWT>
+                  RefreshToken: <JWT>
+                  ExpiresIn: 3600
+                  TokenType: Bearer
+        '400':
+          description: Invalid credentials or missing parameters
+  /graphql/queries/listDevices:
+    post:
+      operationId: listDevices
+      summary: List devices (optional status filter)
+      description: |-
+        Returns all devices or filters by `status`.
+
+        **Live results:** All=12, Online=6, Offline=3, Maintenance=3
+
+        **Status values:** `Online` | `Offline` | `Maintenance`
+        Omit `status` to return all records.
+      tags:
+      - Device Queries
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: listDevices
+              query: |-
+                query listDevices($status: String, $limit: Int, $nextToken: String) {
+                  listDevices(status: $status, limit: $limit, nextToken: $nextToken) {
+                    items
+                    nextToken
+                    totalCount
+                  }
+                }
+              variables: {}
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  listDevices:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/queries/listDevices/online:
+    post:
+      operationId: listDevices
+      summary: listDevices — Online filter
+      description: 'Filter devices by Online status. Confirmed totalCount: 6.'
+      tags:
+      - Device Queries
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: listDevices
+              query: |-
+                query listDevices($status: String, $limit: Int, $nextToken: String) {
+                  listDevices(status: $status, limit: $limit, nextToken: $nextToken) {
+                    items
+                    nextToken
+                    totalCount
+                  }
+                }
+              variables:
+                status: Online
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  listDevices:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/queries/listDevices/offline:
+    post:
+      operationId: listDevices
+      summary: listDevices — Offline filter
+      description: 'Filter devices by Offline status. Confirmed totalCount: 3.'
+      tags:
+      - Device Queries
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: listDevices
+              query: |-
+                query listDevices($status: String, $limit: Int, $nextToken: String) {
+                  listDevices(status: $status, limit: $limit, nextToken: $nextToken) {
+                    items
+                    nextToken
+                    totalCount
+                  }
+                }
+              variables:
+                status: Offline
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  listDevices:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/queries/listDevices/maintenance:
+    post:
+      operationId: listDevices
+      summary: listDevices — Maintenance filter
+      description: 'Filter devices by Maintenance status. Confirmed totalCount: 3.'
+      tags:
+      - Device Queries
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: listDevices
+              query: |-
+                query listDevices($status: String, $limit: Int, $nextToken: String) {
+                  listDevices(status: $status, limit: $limit, nextToken: $nextToken) {
+                    items
+                    nextToken
+                    totalCount
+                  }
+                }
+              variables:
+                status: Maintenance
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  listDevices:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/queries/getDevice:
+    post:
+      operationId: getDevice
+      summary: Get device by ID
+      description: Fetch a single device record by its unique ID. Returns null for non-existent IDs.
+      tags:
+      - Device Queries
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: getDevice
+              query: |-
+                query getDevice($id: String!) {
+                  getDevice(id: $id) {
+                    id
+                    deviceName
+                    serialNumber
+                    model
+                    status
+                    location
+                    firmwareVersion
+                  }
+                }
+              variables:
+                id: a11bc9b9-ba1e-4e1f-8523-45cd003a6845
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  getDevice:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/queries/getDevicesByCustomer:
+    post:
+      operationId: getDevicesByCustomer
+      summary: Get devices by customer
+      description: |-
+        All devices for a customer account.
+
+        **Note:** Demo customer IDs are c001–c005.
+        Live test: c001 returned totalCount=0 (no devices mapped in demo data).
+      tags:
+      - Device Queries
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: getDevicesByCustomer
+              query: |-
+                query getDevicesByCustomer($customerId: String!) {
+                  getDevicesByCustomer(customerId: $customerId) {
+                    items
+                    totalCount
+                  }
+                }
+              variables:
+                customerId: c001
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  getDevicesByCustomer:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/queries/getDevicesByLocation:
+    post:
+      operationId: getDevicesByLocation
+      summary: Get devices by location
+      description: All devices at a named location. `location` must exactly match the string stored on the device record.
+      tags:
+      - Device Queries
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: getDevicesByLocation
+              query: |-
+                query getDevicesByLocation($location: String!) {
+                  getDevicesByLocation(location: $location) {
+                    items
+                    totalCount
+                  }
+                }
+              variables:
+                location: New York Office
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  getDevicesByLocation:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/queries/listFirmware:
+    post:
+      operationId: listFirmware
+      summary: List firmware (optional status filter)
+      description: |-
+        All firmware or filtered by status.
+
+        **Live results:** All=9, Pending=2, Approved=2, Rejected=1
+
+        **Status values:** `Pending` | `Approved` | `Rejected` | `Deprecated`
+      tags:
+      - Firmware Queries
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: listFirmware
+              query: |-
+                query listFirmware($status: String, $limit: Int, $nextToken: String) {
+                  listFirmware(status: $status, limit: $limit, nextToken: $nextToken) {
+                    items
+                    nextToken
+                    totalCount
+                  }
+                }
+              variables: {}
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  listFirmware:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/queries/listFirmware/deprecated:
+    post:
+      operationId: listFirmware
+      summary: listFirmware — Deprecated filter ⚠️ BUG
+      description: |-
+        ⚠️ **KNOWN BUG — Deprecated filter not applied server-side**
+
+        Passing `status: Deprecated` returns ALL firmware records — filter is not applied server-side.
+
+        **Live test:** totalCount=4 returned (not just deprecated records).
+        **Workaround:** Filter client-side after fetching all records.
+      tags:
+      - Firmware Queries
+      deprecated: true
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: listFirmware
+              query: |-
+                query listFirmware($status: String, $limit: Int, $nextToken: String) {
+                  listFirmware(status: $status, limit: $limit, nextToken: $nextToken) {
+                    items
+                    nextToken
+                    totalCount
+                  }
+                }
+              variables:
+                status: Deprecated
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  listFirmware:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/queries/getFirmware:
+    post:
+      operationId: getFirmware
+      summary: Get firmware by ID
+      description: Single firmware record. `fileSize` is `Int` (bytes, not Float).
+      tags:
+      - Firmware Queries
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: getFirmware
+              query: |-
+                query getFirmware($id: String!) {
+                  getFirmware(id: $id) {
+                    id
+                    name
+                    version
+                    deviceModel
+                    status
+                    releaseDate
+                    fileSize
+                    checksum
+                  }
+                }
+              variables:
+                id: 94688ba5-81b0-4c73-9f2a-5923f0b4b256
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  getFirmware:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/queries/getFirmwareByModel:
+    post:
+      operationId: getFirmwareByModel
+      summary: Get firmware by device model
+      description: 'All firmware versions for a given device model. Confirmed: XR-5000 → totalCount=3.'
+      tags:
+      - Firmware Queries
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: getFirmwareByModel
+              query: |-
+                query getFirmwareByModel($deviceModel: String!) {
+                  getFirmwareByModel(deviceModel: $deviceModel) {
+                    items
+                    totalCount
+                  }
+                }
+              variables:
+                deviceModel: XR-5000
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  getFirmwareByModel:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/queries/getFirmwareWithRelations:
+    post:
+      operationId: getFirmwareWithRelations
+      summary: Get firmware with related records
+      description: Firmware + related compliance records + audit log entries — all returned as nested AWSJSON inside `items`.
+        Parse client-side.
+      tags:
+      - Firmware Queries
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: getFirmwareWithRelations
+              query: |-
+                query getFirmwareWithRelations($id: String!) {
+                  getFirmwareWithRelations(id: $id) {
+                    items
+                    totalCount
+                  }
+                }
+              variables:
+                id: 94688ba5-81b0-4c73-9f2a-5923f0b4b256
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  getFirmwareWithRelations:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/queries/listServiceOrdersByStatus:
+    post:
+      operationId: listServiceOrdersByStatus
+      summary: List service orders by status
+      description: |-
+        Filter service orders by workflow status.
+
+        **Status values:** `Pending` | `In Progress` | `Completed` | `Cancelled`
+
+        **Live results:** Pending=0, In Progress=0, Completed=2, Cancelled=1
+      tags:
+      - ServiceOrder Queries
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: listServiceOrdersByStatus
+              query: |-
+                query listServiceOrdersByStatus($status: String!) {
+                  listServiceOrdersByStatus(status: $status) {
+                    items
+                    totalCount
+                  }
+                }
+              variables:
+                status: Pending
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  listServiceOrdersByStatus:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/queries/listServiceOrdersByDate:
+    post:
+      operationId: listServiceOrdersByDate
+      summary: List service orders by date range
+      description: |-
+        Service orders within a date range (ISO 8601 strings).
+
+        - Valid range → returns matching records (2025–2026 returned totalCount=9)
+        - Future range → returns empty array (totalCount=0)
+        - **Reversed range (end < start) → throws raw DynamoDB BETWEEN error (400)** ⚠️
+      tags:
+      - ServiceOrder Queries
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: listServiceOrdersByDate
+              query: |-
+                query listServiceOrdersByDate($startDate: String!, $endDate: String!) {
+                  listServiceOrdersByDate(startDate: $startDate, endDate: $endDate) {
+                    items
+                    totalCount
+                  }
+                }
+              variables:
+                startDate: '2025-01-01'
+                endDate: '2026-12-31'
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  listServiceOrdersByDate:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/queries/listServiceOrdersByDate/reversed:
+    post:
+      operationId: listServiceOrdersByDate
+      summary: listServiceOrdersByDate — Reversed range ⚠️ BUG
+      description: |-
+        ⚠️ **NEW BUG — Reversed range throws DynamoDB 400 error**
+
+        **NEW BUG (found during live testing):** Reversed range (end < start) throws a raw DynamoDB error instead of returning an empty array.
+
+        Error: `Invalid KeyConditionExpression: The BETWEEN operator requires upper bound >= lower bound`
+
+        API catalogue incorrectly stated this returns an empty array.
+      tags:
+      - ServiceOrder Queries
+      deprecated: true
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: listServiceOrdersByDate
+              query: |-
+                query listServiceOrdersByDate($startDate: String!, $endDate: String!) {
+                  listServiceOrdersByDate(startDate: $startDate, endDate: $endDate) {
+                    items
+                    totalCount
+                  }
+                }
+              variables:
+                startDate: '2026-12-31'
+                endDate: '2025-01-01'
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  listServiceOrdersByDate:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/queries/getServiceOrder:
+    post:
+      operationId: getServiceOrder
+      summary: Get service order by ID
+      description: 'Single service order record. Sample: ''Core Switch Firmware Upgrade'' (Completed).'
+      tags:
+      - ServiceOrder Queries
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: getServiceOrder
+              query: |-
+                query getServiceOrder($id: String!) {
+                  getServiceOrder(id: $id) {
+                    id
+                    title
+                    description
+                    status
+                    priority
+                    technicianId
+                    scheduledDate
+                  }
+                }
+              variables:
+                id: acf1df53-cf21-476d-9410-251efbf04b37
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  getServiceOrder:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/queries/getServiceOrdersByTechnician:
+    post:
+      operationId: getServiceOrdersByTechnician
+      summary: Get service orders by technician
+      description: 'All service orders assigned to a technician. Confirmed: u003 (Carol) → totalCount=5.'
+      tags:
+      - ServiceOrder Queries
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: getServiceOrdersByTechnician
+              query: |-
+                query getServiceOrdersByTechnician($technicianId: String!) {
+                  getServiceOrdersByTechnician(technicianId: $technicianId) {
+                    items
+                    totalCount
+                  }
+                }
+              variables:
+                technicianId: u003
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  getServiceOrdersByTechnician:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/queries/listComplianceByStatus:
+    post:
+      operationId: listComplianceByStatus
+      summary: List compliance records by status
+      description: |-
+        Filter compliance records by certification status.
+
+        **Status values:** `Approved` | `Pending` | `Deprecated`
+
+        **Live results:** Approved=5, Pending=2, Deprecated=0
+      tags:
+      - Compliance Queries
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: listComplianceByStatus
+              query: |-
+                query listComplianceByStatus($status: String!) {
+                  listComplianceByStatus(status: $status) {
+                    items
+                    totalCount
+                  }
+                }
+              variables:
+                status: Approved
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  listComplianceByStatus:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/queries/getCompliance:
+    post:
+      operationId: getCompliance
+      summary: Get compliance record by ID
+      description: Single compliance record. `certifications` is returned as an array.
+      tags:
+      - Compliance Queries
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: getCompliance
+              query: |-
+                query getCompliance($id: String!) {
+                  getCompliance(id: $id) {
+                    id
+                    firmwareId
+                    firmwareVersion
+                    deviceModel
+                    status
+                    certifications
+                    vulnerabilities
+                  }
+                }
+              variables:
+                id: c1ef0b2f-0ef2-49e8-8aa9-86ca9ee21401
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  getCompliance:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/queries/getComplianceByCertification:
+    post:
+      operationId: getComplianceByCertification
+      summary: Get compliance by certification
+      description: |-
+        Filter by certification standard.
+
+        **Known certifications:** `HIPAA` | `ISO 27001` | `FCC` | `WiFi Alliance` | `CE`
+
+        **Live results:** HIPAA=1, ISO 27001=2, FCC=1, CE=1
+        Note: WiFi Alliance returns no `totalCount` field in response.
+      tags:
+      - Compliance Queries
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: getComplianceByCertification
+              query: |-
+                query getComplianceByCertification($certification: String!) {
+                  getComplianceByCertification(certification: $certification) {
+                    items
+                    totalCount
+                  }
+                }
+              variables:
+                certification: HIPAA
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  getComplianceByCertification:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/queries/listAuditLogs:
+    post:
+      operationId: listAuditLogs
+      summary: List audit logs by date range
+      description: |-
+        Audit log entries within a time window (ISO 8601 strings).
+
+        - Dashboard uses 24-hour window
+        - Deployment Audit Log uses `limit: 50`
+        - Future date range → returns empty array
+
+        **Live results:** Broad 2025–2026 range with limit=50 → totalCount=50
+      tags:
+      - AuditLog Queries
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: listAuditLogs
+              query: |-
+                query listAuditLogs($startDate: String!, $endDate: String!, $limit: Int) {
+                  listAuditLogs(startDate: $startDate, endDate: $endDate, limit: $limit) {
+                    items
+                    nextToken
+                    totalCount
+                  }
+                }
+              variables:
+                startDate: '2025-01-01'
+                endDate: '2026-12-31'
+                limit: 50
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  listAuditLogs:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/queries/getAuditLogsByUser:
+    post:
+      operationId: getAuditLogsByUser
+      summary: Get audit logs by user
+      description: |-
+        Audit trail for a specific user.
+
+        **Live results:** u001 (Alice)=4, u002 (Bob)=2, u003 (Carol)=1
+      tags:
+      - AuditLog Queries
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: getAuditLogsByUser
+              query: |-
+                query getAuditLogsByUser($userId: String!) {
+                  getAuditLogsByUser(userId: $userId) {
+                    items
+                    totalCount
+                  }
+                }
+              variables:
+                userId: u001
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  getAuditLogsByUser:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/queries/getUserByEmail:
+    post:
+      operationId: getUserByEmail
+      summary: Get user by email
+      description: |-
+        Look up a user profile by email address. Called on every page load for session init.
+
+        Returns `null` if the email exists in Cognito but not in the application DB.
+
+        **Live results:**
+        - alice@acmecorp.com → id: u001 ✅
+        - carol@acmecorp.com → id: u003 ✅
+        - bob@acmecorp.com → **null** ⚠️ (Bob exists in Cognito but not in app DB)
+      tags:
+      - User Queries
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: getUserByEmail
+              query: |-
+                query getUserByEmail($email: String!) {
+                  getUserByEmail(email: $email) {
+                    id
+                    email
+                    role
+                    firstName
+                    lastName
+                  }
+                }
+              variables:
+                email: alice@acmecorp.com
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  getUserByEmail:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/queries/listUsersByRole:
+    post:
+      operationId: listUsersByRole
+      summary: List users by role ⚠️ BUG
+      description: |-
+        ⚠️ **KNOWN BUG — role filter not applied server-side**
+
+        **KNOWN BUG CONFIRMED:** `role` filter is NOT applied server-side.
+
+        Passing any value — including `GARBAGE_ROLE` — returns ALL users (totalCount=5).
+
+        **Workaround:** Filter client-side after fetching all records.
+      tags:
+      - User Queries
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: listUsersByRole
+              query: |-
+                query listUsersByRole($role: String!) {
+                  listUsersByRole(role: $role) {
+                    items
+                    totalCount
+                  }
+                }
+              variables:
+                role: Technician
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  listUsersByRole:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/queries/getCustomerWithRelations:
+    post:
+      operationId: getCustomerWithRelations
+      summary: Get customer with related devices and orders
+      description: |-
+        Customer record + all related devices + service orders, nested inside `items` AWSJSON. Parse client-side.
+
+        Demo customer IDs: `c001` – `c005`
+      tags:
+      - User Queries
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: getCustomerWithRelations
+              query: |-
+                query getCustomerWithRelations($customerId: String!) {
+                  getCustomerWithRelations(customerId: $customerId) {
+                    items
+                    totalCount
+                  }
+                }
+              variables:
+                customerId: c001
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  getCustomerWithRelations:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/mutations/createDevice:
+    post:
+      operationId: createDevice
+      summary: Create a new device
+      description: |-
+        Register a new device. New devices default to Online status.
+
+        **Required fields confirmed via live testing (not in original docs):**
+        `location`, `status`, `firmwareVersion`, `customerId`
+
+        **Live test:** PASS — id: `dc912136-7b56-4b8e-98ea-ec01a3b201bf`
+      tags:
+      - Device Mutations
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: createDevice
+              query: |-
+                mutation createDevice(
+                  $deviceName: String!
+                  $serialNumber: String!
+                  $model: String!
+                  $location: String!
+                  $status: String!
+                  $firmwareVersion: String!
+                  $customerId: String!
+                  $manufacturer: String
+                  $firmwareId: String
+                  $healthScore: Int
+                ) {
+                  createDevice(
+                    deviceName: $deviceName
+                    serialNumber: $serialNumber
+                    model: $model
+                    location: $location
+                    status: $status
+                    firmwareVersion: $firmwareVersion
+                    customerId: $customerId
+                    manufacturer: $manufacturer
+                    firmwareId: $firmwareId
+                    healthScore: $healthScore
+                  ) {
+                    id
+                    deviceName
+                    serialNumber
+                    status
+                  }
+                }
+              variables:
+                deviceName: QA-TEST-Device-01
+                serialNumber: SN-QA-001
+                model: XR-5000
+                location: QA Lab
+                status: Online
+                firmwareVersion: 1.0.0
+                customerId: c001
+                manufacturer: Acme Corp
+                healthScore: 85
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  createDevice:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/mutations/updateDeviceCoords:
+    post:
+      operationId: updateDeviceCoords
+      summary: Update device GPS coordinates
+      description: |-
+        Update GPS coordinates for a device.
+
+        **Required fields confirmed via live testing (not in original docs):**
+        `city`, `country`
+
+        **⚠️ Return type correction:** `GeocodedDeviceType` has NO `id` field — API catalogue was wrong.
+        Return fields: `address`, `lat`, `lng`, `city`, `country`, `formattedAddress`, `cachedAt`, `expiresAt`
+
+        **Live test:** PASS — lat=40.7484, lng=-73.9967
+      tags:
+      - Device Mutations
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: updateDeviceCoords
+              query: |-
+                mutation updateDeviceCoords(
+                  $address: String!
+                  $lat: Float!
+                  $lng: Float!
+                  $city: String!
+                  $country: String!
+                  $formattedAddress: String
+                ) {
+                  updateDeviceCoords(
+                    address: $address
+                    lat: $lat
+                    lng: $lng
+                    city: $city
+                    country: $country
+                    formattedAddress: $formattedAddress
+                  ) {
+                    address
+                    lat
+                    lng
+                    city
+                    country
+                    formattedAddress
+                    cachedAt
+                    expiresAt
+                  }
+                }
+              variables:
+                address: 350 Fifth Avenue, New York, NY 10118
+                lat: 40.7484
+                lng: -73.9967
+                city: New York
+                country: USA
+                formattedAddress: 350 Fifth Ave, New York, NY 10118, USA
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  updateDeviceCoords:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/mutations/createFirmware:
+    post:
+      operationId: createFirmware
+      summary: Upload and register new firmware
+      description: |-
+        Register a new firmware package. Defaults to `Pending` status.
+
+        **Required fields confirmed via live testing (not in original docs):**
+        `releaseDate`, `fileName`, `fileSizeFormatted`, `uploadedBy`, `s3Key`, `s3Bucket`
+
+        **Note:** `fileSize` is `Int` (bytes), not Float.
+
+        **Live test:** PASS — id: `adbfccd8-7f36-4b1c-a35f-0eed4a7b623c`, status: Pending
+      tags:
+      - Firmware Mutations
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: createFirmware
+              query: |-
+                mutation createFirmware(
+                  $name: String!
+                  $version: String!
+                  $deviceModel: String!
+                  $releaseDate: String!
+                  $fileName: String!
+                  $fileSize: Int!
+                  $fileSizeFormatted: String!
+                  $checksum: String!
+                  $uploadedBy: String!
+                  $s3Key: String!
+                  $s3Bucket: String!
+                  $manufacturer: String
+                  $checksumAlgorithm: String
+                  $releaseNotes: String
+                ) {
+                  createFirmware(
+                    name: $name
+                    version: $version
+                    deviceModel: $deviceModel
+                    releaseDate: $releaseDate
+                    fileName: $fileName
+                    fileSize: $fileSize
+                    fileSizeFormatted: $fileSizeFormatted
+                    checksum: $checksum
+                    uploadedBy: $uploadedBy
+                    s3Key: $s3Key
+                    s3Bucket: $s3Bucket
+                    manufacturer: $manufacturer
+                    checksumAlgorithm: $checksumAlgorithm
+                    releaseNotes: $releaseNotes
+                  ) {
+                    id
+                    name
+                    version
+                    deviceModel
+                    status
+                  }
+                }
+              variables:
+                name: QA-TEST Firmware v9.9
+                version: 9.9.0
+                deviceModel: XR-5000
+                releaseDate: '2026-03-27'
+                fileName: qa-fw-9.9.0.bin
+                fileSize: 1024000
+                fileSizeFormatted: 1000 KB
+                checksum: sha256:abc123
+                uploadedBy: u001
+                s3Key: firmware/qa-fw-9.9.0.bin
+                s3Bucket: hlm-firmware-bucket
+                checksumAlgorithm: SHA-256
+                releaseNotes: QA test build
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  createFirmware:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/mutations/approveFirmware:
+    post:
+      operationId: approveFirmware
+      summary: Approve firmware (Pending → Approved)
+      description: |-
+        Approve a firmware package for deployment.
+
+        **Required fields confirmed via live testing (not in original docs):**
+        Parameter is `firmwareId` (not `id`) + `approvedBy`
+
+        **Live test:** PASS — firmware `94688ba5` changed to Approved
+      tags:
+      - Firmware Mutations
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: approveFirmware
+              query: |-
+                mutation approveFirmware($firmwareId: String!, $approvedBy: String!) {
+                  approveFirmware(firmwareId: $firmwareId, approvedBy: $approvedBy) {
+                    id
+                    name
+                    status
+                  }
+                }
+              variables:
+                firmwareId: 94688ba5-81b0-4c73-9f2a-5923f0b4b256
+                approvedBy: u001
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  approveFirmware:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/mutations/createServiceOrder:
+    post:
+      operationId: createServiceOrder
+      summary: Create a new service order
+      description: |-
+        Create a service / maintenance ticket. New orders default to `Pending` status.
+
+        **Required fields confirmed via live testing (not in original docs):**
+        `technicianId`, `technicianName`, `serviceType`, `location`, `scheduledDate`,
+        `scheduledTime`, `priority`, `customerId`, `createdBy`
+
+        **⚠️ Do NOT select `status` in response** — causes enum serialization error.
+
+        **Live test:** PASS — id: `e6f719af-45af-4981-ac7f-e73221bc8bb4`
+      tags:
+      - ServiceOrder Mutations
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: createServiceOrder
+              query: |-
+                mutation createServiceOrder(
+                  $title: String!
+                  $technicianId: String!
+                  $technicianName: String!
+                  $serviceType: String!
+                  $location: String!
+                  $scheduledDate: String!
+                  $scheduledTime: String!
+                  $priority: String!
+                  $customerId: String!
+                  $createdBy: String!
+                  $description: String
+                  $deviceIds: String
+                ) {
+                  createServiceOrder(
+                    title: $title
+                    technicianId: $technicianId
+                    technicianName: $technicianName
+                    serviceType: $serviceType
+                    location: $location
+                    scheduledDate: $scheduledDate
+                    scheduledTime: $scheduledTime
+                    priority: $priority
+                    customerId: $customerId
+                    createdBy: $createdBy
+                    description: $description
+                    deviceIds: $deviceIds
+                  ) {
+                    id
+                    title
+                    priority
+                    technicianId
+                  }
+                }
+              variables:
+                title: QA-TEST Service Order
+                description: Manual QA test
+                technicianId: u003
+                technicianName: Carol Smith
+                serviceType: Maintenance
+                location: QA Lab
+                scheduledDate: '2026-04-01'
+                scheduledTime: 09:00
+                priority: Low
+                customerId: c001
+                createdBy: u001
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  createServiceOrder:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/mutations/createCompliance:
+    post:
+      operationId: createCompliance
+      summary: Submit firmware for compliance review
+      description: |-
+        Submit a firmware version for compliance certification review. Defaults to `Pending` status.
+
+        **Required fields confirmed via live testing (not in original docs):**
+        `submittedBy`, `submittedByName`
+
+        **⚠️ Schema discrepancy:** Introspection shows `certifications` as `String!` but runtime requires `[String]!` (array). Always pass an array of strings.
+
+        **Live test:** PASS — id: `cceeac67-44fa-48c1-b3b4-b1692e8e1099`, certs: [HIPAA, FCC]
+      tags:
+      - Compliance Mutations
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: createCompliance
+              query: |-
+                mutation createCompliance(
+                  $firmwareId: String!
+                  $firmwareVersion: String!
+                  $deviceModel: String!
+                  $submittedBy: String!
+                  $submittedByName: String!
+                  $certifications: [String]!
+                  $vulnerabilities: AWSJSON
+                  $totalVulnerabilities: Int
+                  $complianceNotes: String
+                ) {
+                  createCompliance(
+                    firmwareId: $firmwareId
+                    firmwareVersion: $firmwareVersion
+                    deviceModel: $deviceModel
+                    submittedBy: $submittedBy
+                    submittedByName: $submittedByName
+                    certifications: $certifications
+                    vulnerabilities: $vulnerabilities
+                    totalVulnerabilities: $totalVulnerabilities
+                    complianceNotes: $complianceNotes
+                  ) {
+                    id
+                    firmwareId
+                    certifications
+                  }
+                }
+              variables:
+                firmwareId: 94688ba5-81b0-4c73-9f2a-5923f0b4b256
+                firmwareVersion: 2.1.0
+                deviceModel: XR-5000
+                submittedBy: u001
+                submittedByName: Alice Turner
+                certifications:
+                - HIPAA
+                - FCC
+                totalVulnerabilities: 0
+                complianceNotes: QA test submission
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  createCompliance:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/mutations/updateEntityStatus:
+    post:
+      operationId: updateEntityStatus
+      summary: Update entity status (cross-entity)
+      description: |-
+        Generic status-transition mutation for firmware and compliance records.
+
+        **entityType values:** `firmware` | `compliance`
+
+        Returns raw AWSJSON of the updated DynamoDB record.
+      tags:
+      - Status Mutations
+      deprecated: false
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: updateEntityStatus
+              query: |-
+                mutation updateEntityStatus(
+                  $entityType: String!
+                  $id: String!
+                  $newStatus: String!
+                  $updatedBy: String
+                ) {
+                  updateEntityStatus(
+                    entityType: $entityType
+                    id: $id
+                    newStatus: $newStatus
+                    updatedBy: $updatedBy
+                  )
+                }
+              variables:
+                entityType: firmware
+                id: 94688ba5-81b0-4c73-9f2a-5923f0b4b256
+                newStatus: Approved
+                updatedBy: u001
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  updateEntityStatus:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/mutations/updateEntityStatus/bug-noValidation:
+    post:
+      operationId: updateEntityStatus
+      summary: updateEntityStatus — No status validation ⚠️ BUG
+      description: |-
+        ⚠️ **KNOWN BUG — Any string accepted as newStatus**
+
+        **KNOWN BUG CONFIRMED:** No server-side enum validation on `newStatus`.
+
+        Passing `GARBAGE_VALUE` returns HTTP 200 and the value is persisted in DynamoDB.
+
+        **Live test:** `status: GARBAGE_VALUE` was written successfully.
+      tags:
+      - Status Mutations
+      deprecated: true
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: updateEntityStatus
+              query: |-
+                mutation updateEntityStatus(
+                  $entityType: String!
+                  $id: String!
+                  $newStatus: String!
+                  $updatedBy: String
+                ) {
+                  updateEntityStatus(
+                    entityType: $entityType
+                    id: $id
+                    newStatus: $newStatus
+                    updatedBy: $updatedBy
+                  )
+                }
+              variables:
+                entityType: firmware
+                id: 98910328-e3cb-4d03-8690-5212c30ccece
+                newStatus: GARBAGE_VALUE
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  updateEntityStatus:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /graphql/mutations/updateEntityStatus/bug-upsert:
+    post:
+      operationId: updateEntityStatus
+      summary: updateEntityStatus — Non-existent ID upsert ⚠️ BUG
+      description: |-
+        ⚠️ **KNOWN BUG — Non-existent ID creates phantom record**
+
+        **KNOWN BUG CONFIRMED:** No existence check on `id`.
+
+        Non-existent UUID returns HTTP 200 and creates a phantom record (upsert behaviour).
+
+        **Live test:** `00000000-0000-0000-0000-000000000000` was created with status `Approved`.
+      tags:
+      - Status Mutations
+      deprecated: true
+      security:
+      - CognitoIdToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            example:
+              operationName: updateEntityStatus
+              query: |-
+                mutation updateEntityStatus(
+                  $entityType: String!
+                  $id: String!
+                  $newStatus: String!
+                  $updatedBy: String
+                ) {
+                  updateEntityStatus(
+                    entityType: $entityType
+                    id: $id
+                    newStatus: $newStatus
+                    updatedBy: $updatedBy
+                  )
+                }
+              variables:
+                entityType: firmware
+                id: 00000000-0000-0000-0000-000000000000
+                newStatus: Approved
+      responses:
+        '200':
+          description: Successful GraphQL response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+              example:
+                data:
+                  updateEntityStatus:
+                    items: '[]'
+                    totalCount: 0
+                    nextToken: null
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /maps/v0/maps/HlmMapOpenData-a3b4d250-131a-11f1-90d8-0aa113e32f65/style-descriptor:
+    get:
+      operationId: getMapStyleDescriptor
+      summary: Get map style descriptor
+      description: |-
+        Fetch map style JSON (colours, layers, fonts). Called once on map init by MapLibre SDK.
+
+        Auth: AWS Signature v4 via Amplify session credentials (added automatically by the SDK).
+      tags:
+      - Map Tiles (REST)
+      servers:
+      - url: https://maps.geo.us-east-2.amazonaws.com
+        description: AWS Location Service
+      responses:
+        '200':
+          description: Style JSON
+        '403':
+          description: Invalid AWS credentials
+  /maps/v0/maps/HlmMapOpenData-a3b4d250-131a-11f1-90d8-0aa113e32f65/sprites/sprites@2x.png:
+    get:
+      operationId: getMapSpritePng
+      summary: Get map icon sprite sheet (PNG)
+      description: 'Icon sprite sheet image for map symbols. Auth: AWS Signature v4.'
+      tags:
+      - Map Tiles (REST)
+      servers:
+      - url: https://maps.geo.us-east-2.amazonaws.com
+        description: AWS Location Service
+      responses:
+        '200':
+          description: PNG image
+  /maps/v0/maps/HlmMapOpenData-a3b4d250-131a-11f1-90d8-0aa113e32f65/sprites/sprites@2x.json:
+    get:
+      operationId: getMapSpriteJson
+      summary: Get map icon sprite metadata (JSON)
+      description: 'Icon sprite coordinate metadata. Used alongside the sprite PNG. Auth: AWS Signature v4.'
+      tags:
+      - Map Tiles (REST)
+      servers:
+      - url: https://maps.geo.us-east-2.amazonaws.com
+        description: AWS Location Service
+      responses:
+        '200':
+          description: Sprite metadata JSON
+  /maps/v0/maps/HlmMapOpenData-a3b4d250-131a-11f1-90d8-0aa113e32f65/tiles/{z}/{x}/{y}:
+    get:
+      operationId: getMapTile
+      summary: Get vector map tile
+      description: 'Vector map tile at z/x/y coordinates. Loaded by MapLibre on every pan/zoom. Auth: AWS Signature v4.'
+      tags:
+      - Map Tiles (REST)
+      servers:
+      - url: https://maps.geo.us-east-2.amazonaws.com
+        description: AWS Location Service
+      parameters:
+      - name: z
+        in: path
+        required: true
+        description: Zoom level (e.g. 7)
+        schema:
+          type: integer
+          example: 7
+      - name: x
+        in: path
+        required: true
+        description: Tile column
+        schema:
+          type: integer
+          example: 35
+      - name: y
+        in: path
+        required: true
+        description: Tile row
+        schema:
+          type: integer
+          example: 48
+      responses:
+        '200':
+          description: Vector tile data

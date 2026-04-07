@@ -60,8 +60,13 @@
                 </dependencies>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
+                    <environmentVariables>
+                        <!-- Skip Playwright browser download; pre-installed browser path is
+                             configured via browser.executable.path in application-local.properties -->
+                        <PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD>1</PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD>
+                    </environmentVariables>
                 </configuration>
             </plugin>
         </plugins>

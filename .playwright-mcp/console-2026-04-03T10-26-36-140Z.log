@@ -1,0 +1,2 @@
+[     804ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://main.dddsig2mih3hw.amplifyapp.com/compliance/:0
+[     823ms] [WARNING] Amplify has not been configured. Please call Amplify.configure() before using this service. @ https://main.dddsig2mih3hw.amplifyapp.com/assets/index-D0jrZ7Z6.js:41

@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Inventory Management – Dashboard Recent Alerts Tests" verbose="2" thread-count="1">
+
+    <parameter name="report-name" value="Dashboard-Alerts-Report"/>
+
+    <test name="Dashboard Recent Alerts Tests">
+        <classes>
+            <class name="com.tpg.automation.inventory.DashboardAlertsTests"/>
+        </classes>
+    </test>
+
+</suite>

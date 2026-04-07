@@ -80,8 +80,23 @@ public abstract class InventoryTestBase extends NovusGuiTestBase {
 
         log.step("Wait for Dashboard to load after login");
         if (!user.is(Waiting.on(DashboardPage.DASHBOARD_HEADER).within(30))) {
-            throw new IllegalStateException("Login failed — dashboard not visible after 30 s. " +
-                    "Check credentials in application-inventory.properties or application availability.");
+            log.step("Dashboard not visible — network or load error detected; refreshing browser and retrying");
+            browser.reload();
+            if (!user.is(Waiting.on(DashboardPage.DASHBOARD_HEADER).within(30))) {
+                throw new IllegalStateException("Login failed — dashboard not visible after 30 s + 1 reload retry. " +
+                        "Check credentials in application-inventory.properties or application availability.");
+            }
+            log.step("Dashboard loaded successfully after browser refresh");
+        }
+
+        log.step("Check for 'Unknown error' or network error banner on dashboard after login");
+        if (user.is(Waiting.on(DashboardPage.ErrorBanner.CONTAINER).within(5))) {
+            log.step("Error banner detected on dashboard (Unknown error / network error) — refreshing browser to recover");
+            browser.reload();
+            if (!user.is(Waiting.on(DashboardPage.DASHBOARD_HEADER).within(30))) {
+                throw new IllegalStateException("Dashboard did not recover after reload — error banner was present and reload failed.");
+            }
+            log.step("Dashboard reloaded cleanly — error banner cleared");
         }
     }
 }

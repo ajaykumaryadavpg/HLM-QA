@@ -1,0 +1,4 @@
+[     801ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://main.dddsig2mih3hw.amplifyapp.com/dashboard/:0
+[     817ms] [WARNING] Amplify has not been configured. Please call Amplify.configure() before using this service. @ https://main.dddsig2mih3hw.amplifyapp.com/assets/index-BvpK9A09.js:41
+[     836ms] [WARNING] No routes matched location "/dashboard/"  @ https://main.dddsig2mih3hw.amplifyapp.com/assets/index-BvpK9A09.js:63
+[     837ms] [ERROR] Error handled by React Router default ErrorBoundary: Tb @ https://main.dddsig2mih3hw.amplifyapp.com/assets/index-BvpK9A09.js:66

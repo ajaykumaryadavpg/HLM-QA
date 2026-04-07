@@ -1,0 +1,25 @@
+[     596ms] [WARNING] Amplify has not been configured. Please call Amplify.configure() before using this service. @ https://main.dddsig2mih3hw.amplifyapp.com/assets/index-D5lKOSsc.js:41
+[ 7266009ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://cognito-idp.us-east-2.amazonaws.com/:0
+[ 7266238ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://cognito-idp.us-east-2.amazonaws.com/:0
+[ 7266698ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://cognito-idp.us-east-2.amazonaws.com/:0
+[ 7323296ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://cognito-idp.us-east-2.amazonaws.com/:0
+[ 7323550ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://cognito-idp.us-east-2.amazonaws.com/:0
+[ 7324003ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://cognito-idp.us-east-2.amazonaws.com/:0
+[ 7383303ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://cognito-idp.us-east-2.amazonaws.com/:0
+[ 7383527ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://cognito-idp.us-east-2.amazonaws.com/:0
+[ 7383945ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://cognito-idp.us-east-2.amazonaws.com/:0
+[ 7443302ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://cognito-idp.us-east-2.amazonaws.com/:0
+[ 7443570ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://cognito-idp.us-east-2.amazonaws.com/:0
+[ 7444050ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://cognito-idp.us-east-2.amazonaws.com/:0
+[ 7503321ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://cognito-idp.us-east-2.amazonaws.com/:0
+[ 7503543ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://cognito-idp.us-east-2.amazonaws.com/:0
+[ 7503989ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://cognito-idp.us-east-2.amazonaws.com/:0
+[ 7563304ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://cognito-idp.us-east-2.amazonaws.com/:0
+[ 7563562ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://cognito-idp.us-east-2.amazonaws.com/:0
+[ 7564037ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://cognito-idp.us-east-2.amazonaws.com/:0
+[ 7623314ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://cognito-idp.us-east-2.amazonaws.com/:0
+[ 7623598ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://cognito-idp.us-east-2.amazonaws.com/:0
+[ 7624048ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://cognito-idp.us-east-2.amazonaws.com/:0
+[ 7683309ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://cognito-idp.us-east-2.amazonaws.com/:0
+[ 7683552ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://cognito-idp.us-east-2.amazonaws.com/:0
+[ 7684023ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://cognito-idp.us-east-2.amazonaws.com/:0

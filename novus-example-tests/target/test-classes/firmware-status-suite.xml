@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<!--
+  TestNG suite for Firmware Status badge tests on the Deployment page (Story PS-34 / AC-4).
+
+  Run this suite with:
+    mvn test -pl novus-example-tests -DsuiteXmlFile=firmware-status-suite.xml
+
+  Groups:
+    smoke-tests      — TC-34.4.05-001, TC-34.4.05-002 (tab + card rendering)
+    regression       — TC-34.4.05-003 through TC-34.4.05-008 (badge colours, buttons, tab switch)
+    firmware-status  — all tests in this suite
+
+  Post-PS-34 tests (TC-34.4.05-009 through 011) are marked enabled=false and will not run
+  until the PS-34 backend + frontend are deployed to the target environment.
+
+  Pre-conditions:
+    - application-inventory.properties must point to a running app instance
+    - Chromium binary path must be set in application-local.properties
+    - At least one Approved, one Pending, and one Deprecated firmware record must exist in the DB
+-->
+<suite name="Deployment – Firmware Status Badge Tests (PS-34 / AC-4)" verbose="2" thread-count="1">
+
+    <parameter name="report-name" value="Firmware-Status-Report"/>
+
+    <test name="Firmware Status Badge Tests">
+        <classes>
+            <class name="com.tpg.automation.inventory.FirmwareStatusTests"/>
+        </classes>
+    </test>
+
+</suite>

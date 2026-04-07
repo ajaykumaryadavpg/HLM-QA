@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Inventory Management – Dashboard Alerts &amp; System Status Integration Tests" verbose="2" thread-count="1">
+
+    <parameter name="report-name" value="Dashboard-Alerts-SystemStatus-Integration-Report"/>
+
+    <test name="Dashboard Alerts and System Status Integration Tests">
+        <classes>
+            <class name="com.tpg.automation.inventory.DashboardAlertsSystemStatusIntegrationTests"/>
+        </classes>
+    </test>
+
+</suite>

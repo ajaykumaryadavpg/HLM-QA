@@ -1,0 +1,15 @@
+[     533ms] [WARNING] Amplify has not been configured. Please call Amplify.configure() before using this service. @ https://main.dddsig2mih3hw.amplifyapp.com/assets/index-BvpK9A09.js:41
+[    1000ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://main.dddsig2mih3hw.amplifyapp.com/vite.svg:0
+[   44270ms] [ERROR] Failed to load resource: the server responded with a status of 400 (Bad Request) @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   44271ms] [ERROR] Failed to load resource: the server responded with a status of 400 (Bad Request) @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   44279ms] [ERROR] Failed to load resource: the server responded with a status of 400 (Bad Request) @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   44299ms] [ERROR] Failed to load resource: the server responded with a status of 400 (Bad Request) @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   44515ms] [ERROR] Failed to load resource: the server responded with a status of 400 (Bad Request) @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[   44597ms] [ERROR] Failed to load resource: the server responded with a status of 400 (Bad Request) @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[  112181ms] [ERROR] Failed to load resource: the server responded with a status of 400 (Bad Request) @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[  112194ms] [ERROR] Failed to load resource: the server responded with a status of 400 (Bad Request) @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[  112201ms] [ERROR] Failed to load resource: the server responded with a status of 400 (Bad Request) @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[  112239ms] [ERROR] Failed to load resource: the server responded with a status of 400 (Bad Request) @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[  112514ms] [ERROR] Failed to load resource: the server responded with a status of 400 (Bad Request) @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[  112537ms] [ERROR] Failed to load resource: the server responded with a status of 400 (Bad Request) @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0
+[  113257ms] [ERROR] Failed to load resource: the server responded with a status of 400 (Bad Request) @ https://rw3sl7mwgzcvbg7zuyqj7ppjv4.appsync-api.us-east-2.amazonaws.com/graphql:0

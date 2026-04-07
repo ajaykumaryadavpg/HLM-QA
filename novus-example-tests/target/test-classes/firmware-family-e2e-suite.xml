@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="FirmwareFamily End-to-End CRUD + UI Tests (PS-35 / PS-42)" verbose="2" thread-count="1">
+
+    <parameter name="report-name" value="FirmwareFamily-E2E-Report"/>
+
+    <test name="FirmwareFamily E2E CRUD Flow + UI Verification">
+        <groups>
+            <run>
+                <include name="smoke-tests"/>
+                <include name="regression"/>
+                <include name="firmware-family-e2e"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.tpg.automation.inventory.FirmwareFamilyE2ETests"/>
+        </classes>
+    </test>
+
+</suite>
