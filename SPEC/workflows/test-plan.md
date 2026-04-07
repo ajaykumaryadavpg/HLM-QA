@@ -1,16 +1,16 @@
 # Workflow: test-plan
 
-> **Trigger:** User says `test-plan story-N.M` or `test-plan #issue`
+> **Trigger:** User says `test-plan story-N.M` or `test-plan JIRA-KEY`
 > **Agent:** [qa-planner](../agents/qa-planner.md)
 > **Rulebook:** [e2e-rulebook](../rulebooks/e2e-rulebook.md)
-> **Output:** GitHub sub-issue + local test plan file
+> **Output:** Jira sub-task + local test plan file
 
 ---
 
 ## Pre-requisites
 
-- [ ] Dev server running (`npm run dev` on localhost:5173) — needed for Playwright MCP exploration
-- [ ] GitHub MCP server configured in `.mcp.json`
+- [ ] Dev server running (HLM Inventory app accessible) — needed for Playwright MCP exploration
+- [ ] Jira MCP server configured in `.mcp.json`
 - [ ] Playwright MCP server configured in `.mcp.json`
 
 ---
@@ -19,15 +19,15 @@
 
 ### Step 1: Parse Input
 
-- [ ] Extract epic number (N), story number (N.M), and GitHub issue number from command argument
-- [ ] Accepted formats: `story-N.M`, `#NNN`, `epic-N/story-N.M`
-- [ ] If only story ID given, look up GitHub issue # from `Docs/epics/epic-{N}/story-{N.M}.md` → `GitHub Issue: #N`
+- [ ] Extract epic number (N), story number (N.M), and Jira ticket key from command argument
+- [ ] Accepted formats: `story-N.M`, `HLM-NNN`, `epic-N/story-N.M`
+- [ ] If only story ID given, look up Jira ticket key from `Docs/epics/epic-{N}/story-{N.M}.md` → `Jira Ticket: HLM-NNN`
 
 ### Step 2: Read the Story
 
-- [ ] Read local file: `Docs/epics/epic-{N}/story-{N.M}.md`
+- [ ] Fetch story from Jira via MCP using the ticket key
 - [ ] Extract: User Story, all Acceptance Criteria (AC1..ACn), UI Behavior, Implementation Notes, Out of Scope
-- [ ] If local file not found, fetch from GitHub via MCP: `get_issue(#{issue_number})`
+- [ ] If Jira is unavailable, fall back to local file: `Docs/epics/epic-{N}/story-{N.M}.md`
 - [ ] Identify the application route this story exercises (e.g., `/inventory`, `/deployment`)
 
 ### Step 3: Explore Live App via Playwright MCP
@@ -60,56 +60,39 @@
 - [ ] Fill the "Discovered Selectors" table
 - [ ] Fill the "E2E Mapping" table with proposed testCaseId values:
   - Check existing IDs in `SPEC/rulebooks/e2e-rulebook.md` Module Prefixes table
+  - Check existing test classes in `novus-example-tests/src/test/java/` for current max ID
   - Continue numbering from the last existing ID for the module
 - [ ] Present test plan to user for review
 
-### Step 5: Create GitHub Sub-Issue
+### Step 5: Create Jira Sub-Task
 
-- [ ] Via GitHub CLI or MCP `create_issue`:
-  - **Title:** `[QA Plan] Story {N.M} — {story title}`
-  - **Labels:** `task`, `qa-plan`
-  - **Body:** Full test plan markdown
-  - **Include:** `Parent: #{parent_story_issue_number}` in body
-- [ ] Record the new issue number
-- [ ] **Link as sub-issue** of the parent story via GraphQL:
-  ```graphql
-  mutation {
-    addSubIssue(input: { issueId: "{parent_node_id}", subIssueId: "{qa_plan_node_id}" }) {
-      issue {
-        id
-      }
-      subIssue {
-        id
-      }
-    }
-  }
-  ```
+- [ ] Via Jira MCP:
+  - **Summary:** `[QA Plan] Story {N.M} — {story title}`
+  - **Issue Type:** Sub-task (parent = story ticket)
+  - **Labels:** `qa-plan`
+  - **Description:** Full test plan markdown
+- [ ] Record the new Jira ticket key
+- [ ] Link as sub-task of the parent story ticket
 
-  - Get node IDs: `gh api repos/{owner}/{repo}/issues/{number} --jq '.node_id'`
+### Step 6: Update Jira Board Status
 
-### Step 6: Add to GitHub Projects Board & Update Statuses
-
-- [ ] Add QA Plan issue to project board via GraphQL:
-  - `addProjectV2ItemById` with Project ID `PVT_kwHOARf1_84BTD7o`
-  - `updateProjectV2ItemFieldValue` → set Status field (`PVTSSF_lAHOARf1_84BTD7ozhAadYA`) to **"In Development"** (`1f601fb5`) — QA plan is in progress
-- [ ] **Update parent story status to "In QA"** on the project board:
-  - `addProjectV2ItemById` to ensure parent is on board (idempotent)
-  - `updateProjectV2ItemFieldValue` → set Status field (`PVTSSF_lAHOARf1_84BTD7ozhAadYA`) to **"In QA"** (`69b90ffa`)
-- [ ] If GraphQL fails, log a note and continue (user can manually update board)
+- [ ] Set QA Plan ticket status to **"In Development"** (QA plan is being worked on)
+- [ ] Update parent story ticket status to **"In QA"**
+- [ ] If Jira update fails, log a note and continue (user can manually update)
 
 ### Step 7: Write Local Test Plan File
 
 - [ ] Create directory if needed: `Docs/epics/epic-{N}/test-plans/`
 - [ ] Write file: `Docs/epics/epic-{N}/test-plans/story-{N.M}-test-plan.md`
-- [ ] Content: Same test plan as GitHub issue body + metadata header (date, issue links)
+- [ ] Content: Same test plan as Jira ticket description + metadata header (date, ticket links)
 
 ### Step 8: Report
 
 - [ ] Print summary:
   - Number of test cases generated (P1/P2/P3 breakdown)
-  - GitHub QA Plan issue URL
+  - Jira QA Plan ticket key and URL
   - Local test plan file path
-  - Parent story issue reference
+  - Parent story ticket reference
   - Next step: "Review the test plan, then run `generate-e2e story-{N.M}` to create test scripts"
 
 ---
@@ -132,10 +115,10 @@ User: test-plan story-1.1
 
 Claude:
 → Reads Docs/epics/epic-1/story-1.1.md (User Login with Email and Password)
-→ Navigates to http://localhost:5173/login via Playwright MCP
+→ Navigates to the login page via Playwright MCP
 → Snapshots: discovers input#signin-email, input#signin-password, button[type='submit'], [role='alert']
 → Generates 6 test cases (3 P1 from ACs, 2 P2 UI behavior, 1 P3 edge)
-→ Creates GitHub issue: [QA Plan] Story 1.1 — User Login with Email and Password
+→ Creates Jira sub-task: [QA Plan] Story 1.1 — User Login with Email and Password
 → Writes: Docs/epics/epic-1/test-plans/story-1.1-test-plan.md
-→ Reports: "Created 6 test cases. QA Plan: #147. Review and run `generate-e2e story-1.1` next."
+→ Reports: "Created 6 test cases. QA Plan: HLM-147. Review and run `generate-e2e story-1.1` next."
 ```

@@ -1,6 +1,6 @@
 # Rulebook: E2E Testing Standards
 
-> Quality gates, code patterns, and naming conventions for the IMS Gen2 E2E framework.
+> Quality gates, code patterns, and naming conventions for the HLM E2E framework.
 > This rulebook is the single source of truth for generating test plans and test code.
 
 ---
@@ -11,9 +11,9 @@
 2. Every test case MUST include: Pre-conditions, Steps, Expected Result, Priority
 3. Selectors in test plans MUST be discovered from the live app via Playwright MCP — never guessed
 4. Edge cases must cover: empty state, error state, boundary values, unauthorized access
-5. Test plan issue title format: `[QA Plan] Story N.M — {title}`
-6. Test plan issue labels: `task`, `qa-plan`
-7. Test plan must link to parent story: `Parent: #NNN`
+5. Test plan Jira ticket summary format: `[QA Plan] Story N.M — {title}`
+6. Test plan ticket labels: `qa-plan`
+7. Test plan must be linked as sub-task of parent story in Jira
 8. Priority levels: P1 = core AC validation, P2 = UI/UX behavior, P3 = edge/performance
 
 ---
@@ -23,10 +23,10 @@
 ### Layer Stack (bottom → top)
 
 ```
-ims-core          → Actor, Performable, Waiter, Annotations, Assertions, Reporting, Utilities
-ims-core-ui       → NovusGuiTestBase, UI Actions (Click/Type/Enter/etc.), LocateBy, Verify, Retrieve
-ims-core-api      → NovusApiTestBase, ApiCore<T>, Get/Post/Put/Delete, JsonUtil
-ims-tests         → Pages, Impls, Macros, Listeners, Test Classes, Suites
+novus-core          → Actor, Performable, Waiter, Annotations, Assertions, Reporting, Utilities
+novus-core-ui       → NovusGuiTestBase, UI Actions (Click/Type/Enter/etc.), LocateBy, Verify, Retrieve
+novus-core-api      → NovusApiTestBase, ApiCore<T>, Get/Post/Put/Delete, JsonUtil
+novus-example-tests → Pages, PageImpls, Macros, Listeners, Test Classes, Suites
 ```
 
 ### Key Interfaces
@@ -49,15 +49,15 @@ public interface Waiter {
 }
 ```
 
-### Annotations (com.ims.annotations)
+### Annotations (com.tpg.annotations)
 
 ```java
 @MetaData(
-    testCaseId = "IMS-FEAT-001",   // required — format: IMS-{PREFIX}-NNN
-    author = "ims-automation",      // required
-    category = "feature",           // required — lowercase module name
-    stories = {"#42"},              // optional — GitHub issue numbers
-    bugs = {"#99"}                  // optional — linked bug issues
+    testCaseId = "TC-FEAT-001",         // required — format: TC-{PREFIX}-NNN
+    author = "QA Automation",            // required
+    category = "feature",                // required — lowercase module/feature name
+    stories = {"HLM-42"},               // optional — Jira ticket keys
+    bugs = {"HLM-99"}                   // optional — linked bug tickets
 )
 
 @Description("What the test verifies")   // on method or class
@@ -87,7 +87,7 @@ actor.wantsTo(Verify.page().url().contains("/dashboard"));
 
 ---
 
-## UI Actions Reference (ims-core-ui)
+## UI Actions Reference (novus-core-ui)
 
 ### Click
 
@@ -223,7 +223,7 @@ LocateBy.withExactCssText("css", "text")   // css:text-is("text")
 
 ### Page Object
 
-- **Package:** `com.ims.automation.pages.{module}`
+- **Package:** `com.tpg.automation.pages.inventory`
 - **Annotation:** `@NoArgsConstructor(access = AccessLevel.PRIVATE)`
 - **Only static final String locators** — no methods, no instances
 - **Naming:** UPPER_SNAKE_CASE
@@ -239,16 +239,17 @@ public class FeaturePage {
 }
 ```
 
-### Implementation
+### Implementation (PageImpl)
 
-- **Package:** `com.ims.automation.impls.{module}`
+- **Package:** `com.tpg.automation.impls.inventory`
+- **File naming:** `{Module}PageImpl.java` (e.g., `DashboardPageImpl.java`)
 - **Annotation:** `@NoArgsConstructor(access = AccessLevel.PRIVATE)`
 - **All methods:** `public static Performable methodName()`
 - **MUST call `.log("methodName", "description")`** — Perform throws NovusConfigException if missing
 
 ```java
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class FeatureImpl {
+public class FeaturePageImpl {
     public static Performable searchFor(String query) {
         return Perform.actions(
                 Type.text(query).on(FeaturePage.SEARCH_INPUT)
@@ -265,41 +266,28 @@ public class FeatureImpl {
 
 ### Test Class
 
-- **Package:** `com.ims.automation.{module}` (under `src/test/java`)
-- **Extends:** `NovusGuiTestBase`
-- **Class annotation:** `@Test(groups = {TestGroups.MODULE, TestGroups.REGRESSION})`
-- **Setup:** `@BeforeClass(dependsOnMethods = "baseBeforeClassSetup")`
-- **Fields:** `@Autowired UrlService urlService;` and `Actor actor = new Actor();`
-- **Test body:** `step("...")` → `actor.attemptsTo(...)` → `softly.assertTrue(...)` → `softly.assertAll()`
+- **Package:** `com.tpg.automation.inventory` (under `src/test/java`)
+- **Extends:** `InventoryTestBase` (provides `user` Actor, `urlService`, login via `@BeforeClass`)
+- **Class annotation:** `@Test(groups = {TestGroups.FEATURE_GROUP, TestGroups.REGRESSION})`
+- **Actor field:** `user` (inherited from `InventoryTestBase`) — NOT `actor`
+- **Test body:** `step("...")` → `user.attemptsTo(...)` → `softly.assertTrue(...)` → `softly.assertAll()`
 
 ```java
-@Test(groups = {TestGroups.FEATURE, TestGroups.REGRESSION})
-public class FeatureTests extends NovusGuiTestBase {
+@Test(groups = {TestGroups.DASHBOARD_KPI, TestGroups.REGRESSION})
+public class DashboardKpiTests extends InventoryTestBase {
 
-    @Autowired
-    private UrlService urlService;
-    private final Actor actor = new Actor();
+    // InventoryTestBase provides: urlService, user (Actor), login via @BeforeClass
 
-    @BeforeClass(dependsOnMethods = "baseBeforeClassSetup")
-    public void setup() {
-        actor.setBrowser(browser);
-        actor.attemptsTo(
-                Launch.app(urlService.login()),
-                Login.asAdmin(),
-                Navigate.to().feature()
-        );
-    }
-
-    @Description("Verify feature page loads correctly")
-    @Outcome("Feature page is displayed with data table")
-    @MetaData(testCaseId = "IMS-FEAT-001", author = "ims-automation",
-              category = "feature", stories = {"#42"})
-    @Test(description = "Verify feature page loads correctly")
-    public void verifyFeaturePageLoads() {
-        step("Verify the data table is displayed");
+    @Description("Verify dashboard KPI cards load correctly")
+    @Outcome("KPI cards are displayed with correct data")
+    @MetaData(testCaseId = "TC-KPI-001", author = "QA Automation",
+              category = "dashboard-kpi", stories = {"HLM-42"})
+    @Test(description = "Verify dashboard KPI cards load correctly")
+    public void verifyDashboardKpiCardsLoad() {
+        step("Verify the KPI cards are displayed");
         softly.assertTrue(
-                actor.is(Waiting.on(FeaturePage.DATA_TABLE)),
-                "Data table should be visible on the feature page"
+                user.is(Waiting.on(DashboardPage.KPI_CARD)),
+                "KPI cards should be visible on the dashboard"
         );
         softly.assertAll();
     }
@@ -308,14 +296,14 @@ public class FeatureTests extends NovusGuiTestBase {
 
 ### Macros (reusable multi-step flows)
 
-- **Package:** `com.ims.automation.macros`
+- **Package:** `com.tpg.automation.macros`
 - Only create for flows used across 2+ test classes
-- Follow existing: `Login.asAdmin()`, `Navigate.to().dashboard()`
+- Follow existing patterns in the codebase
 
 ### Existing Macros
 
 ```java
-// Login
+// Login (handled by InventoryTestBase @BeforeClass)
 Login.asAdmin()                    // admin@company.com / Admin@12345678
 Login.asTechnician()               // tech@company.com / Tech@123456789
 Login.asViewer()                   // viewer@company.com / Viewer@12345678
@@ -335,30 +323,35 @@ Navigate.directlyTo(url)           // direct URL navigation
 
 ## Module Prefixes & TestGroups
 
-| Module          | Prefix | TestGroup Constant           | Existing Tests      |
-| --------------- | ------ | ---------------------------- | ------------------- |
-| Auth            | AUTH   | `TestGroups.AUTH`            | IMS-AUTH-001 to 005 |
-| Dashboard       | DASH   | `TestGroups.DASHBOARD`       | IMS-DASH-001 to 004 |
-| Inventory       | INV    | `TestGroups.INVENTORY`       | IMS-INV-001 to 004  |
-| Deployment      | DEP    | `TestGroups.DEPLOYMENT`      | IMS-DEP-001 to 004  |
-| Compliance      | CMP    | `TestGroups.COMPLIANCE`      | IMS-CMP-001 to 004  |
-| Account Service | ACC    | `TestGroups.ACCOUNT_SERVICE` | IMS-ACC-001 to 004  |
-| Analytics       | ANL    | `TestGroups.ANALYTICS`       | IMS-ANL-001 to 004  |
-| Smoke           | SM     | `TestGroups.SMOKE`           | IMS-SM-001 to 003   |
+| Module / Feature              | Prefix        | TestGroup Constant                        | testCaseId example    |
+| ----------------------------- | ------------- | ----------------------------------------- | --------------------- |
+| Inventory Login               | LOGIN         | `TestGroups.INVENTORY_LOGIN`              | TC-LOGIN-001          |
+| Dashboard KPI                 | KPI           | `TestGroups.DASHBOARD_KPI`               | TC-KPI-001            |
+| Dashboard Alerts              | ALERTS        | `TestGroups.DASHBOARD_ALERTS`            | TC-ALERTS-001         |
+| Dashboard System Status       | SYS-STATUS    | `TestGroups.DASHBOARD_SYSTEM_STATUS`     | TC-SYS-STATUS-001     |
+| Dashboard Quick Actions       | QA            | `TestGroups.DASHBOARD_QUICK_ACTIONS`     | TC-QA-001             |
+| Dashboard API                 | API           | `TestGroups.DASHBOARD_API`               | TC-API-001            |
+| Dashboard E2E Integration     | INTEGRATION   | `TestGroups.DASHBOARD_E2E_INTEGRATION`   | TC-INTEGRATION-001    |
+| Geo Location                  | GEO           | `TestGroups.GEO_LOCATION`               | TC-GEO-001            |
+| Firmware Status               | FW-STATUS     | `TestGroups.FIRMWARE_STATUS`             | TC-FW-STATUS-001      |
+| Upload Firmware               | FW-UPLOAD     | `TestGroups.UPLOAD_FIRMWARE`             | TC-FW-UPLOAD-001      |
+| Firmware Family API           | FW-FAM-API    | `TestGroups.FIRMWARE_FAMILY_API`         | TC-FW-FAM-API-001     |
+| Firmware Family E2E           | FW-FAM-E2E    | `TestGroups.FIRMWARE_FAMILY_E2E`         | TC-FW-FAM-E2E-001     |
 
-**When adding new tests:** Continue numbering from the last existing ID for that module.
+**When adding new tests:** Check existing test classes for the highest testCaseId and continue from there.
 
 ### TestGroups Rules
 
-- New module → add constant to `TestGroups.java`
-- Format: `public static final String MODULE_NAME = "module-name";`
-- Location: `e2e/ims-e2e/ims-tests/src/main/java/com/ims/automation/constants/TestGroups.java`
+- New feature → add constant to `TestGroups.java`
+- Format: `public static final String FEATURE_NAME = "feature-name";`
+- Location: `novus-example-tests/src/main/java/com/tpg/automation/constants/TestGroups.java`
 
 ### Suite XML Rules
 
-- New test classes MUST be added to `regression-suite.xml`
-- Critical-path tests should also be added to `smoke-suite.xml`
-- Module group name must match the `TestGroups` constant
+- Each feature gets its own suite XML: `novus-example-tests/src/test/resources/{feature}-suite.xml`
+- Suite XMLs are at `src/test/resources/` directly (no `suites/` subfolder)
+- `all-suites.xml` runs all suites
+- The `pom.xml` surefire config auto-prepends `src/test/resources/` — pass just the filename
 
 ---
 
@@ -373,45 +366,32 @@ LoginPage.PASSWORD_INPUT    = "input#signin-password"
 LoginPage.SIGN_IN_BUTTON    = "button[type='submit']"
 LoginPage.ERROR_MESSAGE     = "[role='alert']"
 
-// HeaderPage
-HeaderPage.SEARCH_BUTTON    = "[data-testid='header-search']"
-HeaderPage.NOTIFICATION_BELL = "[data-testid='notification-bell']"
-HeaderPage.THEME_TOGGLE     = "[data-testid='theme-toggle']"
-HeaderPage.USER_INFO        = "[data-testid='user-info']"
-HeaderPage.SIGN_OUT_BUTTON  = "[data-testid='sign-out']"
-
-// SidebarPage
-SidebarPage.HAMBURGER_BUTTON = "button[aria-label='Toggle navigation']"
-SidebarPage.SIDEBAR_PANEL   = "aside[aria-label='Primary navigation']"
-SidebarPage.DASHBOARD_LINK  = "[aria-label='Dashboard']"
-// ... INVENTORY_LINK, DEPLOYMENT_LINK, COMPLIANCE_LINK, etc.
+// HeaderPage (if exists)
+// SidebarPage (if exists)
 ```
 
-### Module Pages (all use data-testid pattern)
+### Module Pages
 
 ```java
 // DashboardPage
-DashboardPage.PAGE_HEADING, KPI_CARD, QUICK_ACTIONS_PANEL, RECENT_ALERTS, SYSTEM_STATUS
+DashboardPage — KPI cards, quick actions, alerts, system status
 
 // InventoryPage
-InventoryPage.HARDWARE_TAB, FIRMWARE_TAB, GEO_TAB, SEARCH_INPUT, DEVICE_TABLE, PAGINATION, CSV_EXPORT_BUTTON
+InventoryPage — hardware tab, firmware tab, search, device table, pagination
+
+// GeoLocationPage
+GeoLocationPage — map markers, device pins, filters
 
 // DeploymentPage
-DeploymentPage.FIRMWARE_TAB, AUDIT_LOG_TAB, FIRMWARE_CARD, APPROVAL_STAGE_INDICATOR, UPLOAD_BUTTON
+DeploymentPage — firmware tab, audit log tab, upload
 
-// CompliancePage
-CompliancePage.STATUS_FILTER_BUTTONS, COMPLIANCE_TABLE, VULNERABILITY_PANEL, SUBMIT_FOR_REVIEW_BUTTON
-
-// AccountServicePage
-AccountServicePage.KANBAN_VIEW_TOGGLE, CALENDAR_VIEW_TOGGLE, SERVICE_ORDER_CARD, CREATE_ORDER_BUTTON
-
-// AnalyticsPage
-AnalyticsPage.KPI_CARD, TIME_RANGE_7D/30D/90D, CHART_CONTAINER, AUDIT_TABLE
+// LoginPage
+LoginPage — email input, password input, submit button, error message
 ```
 
 ---
 
-## API Testing Reference (ims-core-api)
+## API Testing Reference (novus-core-api)
 
 ```java
 // GET request
@@ -441,25 +421,27 @@ Post.atUrl("https://api.example.com/devices")
 ## File Locations Reference
 
 ```
-e2e/ims-e2e/
-├── pom.xml                          # Parent POM (Java 17, Spring Boot 3.2.2, TestNG 7.10.1, Playwright 1.49.0)
-├── ims-core/                        # Base: Actor, Performable, Annotations, Assertions, Reporting
-├── ims-core-ui/                     # UI: NovusGuiTestBase, Actions, LocateBy, Verify, Retrieve
-│   └── src/main/resources/application-web.properties  # Browser settings
-├── ims-core-api/                    # API: ApiCore, Get/Post/Put/Delete, JsonUtil
-└── ims-tests/                       # Test implementations
-    ├── src/main/java/com/ims/automation/
-    │   ├── constants/TestGroups.java
-    │   ├── pages/{module}/{Module}Page.java
-    │   ├── impls/{module}/{Module}Impl.java
-    │   ├── macros/Login.java, Navigate.java
-    │   ├── listeners/ImsTestListener.java, RetryAnalyzer.java, RetryTransformer.java
-    │   └── services/UrlService.java
-    ├── src/test/java/com/ims/automation/{module}/{Module}Tests.java
-    └── src/test/resources/
-        ├── suites/smoke-suite.xml, regression-suite.xml, module-suite.xml
-        ├── application-test.properties   # aut.protocol, aut.domain, report settings
-        └── application-local.properties  # browser.headless=false for headed mode
+novus-core/                              # Base: Actor, Performable, Annotations, Assertions, Reporting
+novus-core-ui/                           # UI: NovusGuiTestBase, Actions, LocateBy, Verify, Retrieve
+novus-core-api/                          # API: ApiCore, Get/Post/Put/Delete, JsonUtil
+novus-example-tests/                     # Test implementations
+├── src/main/java/com/tpg/automation/
+│   ├── constants/TestGroups.java
+│   ├── pages/inventory/{Module}Page.java
+│   ├── impls/inventory/{Module}PageImpl.java
+│   ├── macros/Login.java
+│   └── services/UrlService.java
+├── src/test/java/com/tpg/automation/
+│   ├── base/InventoryTestBase.java       ← extends NovusGuiTestBase, handles login
+│   └── inventory/{Feature}Tests.java     ← test classes extend InventoryTestBase
+└── src/test/resources/
+    ├── {feature}-suite.xml               ← per-feature suite XMLs (no suites/ subfolder)
+    ├── all-suites.xml                    ← runs everything
+    ├── application-local.properties      ← browser.executable.path, headless mode
+    ├── application-inventory.properties  ← AUT URL + credentials
+    ├── application-web.properties        ← browser settings
+    ├── reports/{date}/                   ← ExtentReports output
+    └── screenshots/                      ← failure screenshots
 ```
 
 ---
@@ -468,7 +450,7 @@ e2e/ims-e2e/
 
 ```
 @BeforeSuite  → springTestContextPrepareTestInstance() → initReport()
-@BeforeClass  → baseBeforeClassSetup() → [your setup() depends on this]
+@BeforeClass  → baseBeforeClassSetup() → [InventoryTestBase.setup() depends on this]
 @BeforeMethod → reset stepCount, new NovusSoftAssert, add test to report
                 ↓
               TEST EXECUTION
@@ -479,14 +461,11 @@ e2e/ims-e2e/
 @AfterSuite   → close browser/context → clear LocalCache
 ```
 
-**Protected fields available in test classes:**
+**InventoryTestBase provides:**
 
-- `Page browser` — Playwright page instance
-- `NovusSoftAssert softly` — fresh per test method
-- `NovusReportingService reportingService`
-- `NovusLoggerService log`
-- `int stepCount` — auto-incremented by step()
-
-**Protected method:**
-
+- `Page browser` — Playwright page instance (inherited from NovusGuiTestBase)
+- `NovusSoftAssert softly` — fresh per test method (inherited)
+- `Actor user` — pre-configured Actor with browser set
+- `UrlService urlService` — @Autowired
 - `step(String step, Object... obj)` — logs numbered step to report + console
+- Login is handled once per class in `@BeforeClass`

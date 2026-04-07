@@ -3,10 +3,10 @@
 | Field             | Value                   |
 | ----------------- | ----------------------- |
 | **Story**         | Story {N.M}             |
-| **Parent Issue**  | #{issue_number}         |
+| **Jira Ticket**   | {JIRA_KEY}-{NNN}        |
 | **Epic**          | Epic {N} — {Epic Title} |
 | **Generated**     | {YYYY-MM-DD}            |
-| **QA Plan Issue** | #{qa_issue_number}      |
+| **QA Plan Ticket**| {JIRA_KEY}-{NNN}        |
 
 ## Story Summary
 
@@ -64,11 +64,11 @@
 
 ## E2E Mapping
 
-| TC   | Test Class    | Test Method         | testCaseId         |
-| ---- | ------------- | ------------------- | ------------------ |
-| TC-1 | {Module}Tests | verify{Description} | IMS-{PREFIX}-{NNN} |
-| TC-2 | {Module}Tests | verify{Description} | IMS-{PREFIX}-{NNN} |
-| ...  | ...           | ...                 | ...                |
+| TC   | Test Class            | Test Method         | testCaseId          |
+| ---- | --------------------- | ------------------- | ------------------- |
+| TC-1 | {Module}{Feature}Tests | verify{Description} | TC-{PREFIX}-{NNN}   |
+| TC-2 | {Module}{Feature}Tests | verify{Description} | TC-{PREFIX}-{NNN}   |
+| ...  | ...                   | ...                 | ...                 |
 
 ## Notes
 

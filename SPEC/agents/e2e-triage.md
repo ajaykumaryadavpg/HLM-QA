@@ -2,81 +2,80 @@
 
 ## Role
 
-Runs E2E tests locally, analyzes failures, classifies them as genuine bugs vs test/environment issues, and auto-files GitHub issues for genuine bugs with full evidence.
+Runs E2E tests locally, analyzes failures, classifies them as genuine bugs vs test/environment issues, and auto-files Jira tickets for genuine bugs with full evidence.
 
 ## Responsibilities
 
-1. Run the specified E2E suite via Maven (smoke, regression, or module)
+1. Run the specified E2E suite via Maven (by suite name)
 2. Parse test results from Maven output and ExtentReport
 3. Classify each failure:
-   - **Genuine Bug** → Application behavior doesn't match AC → file GitHub issue
+   - **Genuine Bug** → Application behavior doesn't match AC → file Jira ticket
    - **Selector Error** → Element not found / locator changed → flag for test maintenance
-   - **Environment Error** → Server not running, timeout, network → skip issue creation
-   - **Flaky Test** → Passed on retry → log warning, no issue
-4. For genuine bugs: create a GitHub issue with evidence (steps, expected vs actual, screenshot path)
-5. Deduplicate: check for existing open `bug` + `e2e` issues before creating new ones
-6. Update the test plan issue with run results
+   - **Environment Error** → Server not running, timeout, network → skip ticket creation
+   - **Flaky Test** → Passed on retry → log warning, no ticket
+4. For genuine bugs: create a Jira ticket with evidence (steps, expected vs actual, screenshot path)
+5. Deduplicate: search Jira for existing open bugs before creating new ones
+6. Update the test plan ticket with run results
 
 ## Tools
 
 ### Bash (test execution)
 
 ```
-cd e2e/ims-e2e/ims-tests
-mvn test -DsuiteXmlFile={suite} -Dspring.profiles.active=test,web
+mvn test -pl novus-example-tests -DsuiteXmlFile={suite-name}-suite.xml
 ```
 
 ### File System (result analysis)
 
 ```
-Read Maven surefire-reports XML:    e2e/ims-e2e/ims-tests/target/surefire-reports/
-Read ExtentReport HTML:             e2e/ims-e2e/ims-tests/src/test/resources/reports/{date}/
-Read screenshots:                   e2e/ims-e2e/ims-tests/src/test/resources/screenshots/
+Read Maven surefire-reports XML:    novus-example-tests/target/surefire-reports/
+Read ExtentReport HTML:             novus-example-tests/src/test/resources/reports/{date}/
+Read screenshots:                   novus-example-tests/src/test/resources/screenshots/
 ```
 
-### GitHub (issue management)
+### Jira MCP (ticket management)
 
 ```
-gh issue list --label "bug,e2e"     → check for duplicates
-gh issue create                     → file new bug
-gh issue comment                    → update existing bug with re-run data
+search_issues (label = bug, e2e)   → check for duplicates
+create_issue                       → file new bug ticket
+add_comment                        → update existing bug with re-run data
 ```
 
 ## Failure Classification Rules
 
-### Genuine Bug (CREATE ISSUE)
+### Genuine Bug (CREATE TICKET)
 
 - Expected element exists but shows wrong value/state
 - Business logic failure (calculation wrong, wrong status transition)
 - Missing data that should be present per AC
 - Permission/RBAC violation not caught
 
-### Selector Error (DO NOT CREATE ISSUE)
+### Selector Error (DO NOT CREATE TICKET)
 
 - `Element not found` / `Locator timeout`
 - `Strict mode violation` (multiple matches)
 - Changed CSS class or data-testid
 
-### Environment Error (DO NOT CREATE ISSUE)
+### Environment Error (DO NOT CREATE TICKET)
 
 - `Connection refused` / `ERR_CONNECTION_REFUSED`
 - `net::ERR_NAME_NOT_RESOLVED`
 - `Page crashed` / `Browser closed`
 - Maven compilation error
 
-### Flaky (DO NOT CREATE ISSUE)
+### Flaky (DO NOT CREATE TICKET)
 
 - Test failed then passed on retry (RetryAnalyzer)
 - Intermittent timing issues
 
-## Issue Template
+## Ticket Template
 
 ````markdown
 ## E2E Bug Report
 
-**Story:** #{story_issue}
+**Story:** {JIRA_KEY}
 **Test Case:** {testCaseId} — {test_method_name}
-**Suite:** {smoke/regression}
+**Suite:** {suite-name}
 **Priority:** {P1/P2/P3}
 
 ### Steps to Reproduce
@@ -102,7 +101,6 @@ gh issue comment                    → update existing bug with re-run data
 
 ### Environment
 
-- **URL:** http://localhost:5173
 - **Browser:** Chromium (Playwright)
 - **Run date:** {date}
 
@@ -111,9 +109,9 @@ gh issue comment                    → update existing bug with re-run data
 _Auto-filed by E2E Triage agent_
 ````
 
-## Labels for Filed Issues
+## Labels for Filed Tickets
 
 - `bug` — always
 - `e2e` — always
-- `epic:{N}` — derived from test class module
-- Priority label based on test priority annotation
+- Epic label derived from test class module
+- Priority based on test priority annotation

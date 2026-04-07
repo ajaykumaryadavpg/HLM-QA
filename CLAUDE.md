@@ -23,9 +23,9 @@ When user says any of these commands, read the corresponding workflow file:
 
 | Skill        | Command                                  | Description                                    |
 | ------------ | ---------------------------------------- | ---------------------------------------------- |
-| test-plan    | test-plan story-1.1 or test-plan #42 | Generate QA test plan for a story              |
-| generate-e2e | generate-e2e story-1.1                 | Generate E2E test code from approved plan      |
-| run-e2e      | run-e2e smoke or run-e2e regression  | Run E2E locally, triage failures, file bugs    |
+| test-plan    | test-plan story-1.1 or test-plan HLM-42 | Generate QA test plan for a story              |
+| generate-e2e | generate-e2e story-1.1                   | Generate E2E test code from approved plan      |
+| run-e2e      | run-e2e dashboard-kpi or run-e2e regression | Run E2E locally, triage failures, file bugs |
 
 ### Workflow Execution Protocol
 
